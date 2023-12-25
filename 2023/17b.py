@@ -4,10 +4,10 @@ inp = [[int(x) for x in list(i)] for i in f.read().split("\n")[:-1]]
 m, n = len(inp), len(inp[0])
 dir = {(0, 1), (1, 0), (0, -1), (-1, 0)}
 minh = 9 * (m + n)
-vis = [(0, (0, 0), (0,0), "0-0 ")]
+vis = [(0, (0, 0), (0,0))]
 ch = set()
 while vis:
-    h, pos, dee, s = heapq.heappop(vis)
+    h, pos, dee = heapq.heappop(vis)
     if pos == (m - 1, n - 1):
         minh = min(minh, h)
     if (pos, dee) in ch:
@@ -20,6 +20,6 @@ while vis:
             if 0 <= ne[0] and ne[0] <= m - 1 and 0 <= ne[1] and ne[1] <= n - 1:
                 hh += inp[ne[1]][ne[0]]
                 if hh <= minh and k >= 4:
-                    heapq.heappush(vis, (hh,ne,d, s + str(ne[0]) + "-" + str(ne[1]) + " "))
+                    heapq.heappush(vis, (hh,ne,d))
     
 print(minh)
