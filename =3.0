@@ -1,2 +1,0 @@
-Requirement already satisfied: networkx in /usr/local/python/3.10.13/lib/python3.10/site-packages (2.4)
-Requirement already satisfied: decorator>=4.3.0 in /home/codespace/.local/lib/python3.10/site-packages (from networkx) (5.1.1)
