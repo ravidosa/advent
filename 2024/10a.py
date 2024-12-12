@@ -1,21 +1,29 @@
-f = open("2024/input-11.txt", "r")
-inp = [int(i) for i in f.read().split(" ")]
+f = open("2024/input-10.txt", "r")
+inp = f.read().split("\n")
 
-dic = {i: inp.count(i) for i in inp}
+head = [(i % len(inp[0]), i // len(inp[0])) for i in range(len("".join(inp))) if "".join(inp)[i] == "0"]
 
-def rock(i):
-    if i == 0:
-        return [1]
-    elif len(str(i)) % 2 == 0:
-        n = len(str(i))
-        return [int(str(i)[:n // 2]), int(str(i)[n // 2:])]
-    else:
-        return [2024 * i]
+inp = [[int(ii) for ii in i]for i in inp]
 
-for j in range(25):
-    dic_ = {}
-    for k in dic:
-        for kk in rock(k):
-            dic_[kk] = dic_.get(kk, 0) + dic[k]
-    dic = dic_
-print(sum(dic.values()))
+score = 0
+
+for h in head:
+    vis = set()
+    t = set()
+    vis.add(h)
+    while len(vis) > 0:
+        pos = vis.pop()
+        x, y = pos
+        if inp[y][x] == 9:
+            if (y, x) not in t:
+                score += 1
+                t.add((y, x))
+        if x > 0 and inp[y][x - 1] - inp[y][x] == 1:
+            vis.add((x - 1, y))
+        if x < len(inp[0]) - 1 and inp[y][x + 1] - inp[y][x] == 1:
+            vis.add((x + 1, y))
+        if y > 0 and inp[y - 1][x] - inp[y][x] == 1:
+            vis.add((x, y - 1))
+        if y < len(inp) - 1 and inp[y + 1][x] - inp[y][x] == 1:
+            vis.add((x, y + 1))
+print(score)
