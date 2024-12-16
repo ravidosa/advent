@@ -1,4 +1,4 @@
-f = open("input.txt", "r")
+f = open("2024/input-15.txt", "r")
 inp = f.read().split("\n\n")
 
 grid, mov = inp
