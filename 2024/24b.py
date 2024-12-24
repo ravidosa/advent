@@ -31,15 +31,16 @@ for con in conn:
     if i[1] == "OR" and (i[0] in ands or i[2] in ands):
         ors[ands.index((i[0])) if i[0] in ands else ands.index(i[2])] = n
 
-for i in range(z):
+for i in range(z - 1):
     print(i)
-    if i != z - 1:
-        print("s = " + str(cxors[i]) + " (" + str(xors[i]) + " xor c_in_" + str(i) + ")" )
-
-print(xors)
-print(ands)
-print(ors)
-print(cands)
-print(cxors)
+    if i == 0:
+        print("s = " + str(xors[i]))
+        print("c = " + str(ands[i]))
+    if i == 1:
+        print("s = " + str(cxors[i]) + " (" + str(xors[i]) + " xor " + str(ands[i - 1]) + ")")
+        print("c = " + str(ors[i]) + " (" + str(ands[i]) + " or " + str(cands[i]) + " (" + str(ands[i - 1]) + " and " + str(xors[i]) + "))")
+    if i != 0 and i != 1:
+        print("s = " + str(cxors[i]) + " (" + str(xors[i]) + " xor " + str(ors[i - 1]) + ")")
+        print("c = " + str(ors[i]) + " (" + str(ands[i]) + " or " + str(cands[i]) + " (" + str(ors[i - 1]) + " and " + str(xors[i]) + "))")
 
 # and stare at it very hard
