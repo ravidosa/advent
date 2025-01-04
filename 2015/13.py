@@ -2,7 +2,7 @@ from utils import *
 import itertools
 inp = open("2015/input-13.txt", "r").read()
 
-parsed_input = parser(inp, ["\n", r" would | happiness units by sitting next to | |\."], [str, str, int, str])
+parsed_input = parser(inp, ["\n", r" would | happiness units by sitting next to | |\."])
 matrix = {}
 names = set()
 for inp in parsed_input:

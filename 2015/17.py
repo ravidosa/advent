@@ -1,7 +1,7 @@
 from utils import *
 inp = open("2015/input-17.txt", "r").read()
 
-parsed_input = parser(inp, ["\n"], [int])
+parsed_input = parser(inp, ["\n"])
 container_count = {}
 def combos(eggnog, containers, used):
     if eggnog < 0 or (eggnog > 0 and len(containers) == 0):

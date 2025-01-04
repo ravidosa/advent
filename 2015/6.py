@@ -1,7 +1,7 @@
 from utils import *
 inp = open("2015/input-6.txt", "r").read()
 
-parsed_input = parser(inp, ["\n", r"turn| |,"], [str, int, int, str, int, int])
+parsed_input = parser(inp, ["\n", r"turn| |,"])
 
 lights = [[0 for _ in range(1000)] for _ in range(1000)]
 for inp in parsed_input:

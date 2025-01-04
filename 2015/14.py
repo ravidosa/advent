@@ -1,7 +1,7 @@
 from utils import *
 inp = open("2015/input-14.txt", "r").read()
 
-parsed_input = parser(inp, ["\n", r" can fly | km/s for | seconds, but then must rest for | seconds\."], [str, int, int, int])
+parsed_input = parser(inp, ["\n", r" can fly | km/s for | seconds, but then must rest for | seconds\."])
 
 SECONDS = 2503
 maxd = 0

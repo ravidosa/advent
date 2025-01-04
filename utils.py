@@ -1,12 +1,13 @@
-import re, cmath
+import re, itertools, cmath
 
 lower = "abcdefghijklmnopqrstuvwxyz"
+par = lambda i: int(i) if re.match(r"(\+|-)?[0-9]+", i) else str(i)
 
-def parser(input, split, par):
+def parser(input, split):
     if len(split) == 1:
-        return list(map(lambda inp: par[min(inp[0], len(par) - 1)](inp[1]), enumerate(filter(None, re.split(split[0], input)))))
+        return list(map(lambda inp: par(inp[1].strip()), enumerate(filter(None, re.split(split[0], input)))))
     else:
-        return list(map(lambda inp: parser(inp, split[1:], par), filter(None, re.split(split[0], input))))
+        return list(map(lambda inp: parser(inp, split[1:]), filter(None, re.split(split[0], input))))
 
 # GRID
 dir = {"^": 0+1j, ">": 1+0j, "v": 0-1j, "<": -1+0j}

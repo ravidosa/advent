@@ -2,7 +2,7 @@ from utils import *
 import functools, z3
 inp = open("2015/input-15.txt", "r").read()
 
-parsed_input = parser(inp, ["\n", r": capacity |, durability |, flavor |, texture |, calories"], [str, int, int, int, int, int])
+parsed_input = parser(inp, ["\n", r": capacity |, durability |, flavor |, texture |, calories"])
 
 x = [z3.Int('x%s' % i) for i in range(len(parsed_input))]
 opt = z3.Optimize()
@@ -11,7 +11,7 @@ for j in range(5):
     opt.add(sum([x[i] * parsed_input[i][j + 1] for i in range(len(parsed_input))]) >= 0)
 opt.maximize(functools.reduce(lambda a, b: a * b, map(lambda j: sum([x[i] * parsed_input[i][j + 1] for i in range(len(parsed_input))]), range(4))))
 opt.check()
-print(opt.model().evaluate(opt.objectives()[0]))
+print(str(opt.model().evaluate(opt.objectives()[0]))[1:])
 
 x = [z3.Int('x%s' % i) for i in range(len(parsed_input))]
 opt = z3.Optimize()
@@ -21,4 +21,4 @@ for j in range(4):
     opt.add(sum([x[i] * parsed_input[i][j + 1] for i in range(len(parsed_input))]) >= 0)
 opt.maximize(functools.reduce(lambda a, b: a * b, map(lambda j: sum([x[i] * parsed_input[i][j + 1] for i in range(len(parsed_input))]), range(4))))
 opt.check()
-print(opt.model().evaluate(opt.objectives()[0]))
+print(str(opt.model().evaluate(opt.objectives()[0]))[1:])

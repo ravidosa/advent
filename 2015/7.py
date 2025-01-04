@@ -1,9 +1,11 @@
 from utils import *
 inp = open("2015/input-7.txt", "r").read()
 
-parsed_input = parser(inp, ["\n", r" -> | "], [str])
+parsed_input = parser(inp, ["\n", r" -> | "])
 def sig(tar):
     global wires
+    if type(tar) == int:
+        return tar
     ass = wires[tar]
     if type(ass) == int:
         return int(ass)
@@ -11,19 +13,19 @@ def sig(tar):
         return int(ass[0])
     elif "AND" in ass:
         w1, _, w2 = ass
-        wires[tar] = (int(w1) if w1.isdigit() else sig(w1)) & (int(w2) if w2.isdigit() else sig(w2))
+        wires[tar] = sig(w1) & sig(w2)
     elif "OR" in ass:
         w1, _, w2 = ass
-        wires[tar] = (int(w1) if w1.isdigit() else sig(w1)) | (int(w2) if w2.isdigit() else sig(w2))
+        wires[tar] = sig(w1) | sig(w2)
     elif "NOT" in ass:
         _, w = ass
-        wires[tar] = 2 ** 16 - 1 - (int(w) if w.isdigit() else sig(w))
+        wires[tar] = 2 ** 16 - 1 - sig(w)
     elif "LSHIFT" in ass:
         w, _, s = ass
-        wires[tar] = ((int(w) if w.isdigit() else sig(w)) << int(s)) % (2 ** 16)
+        wires[tar] = (sig(w) << int(s)) % (2 ** 16)
     elif "RSHIFT" in ass:
         w, _, s = ass
-        wires[tar] = (int(w) if w.isdigit() else sig(w)) >> int(s)
+        wires[tar] = sig(w) >> int(s)
     else:
         wires[tar] = sig(ass[0])
     return wires[tar]
