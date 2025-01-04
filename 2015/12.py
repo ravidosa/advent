@@ -1,6 +1,6 @@
 from utils import *
 import re
-inp = open("2015/input-12.txt", "r").read()
+inp = open("2015/input-12.txt", "r").read().strip()
 
 print(sum(map(int, re.findall(r'-?[0-9]+', inp))))
 

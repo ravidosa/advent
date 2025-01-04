@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-3.txt", "r").read()
+inp = open("2015/input-3.txt", "r").read().strip()
 
 vis = set()
 pos = 0+0j

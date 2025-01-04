@@ -1,9 +1,8 @@
 from utils import *
 import re, functools
-inp = open("2015/input-19.txt", "r").read()
-inpinp = inp.split("\n\n")
+inp = open("2015/input-19.txt", "r").read().split("\n\n")
 
-parsed_input = parser(inpinp[0], ["\n", " => "])
+parsed_input = parser(inp[0], ["\n", " => "])
 
 @functools.cache
 def replace(molecule, reps):
@@ -15,7 +14,7 @@ def replace(molecule, reps):
             for ind in functools.reduce(lambda x, y: x + [y.start()], re.finditer(inp[0], molecule), []):
                 mols.update(replace(molecule[:ind] + inp[1] + molecule[ind + len(inp[0]):], reps - 1))
         return mols
-med_mol = inpinp[1].strip()
+med_mol = inp[1].strip()
 print(len(replace(med_mol, 1)))
 
 def atomize(molecule):

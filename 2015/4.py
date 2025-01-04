@@ -1,6 +1,6 @@
 from utils import *
 import hashlib
-input = open("2015/input-4.txt", "r").read()
+input = open("2015/input-4.txt", "r").read().strip()
 
 res = hashlib.md5("".encode())
 i = 0

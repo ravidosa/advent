@@ -1,9 +1,9 @@
 import re, itertools, cmath
 
 lower = "abcdefghijklmnopqrstuvwxyz"
-par = lambda i: int(i) if re.match(r"(\+|-)?[0-9]+", i) else str(i)
+par_def = lambda i: int(i) if re.match(r"(\+|-)?[0-9]+", i) else str(i)
 
-def parser(input, split):
+def parser(input, split, par=par_def):
     if len(split) == 1:
         return list(map(lambda inp: par(inp[1].strip()), enumerate(filter(None, re.split(split[0], input)))))
     else:
