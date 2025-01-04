@@ -7,10 +7,13 @@ def parser(input, split, par=par_def):
     if len(split) == 1:
         return list(map(lambda inp: par(inp[1].strip()), enumerate(filter(None, re.split(split[0], input)))))
     else:
-        return list(map(lambda inp: parser(inp, split[1:]), filter(None, re.split(split[0], input))))
+        return list(map(lambda inp: parser(inp, split[1:], par), filter(None, re.split(split[0], input))))
 
 # GRID
-dir = {"^": 0+1j, ">": 1+0j, "v": 0-1j, "<": -1+0j}
+dir_arr = {"^": 0+1j, ">": 1+0j, "v": 0-1j, "<": -1+0j}
+dir_letter = {"U": 0+1j, "R": 1+0j, "D": 0-1j, "L": -1+0j}
+neighbors = [1+0j, 0+1j, -1+0j, 0-1j]
+diag_neighbors = [1+0j, 1+1j, 0+1j, -1+1j, -1+0j, -1-1j, 0-1j, 1-1j]
 
 class Grid:
     def __init__(self, input, par):
@@ -25,3 +28,5 @@ def summer(iterable):
         return iterable
     else:
         return sum(map(summer, iterable))
+
+fingerprint = lambda i: "".join(sorted(i))

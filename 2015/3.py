@@ -5,7 +5,7 @@ vis = set()
 pos = 0+0j
 vis.add(pos)
 for i in inp:
-    pos += dir[i]
+    pos += dir_arr[i]
     vis.add(pos)
 print(len(vis))
 
@@ -15,6 +15,6 @@ for j in range(SANTAS):
     pos = 0+0j
     vis.add(pos)
     for i in inp[j::SANTAS]:
-        pos += dir[i]
+        pos += dir_arr[i]
         vis.add(pos)
 print(len(vis))
