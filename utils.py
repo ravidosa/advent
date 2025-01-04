@@ -11,6 +11,14 @@ def parser(input, split, par):
 # GRID
 dir = {"^": 0+1j, ">": 1+0j, "v": 0-1j, "<": -1+0j}
 
+class Grid:
+    def __init__(self, input, par):
+        self.grid = [[par(i) for i in inp] for inp in input.split("\n")]
+        self.rows, self.cols = len(self.grid), len(self.grid[0])
+    def __repr__(self):
+        return "\n".join(map(lambda r: "".join(map(str, r)), self.grid))
+
+
 def summer(iterable):
     if type(iterable) == int or type(iterable) == float:
         return iterable

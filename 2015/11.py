@@ -7,7 +7,7 @@ def increment(password):
         password = password[:i] + "a" * (len(password) - i)
         i -= 1
     if i >= 0:
-        password = (password[:i] if i > 0 else "") + lower[lower.index(password[i]) + 1] + (password[i + 1:] if i < len(password) - 1 else "")
+        password = password[:i] + lower[lower.index(password[i]) + 1] + password[i + 1:]
     return password
 
 if all(map(lambda rep: rep not in inp, "iol")):

@@ -1,7 +1,7 @@
 from utils import *
 inp = open("2015/input-7.txt", "r").read()
 
-parsed_input = parser(inp, ["\n", " -> | "], [str])
+parsed_input = parser(inp, ["\n", r" -> | "], [str])
 def sig(tar):
     global wires
     ass = wires[tar]
