@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-18.txt", "r").read()
+inp = open("2015/input-18.txt", "r").read().strip()
 
 parsed_input = inp.replace(".", "0").replace("#", "1")
 
@@ -20,7 +20,7 @@ print(summer(grid.grid))
 
 grid = Grid(parsed_input, int)
 for _ in range(100):
-    new_grid = [[1 if (r in [0, grid.rows - 1] and c in [0, grid.cols - 1]) else 0 for c in range(grid.cols)] for r in range(grid.rows)]
+    new_grid = [[(r in [0, grid.rows - 1] and c in [0, grid.cols - 1]) for c in range(grid.cols)] for r in range(grid.rows)]
     for r in range(grid.rows):
         for c in range(grid.cols):
             neigh_on = 0

@@ -15,7 +15,7 @@ for con in conn:
         z += 1
 
 def val(wir):
-    if type(valdic[wir]) == int:
+    if type(valdic[wir]) is int:
         return valdic[wir]
     else:
         if valdic[wir][1] == "AND":

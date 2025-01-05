@@ -22,4 +22,4 @@ for i in inp[:-1].split(","):
         else:
             b[mat[0][0]] = (i[:-2], int(i[-1]))
         box[ii] = b
-print(sum([sum([(b[0] + 1) * (ii + 1) * bb[1] for ii, bb in enumerate(b[1])]) if len(b[1]) > 0 else 0 for b in box.items()]))
+print(sum([sum([(b[0] + 1) * (ii + 1) * bb[1] for ii, bb in enumerate(b[1])]) * (len(b[1]) > 0) for b in box.items()]))

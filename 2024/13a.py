@@ -11,6 +11,6 @@ for i in inp:
     if a[0] * b[1] - b[0] * a[1] != 0:
         a_press = (p[0] * b[1] - b[0] * p[1]) / (a[0] * b[1] - b[0] * a[1])
         b_press = (p[1] * a[0] - a[1] * p[0]) / (a[0] * b[1] - b[0] * a[1])
-    if a_press == int(a_press) and b_press == int(b_press):
+    if a_press is int(a_press) and b_press is int(b_press):
         tok += int(a_press * 3 + b_press)
 print(tok)

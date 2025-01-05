@@ -3,8 +3,8 @@ import math
 inp = open("2017/input-3.txt", "r").read()
 
 target = int(inp)
-ring = (((minsq := math.ceil(math.sqrt(target))) + (1 if minsq % 2 == 0 else 0)) - 1) // 2
-mids = [(minsq + (1 if minsq % 2 == 0 else 0)) ** 2 - (2 * i + 1) * ring for i in range(4)]
+ring = (((minsq := math.ceil(math.sqrt(target))) + (minsq % 2 == 0)) - 1) // 2
+mids = [(minsq + (minsq % 2 == 0)) ** 2 - (2 * i + 1) * ring for i in range(4)]
 print(ring + abs(min(mids, key=lambda m: abs(m - target)) - target))
 
 squares = {0+0j: 1, 1+0j: 1}
@@ -18,5 +18,5 @@ while squares[pos] <= target:
             dir *= (0+1j)
     i += 1
     pos += dir
-    squares[pos] = sum(map(lambda d: squares[pos + d] if pos + d in squares else 0, diag_neighbors))
+    squares[pos] = sum(map(lambda d: squares.get(pos + d, 0), diag_neighbors))
 print(squares[pos])

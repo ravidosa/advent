@@ -4,12 +4,12 @@ inp = open("2015/input-7.txt", "r").read()
 parsed_input = parser(inp, ["\n", r" -> | "])
 def sig(tar):
     global wires
-    if type(tar) == int:
+    if type(tar) is int:
         return tar
     ass = wires[tar]
-    if type(ass) == int:
+    if type(ass) is int:
         return int(ass)
-    elif len(ass) == 1 and (type(ass[0]) == int or ass[0].isdigit()):
+    elif len(ass) == 1 and (type(ass[0]) is int or ass[0].isdigit()):
         return int(ass[0])
     elif "AND" in ass:
         w1, _, w2 = ass

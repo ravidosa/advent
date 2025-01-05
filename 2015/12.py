@@ -6,11 +6,11 @@ print(sum(map(int, re.findall(r'-?[0-9]+', inp))))
 
 parsed_input = eval(inp)
 def red_sum(obj):
-    if type(obj) == int:
+    if type(obj) is int:
         return int(obj)
-    elif type(obj) == list:
+    elif type(obj) is list:
         return sum(map(red_sum, obj))
-    elif type(obj) == dict:
+    elif type(obj) is dict:
         if "red" in obj.values():
             return 0
         else:
