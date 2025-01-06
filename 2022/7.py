@@ -1,5 +1,4 @@
 from utils import *
-import functools, operator
 inp = open("2022/input-7.txt", "r").read().strip()
 
 parsed_input = parser(inp, ["\n", " "])

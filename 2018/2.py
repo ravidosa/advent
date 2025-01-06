@@ -1,5 +1,4 @@
 from utils import *
-import itertools
 inp = open("2018/input-2.txt", "r").read().strip()
 
 parsed_input = parser(inp, ["\n"])

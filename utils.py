@@ -1,10 +1,10 @@
-import re, itertools, cmath
+import re, operator, functools, itertools, math, cmath, z3
 
 lower = "abcdefghijklmnopqrstuvwxyz"
 upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 alph = lower + upper
 
-par_def = lambda i: int(i) if re.match(r"(\+|-)?[0-9]+", i) else str(i)
+par_def = lambda i: int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else str(i)
 
 def parser(input, split, par=par_def, strip=True):
     if len(split) == 1:
