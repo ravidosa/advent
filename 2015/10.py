@@ -1,5 +1,4 @@
 from utils import *
-import itertools
 inp = open("2015/input-10.txt", "r").read()
 
 result = inp

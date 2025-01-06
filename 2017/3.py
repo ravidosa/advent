@@ -1,5 +1,4 @@
 from utils import *
-import math
 inp = open("2017/input-3.txt", "r").read()
 
 target = int(inp)

@@ -1,5 +1,4 @@
 from utils import *
-import math
 inp = open("2015/input-22.txt", "r").read().strip()
 
 _, boss_hp, __, boss_damage = parser(inp, ["\n|: "])

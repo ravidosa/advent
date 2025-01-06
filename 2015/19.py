@@ -1,5 +1,4 @@
 from utils import *
-import re, functools
 inp = open("2015/input-19.txt", "r").read().split("\n\n")
 
 parsed_input = parser(inp[0], ["\n", " => "])

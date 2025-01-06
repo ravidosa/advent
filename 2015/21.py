@@ -1,5 +1,4 @@
 from utils import *
-import itertools, math
 inp = open("2015/input-21.txt", "r").read().strip()
 
 shop = """Weapons:    Cost  Damage  Armor
