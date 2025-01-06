@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2016/input-2.txt", "r").read()
+inp = open("2016/input-2.txt", "r").read().strip()
 
 parsed_input = parser(inp, ["\n", ""])
 keypad = {-1+1j: 1, 0+1j: 2, 1+1j: 3, -1+0j: 4, 0+0j: 5, 1+0j: 6, -1-1j: 7, 0-1j: 8, 1-1j: 9}

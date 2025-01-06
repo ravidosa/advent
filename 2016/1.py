@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2016/input-1.txt", "r").read()
+inp = open("2016/input-1.txt", "r").read().strip()
 
 parsed_input = parser(inp, [", "], lambda i: [i[0], int(i[1:])])
 

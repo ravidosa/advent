@@ -12,6 +12,13 @@ def parser(input, split, par=par_def, strip=True):
     else:
         return list(map(lambda inp: parser(inp, split[1:], par), filter(None, re.split(split[0], input))))
 
+def maxval(iterable, key=lambda i: i):
+    return key(max(iterable, key=key))
+def minval(iterable, key=lambda i: i):
+    return key(min(iterable, key=key))
+def keyval(dic, val):
+    return dic.keys()[dic.values().index(val)]
+
 # GRID
 dir_arr = {"^": 0+1j, ">": 1+0j, "v": 0-1j, "<": -1+0j}
 dir_letter = {"U": 0+1j, "R": 1+0j, "D": 0-1j, "L": -1+0j}
