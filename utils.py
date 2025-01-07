@@ -26,7 +26,7 @@ neighbors = [1+0j, 0+1j, -1+0j, 0-1j]
 diag_neighbors = [1+0j, 1+1j, 0+1j, -1+1j, -1+0j, -1-1j, 0-1j, 1-1j]
 
 class Grid:
-    def __init__(self, input, par):
+    def __init__(self, input, par=par_def):
         self.grid = [[par(i) for i in inp] for inp in input.split("\n")]
         self.rows, self.cols = len(self.grid), len(self.grid[0])
     def __repr__(self):

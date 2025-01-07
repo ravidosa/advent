@@ -3,7 +3,7 @@ inp = open("2015/input-18.txt", "r").read().strip()
 
 parsed_input = inp.replace(".", "0").replace("#", "1")
 
-grid = Grid(parsed_input, int)
+grid = Grid(parsed_input)
 for _ in range(100):
     new_grid = [[0 for _ in range(grid.cols)] for __ in range(grid.rows)]
     for r in range(grid.rows):
@@ -18,7 +18,7 @@ for _ in range(100):
     grid.grid = new_grid
 print(summer(grid.grid))
 
-grid = Grid(parsed_input, int)
+grid = Grid(parsed_input)
 for _ in range(100):
     new_grid = [[(r in [0, grid.rows - 1] and c in [0, grid.cols - 1]) for c in range(grid.cols)] for r in range(grid.rows)]
     for r in range(grid.rows):
