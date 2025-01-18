@@ -2,6 +2,7 @@ from utils import *
 inp = open("2024/input-23.txt", "r").read().strip()
 
 parsed_input = parser(inp, ["\n", "-"])
+
 G = nx.Graph()
 G.add_edges_from(parsed_input)
 

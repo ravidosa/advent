@@ -32,6 +32,9 @@ area = lambda cells: len(cells)
 peri = lambda cells: sum(map(lambda p: sum(map(lambda d: (p[0] + d[0], p[1] + d[1]) not in cells, dir_tup)), cells))
 sides = lambda cells: sum(map(lambda p: sum(map(lambda c: all(map(lambda d: (p[0] + d[0], p[1] + d[1]) not in cells, c)) if len(c) == 2 else all(map(lambda d: (p[0] + d[0], p[1] + d[1]) in cells, c[:2])) and (p[0] + c[2][0], p[1] + c[2][1]) not in cells, corner_tup)), cells))
 
+def tupadd(tuple1, tuple2):
+    return tuple(map(lambda pair: pair[0] + pair[1], zip(tuple1, tuple2)))
+
 class Grid:
     def __init__(self, input, par=par_def, dirs=dir_tup):
         self.grid = [[par(i) for i in inp] for inp in input.split("\n")]
@@ -39,8 +42,18 @@ class Grid:
         self.dirs = dirs
     def __repr__(self):
         return "\n".join(map(lambda r: "".join(map(str, r)), self.grid))
+    def __contains__(self, p):
+        return 0 <= p[0] < self.rows and 0 <= p[1] < self.cols
     def find(self, loc):
         return list(filter(lambda i: self.grid[i[0]][i[1]] == loc, itertools.product(range(self.rows), range(self.cols))))
+    def get_pos(self, p):
+        if p in self:
+            return self.grid[p[0]][p[1]]
+        return None
+    def set_pos(self, p, s):
+        self.grid[p[0]][p[1]] = s
+    def cells(self):
+        return itertools.product(range(self.rows), range(self.cols))
     def bfs(self, start, move=lambda currv, nextv: True, fil=lambda v: True):
         vis, next = set(), set()
         next.add(start)
@@ -50,21 +63,21 @@ class Grid:
             r, c = currp
             for d in self.dirs:
                 dr, dc = d
-                if 0 <= r + dr < self.rows and 0 <= c + dc < self.cols:
-                    nextp = (r + dr, c + dc)
-                    if move(self.grid[r][c], self.grid[r + dr][c + dc]) and nextp not in vis:
+                nextp = (r + dr, c + dc)
+                if nextp in self:
+                    if move(self.get_pos(currp), self.get_pos(nextp)) and nextp not in vis:
                         next.add(nextp)
-        return filter(lambda p: fil(self.grid[p[0]][p[1]]), vis)
+        return filter(lambda p: fil(self.get_pos(p)), vis)
     def dfs(self, currp, visited, move=lambda currv, nextv: True, fil=lambda v: True):
         r, c = currp
-        if fil(self.grid[r][c]):
+        if fil(self.get_pos(currp)):
             yield currp
         else:
-            for d in self.dir:
+            for d in self.dirs:
                 dr, dc = d
-                if 0 <= r + dr < self.rows and 0 <= c + dc < self.cols:
-                    nextp = (r + dr, c + dc)
-                    if move(self.grid[r][c], self.grid[r + dr][c + dc]) and nextp not in visited:
+                nextp = (r + dr, c + dc)
+                if nextp in self:
+                    if move(self.get_pos(currp), self.get_pos(nextp)) and nextp not in visited:
                         for p in self.dfs(nextp, visited + [currp], move, fil):
                             yield p
     def djkstra(self, start, end, move=lambda currv, nextv: True, weight=lambda currp, nextp: 1):
@@ -79,11 +92,11 @@ class Grid:
                 return dist[r][c]
             if not processed[r][c]:
                 processed[r][c] = True
-                for d in self.dir:
+                for d in self.dirs:
                     dr, dc = d
-                    if 0 <= r + dr < self.rows and 0 <= c + dc < self.cols:
-                        nextp = (r + dr, c + dc)
-                        if move(self.grid[r][c], self.grid[r + dr][c + dc]):
+                    nextp = (r + dr, c + dc)
+                    if nextp in self:
+                        if move(self.get_pos(currp), self.get_pos(nextp)):
                             dist[r + dr][c + dc] = min(dist[r + dr][c + dc], dist[r][c] + weight(currp, nextp))
                             if nextp not in queue and not processed[r + dr][c + dc]:
                                 hq.heappush(queue, (dist[r + dr][c + dc], nextp))
@@ -145,3 +158,6 @@ def chi_rem(a, n):
 
 def manhattan(p1, p2):
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+
+def prod(iterable):
+    return functools.reduce(operator.mul, iterable)

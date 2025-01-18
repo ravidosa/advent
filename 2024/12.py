@@ -5,12 +5,11 @@ grid = Grid(inp)
 plants = set(inp) - {"\n"}
 regions = []
 filled = set()
-for r in range(grid.rows):
-    for c in range(grid.cols):
-        if (r, c) not in filled:
-            floodfill = list(grid.bfs((r, c), lambda currv, nextv: currv == nextv))
-            regions.append(floodfill)
-            filled.update(floodfill)
+for p in grid.cells():
+    if p not in filled:
+        floodfill = list(grid.bfs(p, lambda currv, nextv: currv == nextv))
+        regions.append(floodfill)
+        filled.update(floodfill)
 
 print(sum(map(lambda r: area(r) * peri(r), regions)))
 

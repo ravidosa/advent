@@ -2,6 +2,7 @@ from utils import *
 inp = open("2021/input-3.txt", "r").read()
 
 parsed_input = parser(inp, ["\n"], str)
+
 most_common = lambda bins, i: None if (bal := sum(map(lambda b: b[i] == "1", bins))) == len(bins) / 2 else ("1" if bal > len(bins) / 2 else "0")
 
 bits = len(parsed_input[0])

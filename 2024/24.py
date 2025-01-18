@@ -3,6 +3,7 @@ inp = open("2024/input-24.txt", "r").read().strip().split("\n\n")
 
 parsed_input = parser(inp[0], ["\n", ": "])
 connections = parser(inp[1], ["\n", " -> | "])
+
 wire_dict = {i[0]: i[1] for i in parsed_input} | {c[-1]: c[:-1] for c in connections}
 z = sum(map(lambda c: c[-1][0] == "z", connections))
 def val(wir):

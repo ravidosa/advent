@@ -10,7 +10,7 @@ def safety(t):
         pxf, pyf = (p[0] + v[0] * t) % W, (p[1] + v[1] * t) % H
         if pxf != W // 2 and pyf != H // 2:
             quads[2 * (pxf > W // 2) + (pyf > H // 2)] += 1
-    return functools.reduce(operator.mul, quads)
+    return prod(quads)
 
 print(safety(100))
 

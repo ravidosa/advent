@@ -7,7 +7,6 @@ for i, ch in enumerate(inp):
     disk.extend([i//2]*int(ch))
   else:
     disk.extend([None]*int(ch))
-
 disky = []
 dq = collections.deque(disk)
 while dq:

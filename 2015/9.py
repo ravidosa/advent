@@ -2,6 +2,7 @@ from utils import *
 inp = open("2015/input-9.txt", "r").read()
 
 parsed_input = parser(inp, ["\n", " to | = "])
+
 matrix = {}
 locations = set()
 for inp in parsed_input:

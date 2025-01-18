@@ -2,8 +2,8 @@ from utils import *
 inp = open("2018/input-3.txt", "r").read().strip()
 
 parsed_input = parser(inp, ["\n", "#| @ |,|: |x"])
-fabric_dict = {}
 
+fabric_dict = {}
 for i in parsed_input:
     _, x, y, w, h = i
     for c in range(x, x + w):

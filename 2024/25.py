@@ -2,6 +2,7 @@ from utils import *
 inp = open("2024/input-25.txt", "r").read().strip()
 
 parsed_input = parser(inp, ["\n\n", "\n"])
+
 w, h = len(parsed_input[0][0]), len(parsed_input[0]) - 2
 locks, keys = [], []
 for i in parsed_input:

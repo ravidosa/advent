@@ -28,7 +28,6 @@ while len(queue) > 0:
                             hq.heappush(queue, (currdist + cost, nextp, nextd))
                         elif currdist + cost == dist.get((nextp, nextd), math.inf):
                             prev[(nextp, nextd)] += [(currp, currd)]
-
 print(minval(range(4), key=lambda i: dist.get((end, i), math.inf)))
 
 spots = set()

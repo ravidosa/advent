@@ -2,6 +2,7 @@ from utils import *
 inp = open("2015/input-7.txt", "r").read()
 
 parsed_input = parser(inp, ["\n", r" -> | "])
+
 def sig(tar):
     global wires
     if type(tar) is int:

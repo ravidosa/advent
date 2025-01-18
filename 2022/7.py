@@ -2,6 +2,7 @@ from utils import *
 inp = open("2022/input-7.txt", "r").read().strip()
 
 parsed_input = parser(inp, ["\n", " "])
+
 path = []
 dirs = {"/": {}}
 for inp in parsed_input:

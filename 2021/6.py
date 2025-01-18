@@ -2,6 +2,7 @@ from utils import *
 inp = open("2021/input-6.txt", "r").read()
 
 parsed_input = parser(inp, [","])
+
 fish_ct = {i: parsed_input.count(i) for i in parsed_input}
 
 for _ in range(80):

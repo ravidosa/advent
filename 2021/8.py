@@ -2,6 +2,7 @@ from utils import *
 inp = open("2021/input-8.txt", "r").read()
 
 parsed_input = parser(inp, ["\n", " \| ", " "])
+
 digit_segs = {(0, 1, 2, 4, 5, 6): "0", (2, 5): "1", (0, 2, 3, 4, 6): "2", (0, 2, 3, 5, 6): "3", (1, 2, 3, 5): "4", (0, 1, 3, 5, 6): "5", (0, 1, 3, 4, 5, 6): "6", (0, 2, 5): "7", (0, 1, 2, 3, 4, 5, 6): "8", (0, 1, 2, 3, 5, 6): "9"}
 
 print(sum(map(lambda i: (seg := list(map(len, i[1]))).count(2) + seg.count(4) + seg.count(3) + seg.count(7), parsed_input)))

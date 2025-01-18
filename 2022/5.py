@@ -2,6 +2,7 @@ from utils import *
 inp = open("2022/input-5.txt", "r").read().split("\n\n")
 
 parsed_input = parser(inp[0], ["\n"], str, False)
+
 stack_count = len(parsed_input[-1].split())
 initial_stacks = [[] for _ in range(stack_count)]
 for r in parsed_input[:-1]:
