@@ -1,11 +1,10 @@
-import networkx as nx
-f = open("2024/input-23.txt", "r")
-inp = f.read().split("\n")
+from utils import *
+inp = open("2024/input-23.txt", "r").read().strip()
 
+parsed_input = parser(inp, ["\n", "-"])
 G = nx.Graph()
-for i in inp:
-    u, v = i.split("-")
-    G.add_edge(u, v)
+G.add_edges_from(parsed_input)
+
 s = 0
 for clique in nx.enumerate_all_cliques(G):
     if len(clique) == 3:
@@ -15,3 +14,5 @@ for clique in nx.enumerate_all_cliques(G):
     elif len(clique) > 3:
         break
 print(s)
+
+print(",".join(sorted(max(nx.find_cliques(G), key=len))))

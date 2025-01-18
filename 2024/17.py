@@ -1,0 +1,52 @@
+from utils import *
+inp = open("2024/input-17.txt", "r").read().strip().split("\n\n")
+
+a, b, c = parser(inp[0], ["Register A: |Register B: |Register C: "])
+parsed_input = parser(inp[1], ["Program: |,"])
+
+i = 0
+ct = 0
+output = []
+while i < len(parsed_input) and ct < 100:
+    ct += 1
+    opcode = parsed_input[i]
+    operand = parsed_input[i + 1]
+
+    literal = operand
+    combo = operand if 0 <= operand <= 3 else a if operand == 4 else b if operand == 5 else c
+
+    if opcode == 0:
+        a = a // (2 ** combo)
+        i += 2
+    if opcode == 1:
+        b = b ^ literal
+        i += 2
+    if opcode == 2:
+        b = combo % 8
+        i += 2
+    if opcode == 3:
+        if a != 0:
+            i = literal
+        else:
+            i += 2
+    if opcode == 4:
+        b = b ^ c
+        i += 2
+    if opcode == 5:
+        output.append(combo % 8)
+        i += 2
+    if opcode == 6:
+        b = a // (2 ** combo)
+        i += 2
+    if opcode == 7:
+        c = a // (2 ** combo)
+        i += 2
+print(",".join(map(str, output)))
+
+x = z3.BitVec('x', 3 * len(parsed_input) + 1)
+s = z3.Optimize()
+for i in range(len(parsed_input)):
+    s.add_soft(((((x >> (3 * i)) & 7) ^ 5) ^ 6 ^ ((x >> (3 * i)) >> (((x >> (3 * i)) & 7) ^ 5))) & 7 == parsed_input[i])
+h = s.minimize(x)
+s.check()
+print(h.value())
