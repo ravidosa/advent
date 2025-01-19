@@ -8,8 +8,8 @@ pos = 0+0j
 code = ""
 for inp in parsed_input:
     for key in inp:
-        if (pos + dir_letter[key] in keypad):
-            pos += dir_letter[key]
+        if (pos + dir_letter[key]["comp"] in keypad):
+            pos += dir_letter[key]["comp"]
     code += str(keypad[pos])
 print(code)
 
@@ -18,7 +18,7 @@ pos = -2+0j
 code = ""
 for inp in parsed_input:
     for key in inp:
-        if (pos + dir_letter[key] in keypad):
-            pos += dir_letter[key]
+        if (pos + dir_letter[key]["comp"] in keypad):
+            pos += dir_letter[key]["comp"]
     code += str(keypad[pos])
 print(code)

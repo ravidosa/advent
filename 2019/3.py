@@ -9,7 +9,7 @@ steps = {}
 pos = 0+0j
 step = 0
 for inp in parsed_input[0]:
-    dir = dir_letter[inp[0]]
+    dir = dir_letter[inp[0]]["comp"]
     for i in range(inp[1]):
         pos += dir
         step += 1
@@ -18,7 +18,7 @@ for inp in parsed_input[0]:
 pos = 0+0j
 step = 0
 for inp in parsed_input[1]:
-    dir = dir_letter[inp[0]]
+    dir = dir_letter[inp[0]]["comp"]
     for i in range(inp[1]):
         pos += dir
         step += 1

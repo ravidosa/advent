@@ -18,12 +18,21 @@ def minval(iterable, key=lambda i: i):
     return key(min(iterable, key=key))
 def keyval(dic, val):
     return dic.keys()[dic.values().index(val)]
+def argmax(iterable, key=lambda i: i):
+    iterable = list(iterable)
+    return max(range(len(iterable)), key=lambda ind: key(iterable[ind]))
+def argmin(iterable, key=lambda i: i):
+    iterable = list(iterable)
+    return min(range(len(iterable)), key=lambda ind: key(iterable[ind]))
+def cmp(a, b, key=lambda i: i):
+    ka, kb = key(a), key(b)
+    return (ka > kb) - (ka < kb)
 
 # GRID
 dir_tup = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 dir_diag_tup = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
 dir_sym = {"^": {"comp": 0+1j, "tup": (-1, 0)}, ">": {"comp": 1+0j, "tup": (0, 1)}, "v": {"comp": 0-1j, "tup": (1, 0)}, "<": {"comp": -1+0j, "tup": (0, -1)}}
-dir_letter = {"U": 0+1j, "R": 1+0j, "D": 0-1j, "L": -1+0j}
+dir_letter = {"U": {"comp": 0+1j, "tup": (-1, 0)}, "R": {"comp": 1+0j, "tup": (0, 1)}, "D": {"comp": 0-1j, "tup": (1, 0)}, "L": {"comp": -1+0j, "tup": (0, -1)}}
 neighbors = [1+0j, 0+1j, -1+0j, 0-1j]
 diag_neighbors = [1+0j, 1+1j, 0+1j, -1+1j, -1+0j, -1-1j, 0-1j, 1-1j]
 
@@ -54,16 +63,26 @@ class Grid:
         self.grid[p[0]][p[1]] = s
     def cells(self):
         return itertools.product(range(self.rows), range(self.cols))
+    def row(self, pos, len=math.inf):
+        r, c = pos
+        return list(map(lambda i: self.get_pos((r, c + i)), range(min(self.cols - c, len))))
+    def col(self, pos, len=math.inf):
+        r, c = pos
+        return list(map(lambda i: self.get_pos((r + i, c)), range(min(self.rows - r, len))))
+    def pdiag(self, pos, len=math.inf):
+        r, c = pos
+        return list(map(lambda i: self.get_pos((r + i, c - i)), range(min(self.rows - r, c + 1, len))))
+    def ndiag(self, pos, len=math.inf):
+        r, c = pos
+        return list(map(lambda i: self.get_pos((r + i, c + i)), range(min(self.rows - r, self.cols - c, len))))
     def bfs(self, start, move=lambda currv, nextv: True, fil=lambda v: True):
         vis, next = set(), set()
         next.add(start)
         while len(next) > 0:
             currp = next.pop()
             vis.add(currp)
-            r, c = currp
             for d in self.dirs:
-                dr, dc = d
-                nextp = (r + dr, c + dc)
+                nextp = tupadd(currp, d)
                 if nextp in self:
                     if move(self.get_pos(currp), self.get_pos(nextp)) and nextp not in vis:
                         next.add(nextp)
@@ -74,13 +93,12 @@ class Grid:
             yield currp
         else:
             for d in self.dirs:
-                dr, dc = d
-                nextp = (r + dr, c + dc)
+                nextp = tupadd(currp, d)
                 if nextp in self:
                     if move(self.get_pos(currp), self.get_pos(nextp)) and nextp not in visited:
                         for p in self.dfs(nextp, visited + [currp], move, fil):
                             yield p
-    def djkstra(self, start, end, move=lambda currv, nextv: True, weight=lambda currp, nextp: 1):
+    def djkstra(self, start, end=lambda v: True, move=lambda currv, nextv: True, weight=lambda currp, nextp: 1):
         dist = [[math.inf for _ in range(self.cols)] for __ in range(self.rows)]
         processed = [[False for _ in range(self.cols)] for __ in range(self.rows)]
         dist[start[0]][start[1]] = 0
@@ -88,13 +106,13 @@ class Grid:
         while len(queue) > 0:
             currd, currp = hq.heappop(queue)
             r, c = currp
-            if currp == end:
+            if end and ((type(end) == tuple and currp == end) or (callable(end) and end(self.get_pos(currp)))):
                 return dist[r][c]
             if not processed[r][c]:
                 processed[r][c] = True
                 for d in self.dirs:
                     dr, dc = d
-                    nextp = (r + dr, c + dc)
+                    nextp = tupadd(currp, d)
                     if nextp in self:
                         if move(self.get_pos(currp), self.get_pos(nextp)):
                             dist[r + dr][c + dc] = min(dist[r + dr][c + dc], dist[r][c] + weight(currp, nextp))

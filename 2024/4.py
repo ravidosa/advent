@@ -5,11 +5,10 @@ grid = Grid(inp)
 
 s = 0
 for pos in grid.cells():
-    r, c = pos
-    s += functools.reduce(operator.concat, map(lambda i: grid.get_pos((r, c + i)), range(min(4, grid.cols - c))), "") in ["XMAS", "SAMX"]
-    s += functools.reduce(operator.concat, map(lambda i: grid.get_pos((r + i, c)), range(min(4, grid.rows - r))), "") in ["XMAS", "SAMX"]
-    s += functools.reduce(operator.concat, map(lambda i: grid.get_pos((r + i, c + i)), range(min(4, grid.rows - r, grid.cols - c))), "") in ["XMAS", "SAMX"]
-    s += functools.reduce(operator.concat, map(lambda i: grid.get_pos((r + i, c - i)), range(min(4, grid.rows - r, c + 1))), "") in ["XMAS", "SAMX"]
+    s += functools.reduce(operator.concat, grid.row(pos, 4)) in ["XMAS", "SAMX"]
+    s += functools.reduce(operator.concat, grid.col(pos, 4), "") in ["XMAS", "SAMX"]
+    s += functools.reduce(operator.concat, grid.pdiag(pos, 4), "") in ["XMAS", "SAMX"]
+    s += functools.reduce(operator.concat, grid.ndiag(pos, 4), "") in ["XMAS", "SAMX"]
 print(s)
 
 s = 0

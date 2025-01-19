@@ -18,10 +18,10 @@ while len(queue) > 0:
         for nextd in range(4):
             dr, dc = dir_tup[nextd]
             if dr != -prevdr or dc != -prevdc:
+                nextp = tupadd(currp, dir_tup[nextd])
                 cost = 1 + 1000 * (dr != prevdr or dc != prevdc)
-                if 0 <= r + dr < grid.rows and 0 <= c + dc < grid.cols:
-                    nextp = (r + dr, c + dc)
-                    if grid.grid[r + dr][c + dc] != "#":
+                if nextp in grid:
+                    if grid.get_pos(nextp) != "#":
                         if currdist + cost < dist.get((nextp, nextd), math.inf):
                             dist[(nextp, nextd)] = currdist + cost
                             prev[(nextp, nextd)] = [(currp, currd)]
