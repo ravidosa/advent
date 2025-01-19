@@ -9,10 +9,12 @@ for i in parsed_input:
     num, pairs = inp[0], zip(i[1::2], i[2::2])
     if all(map(lambda p: sue[p[0]] == p[1], pairs)):
         break
-print(num)
+p1 = num
 
 for i in parsed_input:
     num, pairs = inp[0], zip(i[1::2], i[2::2])
     if all(map(lambda p: sue[p[0]] < p[1] if p[0] in ["cats", "trees"] else sue[p[0]] > p[1] if p[0] in ["pomeranians", "goldfish"] else sue[p[0]] == p[1], pairs)):
         break
-print(num)
+p2 = num
+
+output(p1, p2)

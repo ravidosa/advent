@@ -7,7 +7,7 @@ vis.add(pos)
 for i in inp:
     pos += dir_sym[i]["comp"]
     vis.add(pos)
-print(len(vis))
+p1 = len(vis)
 
 SANTAS = 2
 vis = set()
@@ -17,4 +17,6 @@ for j in range(SANTAS):
     for i in inp[j::SANTAS]:
         pos += dir_sym[i]["comp"]
         vis.add(pos)
-print(len(vis))
+p2 = len(vis)
+
+output(p1, p2)

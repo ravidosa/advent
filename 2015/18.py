@@ -11,7 +11,7 @@ for _ in range(100):
         if (grid.get_pos(p) == 1 and neigh_on in [2, 3]) or (grid.get_pos(p) == 0 and neigh_on in [3]):
             new_grid[p[0]][p[1]] = 1
     grid.grid = new_grid
-print(summer(grid.grid))
+p1 = summer(grid.grid)
 
 grid = Grid(parsed_input)
 for _ in range(100):
@@ -21,4 +21,6 @@ for _ in range(100):
         if (grid.get_pos(p) == 1 and neigh_on in [2, 3]) or (grid.get_pos(p) == 0 and neigh_on in [3]):
             new_grid[p[0]][p[1]] = 1
     grid.grid = new_grid
-print(summer(grid.grid))
+p2 = summer(grid.grid)
+
+output(p1, p2)

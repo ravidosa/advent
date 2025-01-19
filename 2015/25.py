@@ -11,4 +11,6 @@ while r != parsed_input[0] or c != parsed_input[1]:
     else:
         r, c = r - 1, c + 1
     code = (code * 252533) % 33554393
-print(code)
+p1 = code
+
+output(p1)

@@ -12,7 +12,7 @@ for i in range(1, target + 1):
             break
     if found:
         break
-print(min(presents, key=lambda i: i if presents[i] >= target else target))
+p1 = min(presents, key=lambda i: i if presents[i] >= target else target)
 
 target = math.ceil(int(inp) / 11)
 presents = {}
@@ -25,4 +25,6 @@ for i in range(1, target + 1):
             break
     if found:
         break
-print(min(presents, key=lambda i: i if presents[i] >= target else target))
+p2 = min(presents, key=lambda i: i if presents[i] >= target else target)
+
+output(p1, p2)

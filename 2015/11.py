@@ -20,9 +20,11 @@ else:
             password = password[:password.index(rep)] + lower[lower.index(rep) + 1]  + "a" * (len(password) - password.index(rep) - 1)
 while not secure(password):
     password = increment(password)
-print(password)
+p1 = password
 
 password = increment(password)
 while not secure(password):
     password = increment(password)
-print(password)
+p2 = password
+
+output(p1, p2)

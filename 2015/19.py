@@ -14,7 +14,7 @@ def replace(molecule, reps):
                 mols.update(replace(molecule[:ind] + i[1] + molecule[ind + len(i[0]):], reps - 1))
         return mols
 med_mol = inp[1].strip()
-print(len(replace(med_mol, 1)))
+p1 = len(replace(med_mol, 1))
 
 def atomize(molecule):
     atoms = []
@@ -28,4 +28,6 @@ def atomize(molecule):
     atoms.append(at)
     return atoms[1:]
 at = atomize(med_mol)
-print(len(at) - 2 * at.count("Rn") - 2 * at.count("Y") - 1)
+p2 = len(at) - 2 * at.count("Rn") - 2 * at.count("Y") - 1
+
+output(p1, p2)

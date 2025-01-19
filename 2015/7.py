@@ -33,8 +33,10 @@ def sig(tar):
 
 wires = {i[-1]: i[:-1] for i in parsed_input}
 override = sig("a")
-print(override)
+p1 = override
 
 wires = {i[-1]: inp[:-1] for i in parsed_input}
 wires["b"] = override
-print(sig("a"))
+p2 = sig("a")
+
+output(p1, p2)

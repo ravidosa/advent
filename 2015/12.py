@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 12).strip()
 
-print(sum(map(int, re.findall(r'-?[0-9]+', inp))))
+p1 = sum(map(int, re.findall(r'-?[0-9]+', inp)))
 
 parsed_input = eval(inp)
 def red_sum(obj):
@@ -15,4 +15,6 @@ def red_sum(obj):
         else:
             return sum(map(red_sum, obj.values()))
     return 0
-print(red_sum(parsed_input))
+p2 =red_sum(parsed_input)
+
+output(p1, p2)

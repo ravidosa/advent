@@ -37,7 +37,7 @@ for combo in itertools.product(range(len(weapons)), range(len(armors)), itertool
         player_armor = (0 if a == len(armors) else armors[a][3]) + sum(map(lambda rr: rings[rr][4], r))
         if math.ceil(player_hp / max(1, boss_damage - player_armor)) >= math.ceil(boss_hp / max(1, player_damage - boss_armor)):
             ming = min(ming, weapons[w][1] + (0 if a == len(armors) else armors[a][1]) + sum(map(lambda rr: rings[rr][2], r)))
-print(ming)
+p1 = ming
 
 maxg = 0
 for combo in itertools.product(range(len(weapons)), range(len(armors)), itertools.combinations(range(len(rings)), 2)):
@@ -47,4 +47,6 @@ for combo in itertools.product(range(len(weapons)), range(len(armors)), itertool
         player_armor = (0 if a == len(armors) else armors[a][3]) + sum(map(lambda rr: rings[rr][4], r))
         if math.ceil(player_hp / max(1, boss_damage - player_armor)) < math.ceil(boss_hp / max(1, player_damage - boss_armor)):
             maxg = max(maxg, weapons[w][1] + (0 if a == len(armors) else armors[a][1]) + sum(map(lambda rr: rings[rr][2], r)))
-print(maxg)
+p2 = maxg
+
+output(p1, p2)

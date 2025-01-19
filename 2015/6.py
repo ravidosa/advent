@@ -14,7 +14,7 @@ for i in parsed_input:
                 lights[y][x] = 0
             if instr == "toggle":
                 lights[y][x] = 1 - lights[y][x]
-print(summer(lights))
+p1 = summer(lights)
 
 lights = [[0 for _ in range(1000)] for _ in range(1000)]
 for i in parsed_input:
@@ -27,4 +27,6 @@ for i in parsed_input:
                 lights[y][x] = max(lights[y][x] - 1, 0)
             if instr == "toggle":
                 lights[y][x] += 2
-print(summer(lights))
+p2 = summer(lights)
+
+output(p1, p2)

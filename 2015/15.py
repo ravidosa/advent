@@ -10,7 +10,7 @@ for j in range(5):
     opt.add(sum([x[i] * parsed_input[i][j + 1] for i in range(len(parsed_input))]) >= 0)
 opt.maximize(prod(map(lambda j: sum([x[i] * parsed_input[i][j + 1] for i in range(len(parsed_input))]), range(4))))
 opt.check()
-print(str(opt.model().evaluate(opt.objectives()[0]))[1:])
+p1 = str(opt.model().evaluate(opt.objectives()[0]))[1:]
 
 x = [z3.Int('x%s' % i) for i in range(len(parsed_input))]
 opt = z3.Optimize()
@@ -20,4 +20,6 @@ for j in range(4):
     opt.add(sum([x[i] * parsed_input[i][j + 1] for i in range(len(parsed_input))]) >= 0)
 opt.maximize(prod(map(lambda j: sum([x[i] * parsed_input[i][j + 1] for i in range(len(parsed_input))]), range(4))))
 opt.check()
-print(str(opt.model().evaluate(opt.objectives()[0]))[1:])
+p2 = str(opt.model().evaluate(opt.objectives()[0]))[1:]
+
+output(p1, p2)

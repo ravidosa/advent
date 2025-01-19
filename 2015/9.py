@@ -9,15 +9,10 @@ for i in parsed_input:
     l1, l2, cost = i
     matrix[(l1, l2)], matrix[(l2, l1)] = cost, cost
     locations.update([l1, l2])
+dist = lambda route: sum(map(lambda i: matrix[(route[i], route[i + 1])], range(len(locations) - 1)))
 
-mind = sum(matrix.values())
-for route in itertools.permutations(locations):
-    d = sum(map(lambda i: matrix[(route[i], route[i + 1])], range(len(locations) - 1)))
-    mind = min(mind, d)
-print(mind)
+p1 = min(itertools.permutations(locations), key=dist)
 
-maxd = 0
-for route in itertools.permutations(locations):
-    d = sum(map(lambda i: matrix[(route[i], route[i + 1])], range(len(locations) - 1)))
-    maxd = max(maxd, d)
-print(maxd)
+p2 = max(itertools.permutations(locations), key=dist)
+
+output(p1, p2)

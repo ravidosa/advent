@@ -28,7 +28,7 @@ while 0 <= i < len(parsed_input):
             i += inp[2]
         else:
             i += 1
-print(reg["b"])
+p1 = reg["b"]
 
 reg = {"a": 1, "b": 0}
 i = 0
@@ -55,4 +55,6 @@ while 0 <= i < len(parsed_input):
             i += inp[2]
         else:
             i += 1
-print(reg["b"])
+p2 = reg["b"]
+
+output(p1, p2)

@@ -27,7 +27,7 @@ def round(turn, player_hp, boss_hp, mana, s_turn, p_turn, r_turn, spent, tr):
         else:
             round(0, player_hp - max(1, boss_damage - 7 * (s_turn != 0)), boss_hp - 3 * (p_turn != 0), mana + 101 * (r_turn != 0), max(0, s_turn - 1), max(0, p_turn - 1), max(0, r_turn - 1), spent, tr)
 round(0, 50, boss_hp, 500, 0, 0, 0, 0, "")
-print(minsp)
+p1 = minsp
 
 minsp = math.inf
 def round(turn, player_hp, boss_hp, mana, s_turn, p_turn, r_turn, spent, tr):
@@ -54,4 +54,6 @@ def round(turn, player_hp, boss_hp, mana, s_turn, p_turn, r_turn, spent, tr):
         else:
             round(0, player_hp - max(1, boss_damage - 7 * (s_turn != 0)), boss_hp - 3 * (p_turn != 0), mana + 101 * (r_turn != 0), max(0, s_turn - 1), max(0, p_turn - 1), max(0, r_turn - 1), spent, tr)
 round(0, 50, boss_hp, 500, 0, 0, 0, 0, "")
-print(minsp)
+p2 = minsp
+
+output(p1, p2)

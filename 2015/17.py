@@ -13,7 +13,8 @@ def combos(eggnog, containers, used):
     else:
         return combos(eggnog - containers[0], containers[1:], used + 1) + combos(eggnog, containers[1:], used)
 
-EGGNOG = 150
-print(combos(EGGNOG, tuple(parsed_input), 0))
+p1 = combos(150, tuple(parsed_input), 0)
 
-print(container_count[min(container_count.keys())])
+p2 =container_count[min(container_count.keys())]
+
+output(p1, p2)
