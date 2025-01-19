@@ -5,8 +5,8 @@ parsed_input = parser(inp, ["\n", r" can fly | km/s for | seconds, but then must
 
 SECONDS = 2503
 maxd = 0
-for inp in parsed_input:
-    _, speed, time, rest = inp
+for i in parsed_input:
+    _, speed, time, rest = i
     d = SECONDS // (time + rest) * time * speed + min(SECONDS % (time + rest), time) * speed
     maxd = max(maxd, d)
 print(maxd)
@@ -14,8 +14,8 @@ print(maxd)
 points = {}
 for t in range(1, SECONDS + 1):
     maxd, maxr = 0, []
-    for inp in parsed_input:
-        name, speed, time, rest = inp
+    for i in parsed_input:
+        name, speed, time, rest = i
         d = t // (time + rest) * time * speed + min(t % (time + rest), time) * speed
         maxd, maxr = max(maxd, d), [name] if d > maxd else maxr + [name] if d == maxd else maxr
     for r in maxr:

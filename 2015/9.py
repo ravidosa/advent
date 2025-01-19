@@ -5,8 +5,8 @@ parsed_input = parser(inp, ["\n", " to | = "])
 
 matrix = {}
 locations = set()
-for inp in parsed_input:
-    l1, l2, cost = inp
+for i in parsed_input:
+    l1, l2, cost = i
     matrix[(l1, l2)], matrix[(l2, l1)] = cost, cost
     locations.update([l1, l2])
 

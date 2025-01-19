@@ -5,8 +5,8 @@ parsed_input = parser(inp, ["\n", r" would | happiness units by sitting next to 
 
 matrix = {}
 names = set()
-for inp in parsed_input:
-    n1, gl, change, n2 = inp
+for i in parsed_input:
+    n1, gl, change, n2 = i
     matrix[(n1, n2)] = change * (1 if gl == "gain" else -1)
     names.update([n1, n2])
 

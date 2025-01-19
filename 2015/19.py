@@ -9,9 +9,9 @@ def replace(molecule, reps):
         return set([molecule])
     else:
         mols = set()
-        for inp in parsed_input:
-            for ind in functools.reduce(lambda x, y: x + [y.start()], re.finditer(inp[0], molecule), []):
-                mols.update(replace(molecule[:ind] + inp[1] + molecule[ind + len(inp[0]):], reps - 1))
+        for i in parsed_input:
+            for ind in functools.reduce(lambda x, y: x + [y.start()], re.finditer(i[0], molecule), []):
+                mols.update(replace(molecule[:ind] + i[1] + molecule[ind + len(i[0]):], reps - 1))
         return mols
 med_mol = inp[1].strip()
 print(len(replace(med_mol, 1)))

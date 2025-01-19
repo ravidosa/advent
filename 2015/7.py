@@ -31,10 +31,10 @@ def sig(tar):
         wires[tar] = sig(ass[0])
     return wires[tar]
 
-wires = {inp[-1]: inp[:-1] for inp in parsed_input}
+wires = {i[-1]: i[:-1] for i in parsed_input}
 override = sig("a")
 print(override)
 
-wires = {inp[-1]: inp[:-1] for inp in parsed_input}
+wires = {i[-1]: inp[:-1] for i in parsed_input}
 wires["b"] = override
 print(sig("a"))

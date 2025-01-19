@@ -8,18 +8,18 @@ vis = set()
 steps = {}
 pos = 0+0j
 step = 0
-for inp in parsed_input[0]:
-    dir = dir_letter[inp[0]]["comp"]
-    for i in range(inp[1]):
+for i in parsed_input[0]:
+    dir = dir_letter[i[0]]["comp"]
+    for i in range(i[1]):
         pos += dir
         step += 1
         vis.add(pos)
         steps[pos] = step
 pos = 0+0j
 step = 0
-for inp in parsed_input[1]:
-    dir = dir_letter[inp[0]]["comp"]
-    for i in range(inp[1]):
+for i in parsed_input[1]:
+    dir = dir_letter[i[0]]["comp"]
+    for i in range(i[1]):
         pos += dir
         step += 1
         if pos in vis:

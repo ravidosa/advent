@@ -4,8 +4,8 @@ inp = open("2015/input-6.txt", "r").read()
 parsed_input = parser(inp, ["\n", r"turn| through | |,"])
 
 lights = [[0 for _ in range(1000)] for _ in range(1000)]
-for inp in parsed_input:
-    instr, ix, iy, fx, fy = inp
+for i in parsed_input:
+    instr, ix, iy, fx, fy = i
     for x in range(ix, fx + 1):
         for y in range(iy, fy + 1):
             if instr == "on":
@@ -17,8 +17,8 @@ for inp in parsed_input:
 print(summer(lights))
 
 lights = [[0 for _ in range(1000)] for _ in range(1000)]
-for inp in parsed_input:
-    instr, ix, iy, fx, fy = inp
+for i in parsed_input:
+    instr, ix, iy, fx, fy = i
     for x in range(ix, fx + 1):
         for y in range(iy, fy + 1):
             if instr == "on":
