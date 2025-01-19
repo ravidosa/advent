@@ -1,8 +1,29 @@
-import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq
+import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, pathlib
+
+# INPUT
+
+def input_file(year, day):
+    test = int(sys.argv[1]) if len(sys.argv >= 1) else 0
+    if test:
+        if pathlib.Path("{0}/testinput-{1}.txt".format(year, day)).is_file():
+            return open("{0}/testinput-{1}.txt".format(year, day), "r").read()
+    else:
+        if pathlib.Path("{0}/input-{1}.txt".format(year, day)).is_file():
+            return open("{0}/input-{1}.txt".format(year, day), "r").read()
+        url_file = requests.get("https://adventofcode.com/{0}/day/{1}/input".format(year, day))
+        if url_file.text != "Puzzle inputs differ by user.  Please log in to get your puzzle input.\n":
+            f = open("{0}/input-{1}.txt".format(year, day), "w")
+            f.write(url_file.text)
+            f.close()
+            return url_file.text
+
+# STRINGS/PARSING
 
 lower = "abcdefghijklmnopqrstuvwxyz"
 upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 alph = lower + upper
+
+fingerprint = lambda i: "".join(sorted(str(i)))
 
 par_def = lambda i: int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else str(i)
 
@@ -11,6 +32,10 @@ def parser(input, split, par=par_def, strip=True):
         return list(map(lambda inp: par(inp[1].strip() if strip else inp[1]), enumerate(filter(None, re.split(split[0], input)))))
     else:
         return list(map(lambda inp: parser(inp, split[1:], par), filter(None, re.split(split[0], input))))
+
+
+
+# MAX/MIN
 
 def maxval(iterable, key=lambda i: i):
     return key(max(iterable, key=key))
@@ -28,7 +53,10 @@ def cmp(a, b, key=lambda i: i):
     ka, kb = key(a), key(b)
     return (ka > kb) - (ka < kb)
 
+
+
 # GRID
+
 dir_tup = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 dir_diag_tup = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
 dir_sym = {"^": {"comp": 0+1j, "tup": (-1, 0)}, ">": {"comp": 1+0j, "tup": (0, 1)}, "v": {"comp": 0-1j, "tup": (1, 0)}, "<": {"comp": -1+0j, "tup": (0, -1)}}
@@ -126,7 +154,7 @@ def summer(iterable):
     else:
         return sum(map(summer, iterable))
 
-fingerprint = lambda i: "".join(sorted(str(i)))
+
 
 ### INTCODE
 
@@ -155,7 +183,8 @@ def intcode(int_list, inp=None):
             return None
     return int_list
 
-## MATH
+# MATH
+
 def dec_to_tern(dec, N):
     if dec == 0:
         tern = "0"
