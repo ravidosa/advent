@@ -1,6 +1,6 @@
 from utils import *
 import hashlib
-input = open("2016/input-5.txt", "r").read().strip()
+input = input_file(2016, 5).strip()
 
 password = ""
 i = 0

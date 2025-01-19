@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2022/input-11.txt", "r").read()
+inp = input_file(2022, 11).strip()
 
 parsed_input = parser(inp, ["\n\n", "\n", "Monkey |  Starting items: |  Operation: new = old |  Test: divisible by |    If true: throw to monkey |    If false: throw to monkey|:| |, "])
 

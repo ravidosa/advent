@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-14.txt", "r").read()
+inp = input_file(2015, 14).strip()
 
 parsed_input = parser(inp, ["\n", r" can fly | km/s for | seconds, but then must rest for | seconds\."])
 

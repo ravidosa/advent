@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2017/input-4.txt", "r").read()
+inp = input_file(2017, 4).strip()
 
 parsed_input = parser(inp, ["\n", " "])
 print(sum(map(lambda i: len(i) == len(set(i)), parsed_input)))

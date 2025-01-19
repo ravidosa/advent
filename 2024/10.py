@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-10.txt", "r").read().strip()
+inp = input_file(2024, 10).strip()
 
 grid = Grid(inp)
 heads = grid.find(0)

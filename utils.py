@@ -1,21 +1,51 @@
-import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, pathlib
+import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, os, pathlib, bs4
+from env import SESSION
 
-# INPUT
+# INPUT/OUTPUT
+
+y, d = None, None
 
 def input_file(year, day):
-    test = int(sys.argv[1]) if len(sys.argv >= 1) else 0
-    if test:
+    global y, d
+    y, d = year, day
+    if "test" in sys.argv:
         if pathlib.Path("{0}/testinput-{1}.txt".format(year, day)).is_file():
             return open("{0}/testinput-{1}.txt".format(year, day), "r").read()
+        url_html = requests.get("https://adventofcode.com/{0}/day/{1}".format(year, day), cookies={"session": SESSION}, headers={"User-Agent":"https://github.com/ravidosa/advent/blob/main/utils.py"})
+        soup = bs4.BeautifulSoup(url_html.text, "lxml")
+        prev_p = next(filter(lambda t: any(map(lambda s: re.search(r"(E|e)xample", s), t.stripped_strings)), soup.findAll("p")))
+        if prev_p:
+            test_text = prev_p.find_next_sibling().getText()
+            f = open("{0}/testinput-{1}.txt".format(year, day), "w")
+            f.write(test_text)
+            f.close()
+            return test_text
     else:
         if pathlib.Path("{0}/input-{1}.txt".format(year, day)).is_file():
             return open("{0}/input-{1}.txt".format(year, day), "r").read()
-        url_file = requests.get("https://adventofcode.com/{0}/day/{1}/input".format(year, day))
+        url_file = requests.get("https://adventofcode.com/{0}/day/{1}/input".format(year, day), cookies={"session": SESSION}, headers={"User-Agent":"https://github.com/ravidosa/advent/blob/main/utils.py"})
         if url_file.text != "Puzzle inputs differ by user.  Please log in to get your puzzle input.\n":
             f = open("{0}/input-{1}.txt".format(year, day), "w")
             f.write(url_file.text)
             f.close()
             return url_file.text
+
+def output(*p):
+    if "p1" in sys.argv or "p2" in sys.argv:
+        res = requests.post("https://adventofcode.com/{0}/day/{1}/answer".format(y, d), cookies={"session": SESSION}, headers={"User-Agent":"https://github.com/ravidosa/advent/blob/main/utils.py"}, data={"level": 1 if "p1" in sys.argv else 2, "answer": p[0 if "p1" in sys.argv else 1]})
+        if "That's not the right answer; your answer is too high." in res.text:
+            print("too high")
+        elif "That's not the right answer; your answer is too low." in res.text:
+            print("too low")
+        elif "That's not the right answer" in res.text:
+            print("wrong")
+        else:
+            print("correct")
+    else:
+        for pp in p:
+            print(pp)
+
+
 
 # STRINGS/PARSING
 
@@ -204,7 +234,7 @@ def chi_rem(a, n):
         return chi_rem([next_a] + a[2:], [next_n] + n[2:])
 
 def manhattan(p1, p2):
-    return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+    return sum(map(lambda pair: abs(pair[0] - pair[1]), zip(p1, p2)))
 
 def prod(iterable):
     return functools.reduce(operator.mul, iterable)

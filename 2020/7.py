@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2020/input-7.txt", "r").read()
+inp = input_file(2020, 7).strip()
 
 parsed_input = parser(inp, ["\n", r" bags contain | bags?, | bags?\.|no other"], lambda i: [int(i[:i.index(" ")]), i[i.index(" ") + 1:]] if i[0].isdigit() else i)
 bag_dict = {i[0]: [] if len(i) == 1 else i[1:] for i in parsed_input}

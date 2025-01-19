@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2022/input-8.txt", "r").read().strip()
+inp = input_file(2022, 8).strip()
 
 grid = Grid(inp)
 

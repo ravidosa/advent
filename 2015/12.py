@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-12.txt", "r").read().strip()
+inp = input_file(2015, 12).strip()
 
 print(sum(map(int, re.findall(r'-?[0-9]+', inp))))
 

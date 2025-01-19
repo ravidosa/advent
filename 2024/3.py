@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-3.txt", "r").read().strip()
+inp = input_file(2024, 3).strip()
 
 mul = re.findall(r'mul\([0-9]+,[0-9]+\)', inp)
 print(sum(map(lambda x: int(x[4:x.index(',')]) * int(x[x.index(',') + 1:-1]), mul)))

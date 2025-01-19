@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-9.txt", "r").read().strip()
+inp = input_file(2024, 9).strip()
 
 disk = []
 for i, ch in enumerate(inp):

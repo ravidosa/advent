@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-8.txt", "r").read().strip()
+inp = input_file(2024, 8).strip()
 
 grid = Grid(inp, par=str)
 freqs = set(inp) - {".", "\n"}

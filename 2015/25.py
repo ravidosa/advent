@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-25.txt", "r").read()
+inp = input_file(2015, 25).strip()
 
 parsed_input = parser(inp, [r"To continue, please consult the code grid in the manual\.  Enter the code at row |, column |\."])
 

@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-13.txt", "r").read().strip()
+inp = input_file(2024, 13).strip()
 
 parsed_input = parser(inp, ["\n\n", "\n", "Button A: X|Button B: X|, Y=?|Prize: X="])
 

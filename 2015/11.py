@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-11.txt", "r").read()
+inp = input_file(2015, 11).strip()
 
 def increment(password):
     i = len(password) - 1

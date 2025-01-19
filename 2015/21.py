@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-21.txt", "r").read().strip()
+inp = input_file(2015, 21).strip()
 
 shop = """Weapons:    Cost  Damage  Armor
 Dagger        8     4       0

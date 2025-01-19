@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2021/input-9.txt", "r").read().strip()
+inp = input_file(2021, 9).strip()
 
 grid = Grid(inp)
 low_points = list(filter(lambda p: all(map(lambda d: grid.get_pos(tupadd(p, d)) > grid.get_pos(p) if tupadd(p, d) in grid else True, grid.dirs)), grid.cells()))

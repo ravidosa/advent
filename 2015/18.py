@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-18.txt", "r").read().strip()
+inp = input_file(2015, 18).strip()
 
 parsed_input = inp.replace(".", "0").replace("#", "1")
 

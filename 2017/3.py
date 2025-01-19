@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2017/input-3.txt", "r").read()
+inp = input_file(2017, 3).strip()
 
 target = int(inp)
 ring = (((minsq := math.ceil(math.sqrt(target))) + (minsq % 2 == 0)) - 1) // 2

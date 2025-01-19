@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-9.txt", "r").read()
+inp = input_file(2015, 9).strip()
 
 parsed_input = parser(inp, ["\n", " to | = "])
 

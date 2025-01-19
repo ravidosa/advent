@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-5.txt", "r").read().split("\n\n")
+inp = input_file(2024, 5).strip().split("\n\n")
 
 parsed_input = parser(inp[1], ["\n"])
 order = parser(inp[0], ["\n", "\|"], str)

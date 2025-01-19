@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2016/input-9.txt", "r").read().strip()
+inp = input_file(2016, 9).strip()
 
 def decompress(s, v):
     if "(" not in s:

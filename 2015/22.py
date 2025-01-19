@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-22.txt", "r").read().strip()
+inp = input_file(2015, 22).strip()
 
 _, boss_hp, __, boss_damage = parser(inp, ["\n|: "])
 

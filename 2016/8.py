@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2016/input-8.txt", "r").read().strip()
+inp = input_file(2016, 8).strip()
 
 parsed_input = parser(inp, ["\n", r"rotate |x=|y=| by |x| "])
 

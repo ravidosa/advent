@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2022/input-15.txt", "r").read()
+inp = input_file(2022, 15).strip()
 
 parsed_input = parser(inp, ["\n", ": ", "Sensor at x=|, y=|closest beacon is at x="])
 

@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-6.txt", "r").read().strip()
+inp = input_file(2024, 6).strip()
 
 grid = Grid(inp)
 start = grid.find("^")[0]

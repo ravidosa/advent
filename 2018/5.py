@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2018/input-5.txt", "r").read().strip()
+inp = input_file(2018, 5).strip()
 
 units = "|".join(map(lambda i: upper[i] + lower[i], range(26))) + "|" + "|".join(map(lambda i: lower[i] + upper[i], range(26)))
 polymer = inp

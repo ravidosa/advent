@@ -1,7 +1,8 @@
 from utils import *
-inp = open("2024/input-14.txt", "r").read()
+inp = input_file(2024, 14).strip()
 
 parsed_input = parser(inp, ["\n", " ", "p=|v=|,"])
+
 W, H = 101, 103
 def safety(t):
     quads = [0, 0, 0, 0]

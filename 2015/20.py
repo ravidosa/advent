@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-20.txt", "r").read().strip()
+inp = input_file(2015, 20).strip()
 
 target = math.ceil(int(inp) / 10)
 presents = {}

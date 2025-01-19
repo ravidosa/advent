@@ -1,5 +1,5 @@
 from utils import *
-inp = "\n".join(sorted(open("2018/input-4.txt", "r").readlines()))
+inp = "\n".join(sorted(input_file(2018, 4).split("\n"))[1:])
 
 parsed_input = parser(inp, ["\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}\] Guard #", r"\n|\[[0-9]{4}-[0-9]{2}-[0-9]{2} 00:| begins shift", r"\]"])
 

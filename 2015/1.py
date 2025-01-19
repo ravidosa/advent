@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-1.txt", "r").read().strip()
+inp = input_file(2015, 1).strip()
 
 print(inp.count("(") - inp.count(")"))
 

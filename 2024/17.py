@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-17.txt", "r").read().strip().split("\n\n")
+inp = input_file(2024, 17).strip().split("\n\n")
 
 a, b, c = parser(inp[0], ["Register A: |Register B: |Register C: "])
 parsed_input = parser(inp[1], ["Program: |,"])

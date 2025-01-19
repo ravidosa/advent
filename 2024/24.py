@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2024/input-24.txt", "r").read().strip().split("\n\n")
+inp = input_file(2024, 24).strip().split("\n\n")
 
 parsed_input = parser(inp[0], ["\n", ": "])
 connections = parser(inp[1], ["\n", " -> | "])

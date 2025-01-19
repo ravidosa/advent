@@ -1,5 +1,5 @@
 from utils import *
-inp = open("2015/input-10.txt", "r").read()
+inp = input_file(2015, 10).strip()
 
 result = inp
 for _ in range(40):
