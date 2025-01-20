@@ -44,11 +44,11 @@ while i < len(parsed_input) and ct < 100:
 p1 = ",".join(map(str, output))
 
 x = z3.BitVec('x', 3 * len(parsed_input) + 1)
-s = z3.Optimize()
+opt = z3.Optimize()
 for i in range(len(parsed_input)):
-    s.add_soft(((((x >> (3 * i)) & 7) ^ 5) ^ 6 ^ ((x >> (3 * i)) >> (((x >> (3 * i)) & 7) ^ 5))) & 7 == parsed_input[i])
-h = s.minimize(x)
-s.check()
+    opt.add_soft(((((x >> (3 * i)) & 7) ^ 5) ^ 6 ^ ((x >> (3 * i)) >> (((x >> (3 * i)) & 7) ^ 5))) & 7 == parsed_input[i])
+h = opt.minimize(x)
+opt.check()
 p2 = h.value()
 
 output(p1, p2)

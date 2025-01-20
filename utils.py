@@ -108,10 +108,11 @@ def tupadd(tuple1, tuple2):
     return tuple(p1 + p2 for p1, p2 in zip(tuple1, tuple2))
 
 class Grid:
-    def __init__(self, input, par=par_def, dirs=dir_tup):
+    def __init__(self, input, par=par_def, dirs=dir_tup, wrap=False):
         self.grid = [[par(i) for i in inp] for inp in input.split("\n")]
         self.rows, self.cols = len(self.grid), len(self.grid[0])
         self.dirs = dirs
+        self.wrap = wrap
     def __repr__(self):
         return "\n".join("".join(map(str, r)) for r in self.grid)
     def __contains__(self, p):
@@ -119,11 +120,12 @@ class Grid:
     def find(self, loc):
         return [pos for pos in itertools.product(range(self.rows), range(self.cols)) if self.get_pos(pos) == loc]
     def get_pos(self, p):
-        if p in self:
-            return self.grid[p[0]][p[1]]
+        if p in self or self.wrap:
+            return self.grid[p[0] % self.rows][p[1] % self.cols]
         return None
     def set_pos(self, p, s):
-        self.grid[p[0]][p[1]] = s
+        if p in self or self.wrap:
+            self.grid[p[0] % self.rows][p[1] % self.cols] = s
     def cells(self):
         return itertools.product(range(self.rows), range(self.cols))
     def row(self, pos, len=math.inf):

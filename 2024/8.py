@@ -21,7 +21,7 @@ for freq in freqs:
       en1, en2 = pair
       dr, dc = en1[0] - en2[0], en1[1] - en2[1]
       steps = min(grid.cols // abs(dr), grid.rows // abs(dc))
-      nodes.update(map(lambda i: (en1[0] + i * dr, en1[1] + i * dc), range(-steps, steps)))
+      nodes.update((en1[0] + i * dr, en1[1] + i * dc) for i in range(-steps, steps))
 p2 = sum(n in grid for n in nodes)
 
 output(p1, p2)
