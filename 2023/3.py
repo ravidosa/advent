@@ -16,8 +16,8 @@ for r in range(grid.rows):
                     break
         c += l
 
-p1 = sum(map(lambda p: p[1], set().union(*part_dict.values())))
+p1 = sum(p[1] for p in bigcup(part_dict.values()))
 
-p2 = sum(map(lambda p: prod(map(lambda pp: pp[1], part_dict[p])) * (len(part_dict[p]) == 2) * (grid.get_pos(p) == "*"), part_dict))
+p2 = sum(prod(pp[1] for pp in part_dict[p]) for p in part_dict if len(part_dict[p]) == 2 and grid.get_pos(p) == "*")
 
 output(p1, p2)

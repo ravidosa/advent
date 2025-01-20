@@ -5,7 +5,7 @@ parsed_input = parser(inp, ["\n", r"Card [0-9]*: | \| ", " "])
 
 matching = lambda card: len(set(card[0]).intersection(card[1]))
 
-p1 = sum(map(lambda c: 2 ** matching(c) // 2, parsed_input))
+p1 = sum(2 ** matching(c) // 2 for c in parsed_input)
 
 cards = [1] * len(parsed_input)
 for i in range(len(parsed_input)):
