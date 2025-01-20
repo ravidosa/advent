@@ -7,9 +7,9 @@ maxy = max(maxval(i, key=lambda j: j[1]) for i in parsed_input) + 2
 maxx = 2 * maxy + 1
 grid = Grid(("." * maxx + "\n") * maxy)
 for i in parsed_input:
-    for pair in zip(i[:-1], i[1:]):
-        for r in range(minval(pair, key=lambda i: i[1]), maxval(pair, key=lambda i: i[1]) + 1):
-            for c in range(minval(pair, key=lambda i: i[0]) - (500 - maxy), maxval(pair, key=lambda i: i[0]) - (500 - maxy) + 1):
+    for p1, p2 in zip(i[:-1], i[1:]):
+        for r in range(min(p1[1], p2[1]), max(p1[1], p2[1]) + 1):
+            for c in range(min(p1[0], p2[0]) - (500 - maxy), max(p1[0], p2[0]) - (500 - maxy) + 1):
                 grid.set_pos((r, c), "#")
 
 s = 0
