@@ -15,7 +15,7 @@ def input_file(year=datetime.datetime.now().year, day=datetime.datetime.now().da
             return open("{0}/testinput-{1}.txt".format(year, day), "r").read()
         url_html = requests.get("https://adventofcode.com/{0}/day/{1}".format(year, day), cookies={"session": SESSION}, headers={"User-Agent":"https://github.com/ravidosa/advent/blob/main/utils.py"})
         soup = bs4.BeautifulSoup(url_html.text, "lxml")
-        prev_p = next(filter(lambda t: any(re.search(r"(E|e)xample", s), t.stripped_strings)) for s in soup.findAll("p"))
+        prev_p = next(filter(lambda t: any(map(lambda s: re.search(r"(E|e)xample", s), t.stripped_strings)), soup.findAll("p")))
         if prev_p:
             test_text = prev_p.find_next_sibling().getText()
             f = open("{0}/testinput-{1}.txt".format(year, day), "w")
@@ -245,3 +245,9 @@ def manhattan(tuple1, tuple2):
 
 def prod(iterable):
     return functools.reduce(operator.mul, iterable)
+
+def bigcup(iterable):
+    return functools.reduce(lambda a, b: a.union(b), iterable, set())
+
+def bigcap(iterable):
+    return functools.reduce(lambda a, b: a.intersection(b), iterable, set())
