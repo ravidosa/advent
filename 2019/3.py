@@ -26,7 +26,8 @@ for i in parsed_input[1]:
             ints.add(pos)
             steps[pos] += step
 closest_int = min(ints, key=lambda i: abs(int(i.real)) + abs(int(i.imag)))
-print(abs(int(closest_int.real)) + abs(int(closest_int.imag)))
+p1 = abs(int(closest_int.real)) + abs(int(closest_int.imag))
 
-steps_int = min(ints, key=lambda i: steps[i])
-print(steps[steps_int])
+p2 = minval(ints, key=lambda i: steps[i])
+
+output(p1, p2)

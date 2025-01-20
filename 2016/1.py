@@ -7,7 +7,7 @@ pos, dir = 0+0j, 0+1j
 for i in parsed_input:
     dir *= (0+1j if i[0] == "L" else 0-1j)
     pos += i[1] * dir
-print(abs(int(pos.real)) + abs(int(pos.imag)))
+p1 = abs(int(pos.real)) + abs(int(pos.imag))
 
 vis = set()
 pos, dir = 0+0j, 0+1j
@@ -24,4 +24,6 @@ for i in parsed_input:
             vis.add(pos)
     if rep:
         break
-print(abs(int(pos.real)) + abs(int(pos.imag)))
+p2 = abs(int(pos.real)) + abs(int(pos.imag))
+
+output(p1, p2)

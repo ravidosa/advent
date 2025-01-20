@@ -26,6 +26,8 @@ def sizer(dir, path):
         return s
 sizer("/", [])
 
-print(sum(filter(lambda s: s <= 100000, sizes.values())))
+p1 = sum(filter(lambda s: s <= 100000, sizes.values()))
 
-print(min(filter(lambda s: s >= (sizes["/"] - 40000000), sizes.values())))
+p2 = min(filter(lambda s: s >= (sizes["/"] - 40000000), sizes.values()))
+
+output(p1, p2)

@@ -31,7 +31,7 @@ def route_press(path, keypad):
     return collections.Counter([path_up] if keypad == "n" else path_up)
 def complexity(code, dir_robots):
     presses = route_press(code, "n")
-    for j in range(dir_robots):
+    for _ in range(dir_robots):
         temp_presses = collections.Counter()
         for sub_route in presses:
             new_press = route_press(sub_route, "d")
@@ -41,6 +41,8 @@ def complexity(code, dir_robots):
         presses = temp_presses
     return sum(map(lambda p: len(p) * presses[p], presses)) * int(code[:-1])
 
-print(sum(map(lambda c: complexity(c, 2), parsed_input)))
+p1 = sum(map(lambda c: complexity(c, 2), parsed_input))
 
-print(sum(map(lambda c: complexity(c, 25), parsed_input)))
+p2 = sum(map(lambda c: complexity(c, 25), parsed_input))
+
+output(p1, p2)

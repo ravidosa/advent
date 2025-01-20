@@ -13,8 +13,10 @@ def safety(t):
             quads[2 * (pxf > W // 2) + (pyf > H // 2)] += 1
     return prod(quads)
 
-print(safety(100))
+p1 = safety(100)
 
 mint1, mint2 = sorted(range(max(W, H)), key=safety)[:2]
 posst = [chi_rem([mint1, mint2], [W, H]), chi_rem([mint2, mint1], [W, H])]
-print(min(posst, key=safety))
+p2 = min(posst, key=safety)
+
+output(p1, p2)

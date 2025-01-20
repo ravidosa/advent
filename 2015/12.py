@@ -15,6 +15,6 @@ def red_sum(obj):
         else:
             return sum(map(red_sum, obj.values()))
     return 0
-p2 =red_sum(parsed_input)
+p2 = red_sum(parsed_input)
 
 output(p1, p2)

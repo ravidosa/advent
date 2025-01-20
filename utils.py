@@ -1,11 +1,13 @@
-import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, os, pathlib, bs4
+import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, os, pathlib, bs4, datetime
 from env import SESSION
+
+p1, p2 = None, None
 
 # INPUT/OUTPUT
 
 y, d = None, None
 
-def input_file(year, day):
+def input_file(year=datetime.datetime.now().year, day=datetime.datetime.now().day):
     global y, d
     y, d = year, day
     if "test" in sys.argv:
@@ -29,6 +31,8 @@ def input_file(year, day):
             f.write(url_file.text)
             f.close()
             return url_file.text
+        else:
+            print("update session in env.py")
 
 def output(*p):
     if "p1" in sys.argv or "p2" in sys.argv:
@@ -41,8 +45,8 @@ def output(*p):
             print("wrong")
         else:
             print("correct")
-    else:
-        for pp in p:
+    for pp in p:
+        if pp != None:
             print(pp)
 
 
@@ -59,9 +63,9 @@ par_def = lambda i: int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else str(i)
 
 def parser(input, split, par=par_def, strip=True):
     if len(split) == 1:
-        return list(map(lambda inp: par(inp[1].strip() if strip else inp[1]), enumerate(filter(None, re.split(split[0], input)))))
+        return [par(inp[1].strip() if strip else inp[1]) for inp in enumerate(filter(None, re.split(split[0], input)))]
     else:
-        return list(map(lambda inp: parser(inp, split[1:], par), filter(None, re.split(split[0], input))))
+        return [parser(inp, split[1:], par) for inp in filter(None, re.split(split[0], input))]
 
 
 
@@ -112,7 +116,7 @@ class Grid:
     def __contains__(self, p):
         return 0 <= p[0] < self.rows and 0 <= p[1] < self.cols
     def find(self, loc):
-        return list(filter(lambda i: self.grid[i[0]][i[1]] == loc, itertools.product(range(self.rows), range(self.cols))))
+        return [pos for pos in itertools.product(range(self.rows), range(self.cols)) if self.get_pos(pos) == loc]
     def get_pos(self, p):
         if p in self:
             return self.grid[p[0]][p[1]]
@@ -123,16 +127,16 @@ class Grid:
         return itertools.product(range(self.rows), range(self.cols))
     def row(self, pos, len=math.inf):
         r, c = pos
-        return list(map(lambda i: self.get_pos((r, c + i)), range(min(self.cols - c, len))))
+        return [self.get_pos((r, c + i)) for i in range(0, min(self.cols - c, len))]
     def col(self, pos, len=math.inf):
         r, c = pos
-        return list(map(lambda i: self.get_pos((r + i, c)), range(min(self.rows - r, len))))
+        return [self.get_pos((r + i, c)) for i in range(0, min(self.rows - r, len))]
     def pdiag(self, pos, len=math.inf):
         r, c = pos
-        return list(map(lambda i: self.get_pos((r + i, c - i)), range(min(self.rows - r, c + 1, len))))
+        return [self.get_pos((r + i, c - i)) for i in range(0, min(self.rows - r, c + 1, len))]
     def ndiag(self, pos, len=math.inf):
         r, c = pos
-        return list(map(lambda i: self.get_pos((r + i, c + i)), range(min(self.rows - r, self.cols - c, len))))
+        return [self.get_pos((r + i, c + i)) for i in range(0, min(self.rows - r, self.cols - c, len))]
     def bfs(self, start, move=lambda currv, nextv: True, fil=lambda v: True):
         vis, next = set(), set()
         next.add(start)
@@ -144,7 +148,7 @@ class Grid:
                 if nextp in self:
                     if move(self.get_pos(currp), self.get_pos(nextp)) and nextp not in vis:
                         next.add(nextp)
-        return filter(lambda p: fil(self.get_pos(p)), vis)
+        return {p for p in vis if fil(self.get_pos(p))}
     def dfs(self, currp, visited, move=lambda currv, nextv: True, fil=lambda v: True):
         r, c = currp
         if fil(self.get_pos(currp)):

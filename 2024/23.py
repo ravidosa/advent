@@ -14,6 +14,8 @@ for clique in nx.enumerate_all_cliques(G):
             s += 1
     elif len(clique) > 3:
         break
-print(s)
+p1 = s
 
-print(",".join(sorted(max(nx.find_cliques(G), key=len))))
+p2 = ",".join(sorted(max(nx.find_cliques(G), key=len)))
+
+output(p1, p2)

@@ -1,6 +1,10 @@
 from utils import *
 inp = input_file(2015, 21).strip()
 
+parsed_input = parser(inp, ["\n|Hit Points: |Damage: |Armor: "])
+
+boss_hp, boss_damage, boss_armor = parsed_input
+player_hp = 100
 shop = """Weapons:    Cost  Damage  Armor
 Dagger        8     4       0
 Shortsword   10     5       0
@@ -25,28 +29,18 @@ Defense +3   80     0       3""".split("\n\n")
 weapons = parser(shop[0], ["Weapons:    Cost  Damage  Armor|\n", " "])
 armors = parser(shop[1], ["Armor:      Cost  Damage  Armor|\n", " "])
 rings = parser(shop[2], ["Rings:      Cost  Damage  Armor|\n", " "])
-_, boss_hp, __, boss_damage, ___, boss_armor = parser(inp, ["\n|: "])
 armors.append(["None", 0, 0, 0])
-
-player_hp = 100
-ming = math.inf
-for combo in itertools.product(range(len(weapons)), range(len(armors)), itertools.combinations(range(len(rings)), 2)):
+def fight(combo):
     w, a, ring = combo
-    for r in [[], [ring[0]], [ring[1]], ring]:
-        player_damage = weapons[w][2] + sum(map(lambda rr: rings[rr][3], r))
-        player_armor = (0 if a == len(armors) else armors[a][3]) + sum(map(lambda rr: rings[rr][4], r))
-        if math.ceil(player_hp / max(1, boss_damage - player_armor)) >= math.ceil(boss_hp / max(1, player_damage - boss_armor)):
-            ming = min(ming, weapons[w][1] + (0 if a == len(armors) else armors[a][1]) + sum(map(lambda rr: rings[rr][2], r)))
-p1 = ming
+    player_damage = weapons[w][2] + sum(map(lambda rr: rings[rr][3], ring))
+    player_armor = (0 if a == len(armors) else armors[a][3]) + sum(map(lambda rr: rings[rr][4], ring))
+    win = math.ceil(player_hp / max(1, boss_damage - player_armor)) >= math.ceil(boss_hp / max(1, player_damage - boss_armor))
+    gold = weapons[w][1] + (0 if a == len(armors) else armors[a][1]) + sum(map(lambda rr: rings[rr][2], ring))
+    return (win, gold)
+res = [fight(combo) for combo in itertools.product(range(len(weapons)), range(len(armors)), itertools.chain(itertools.combinations(range(len(rings)), 2), itertools.combinations(range(len(rings)), 1), itertools.combinations(range(len(rings)), 0)))]
 
-maxg = 0
-for combo in itertools.product(range(len(weapons)), range(len(armors)), itertools.combinations(range(len(rings)), 2)):
-    w, a, ring = combo
-    for r in [[], [ring[0]], [ring[1]], ring]:
-        player_damage = weapons[w][2] + sum(map(lambda rr: rings[rr][3], r))
-        player_armor = (0 if a == len(armors) else armors[a][3]) + sum(map(lambda rr: rings[rr][4], r))
-        if math.ceil(player_hp / max(1, boss_damage - player_armor)) < math.ceil(boss_hp / max(1, player_damage - boss_armor)):
-            maxg = max(maxg, weapons[w][1] + (0 if a == len(armors) else armors[a][1]) + sum(map(lambda rr: rings[rr][2], r)))
-p2 = maxg
+p1 = minval(filter(lambda r: r[0] == 1, res), key=lambda r: r[1])
+
+p2 = maxval(filter(lambda r: r[0] == 0, res), key=lambda r: r[1])
 
 output(p1, p2)

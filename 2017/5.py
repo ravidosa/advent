@@ -3,17 +3,20 @@ inp = input_file(2017, 5).strip()
 
 parsed_input = parser(inp, ["\n"])
 
+instr = parsed_input.copy()
 pos, steps = 0, 0
-while 0 <= pos < len(parsed_input):
-    parsed_input[pos] += 1
-    pos += parsed_input[pos] - 1
+while 0 <= pos < len(instr):
+    instr[pos] += 1
+    pos += instr[pos] - 1
     steps += 1
-print(steps)
+p1 = steps
 
-parsed_input = parser(inp, ["\n"])
+instr = parsed_input.copy()
 pos, steps = 0, 0
-while 0 <= pos < len(parsed_input):
-    parsed_input[pos] += (inc := (-1 if parsed_input[pos] >= 3 else 1))
-    pos += parsed_input[pos] - inc
+while 0 <= pos < len(instr):
+    instr[pos] += (inc := (-1 if instr[pos] >= 3 else 1))
+    pos += instr[pos] - inc
     steps += 1
-print(steps)
+p2 = steps
+
+output(p1, p2)

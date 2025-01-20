@@ -9,7 +9,7 @@ def increment(password):
     if i >= 0:
         password = password[:i] + lower[lower.index(password[i]) + 1] + password[i + 1:]
     return password
-secure = lambda inp: len(re.findall("|".join(map(lambda i: lower[i:i + 3], range(24))), inp)) >= 1 and not re.findall(r'i|o|l', inp) and re.findall(r'(.)\1', inp) and len(set(re.findall(r'(.)\1', inp))) >= 2
+secure = lambda password: len(re.findall("|".join(map(lambda i: lower[i:i + 3], range(24))), password)) >= 1 and not re.findall(r'i|o|l', password) and re.findall(r'(.)\1', password) and len(set(re.findall(r'(.)\1', password))) >= 2
 
 if all(map(lambda rep: rep not in inp, "iol")):
     password = increment(inp)

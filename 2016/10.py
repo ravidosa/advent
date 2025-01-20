@@ -30,6 +30,8 @@ while len(giving) > 0:
     if tyh == bots and len(bots[gives[bot][1][1]]) == 2:
         giving.append(gives[bot][1][1])
 
-print(cmp_17_61)
+p1 = cmp_17_61
 
-print(outputs[0][0] * outputs[1][0] * outputs[2][0])
+p2 = outputs[0][0] * outputs[1][0] * outputs[2][0]
+
+output(p1, p2)

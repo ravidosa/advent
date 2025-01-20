@@ -15,7 +15,7 @@ while 1 <= currp[0] < grid.rows - 1 and 1 <= currp[1] < grid.cols - 1:
         vis.add(nextp)
     else:
         dir = (dir + 1) % 4
-print(len(vis))
+p1 = len(vis)
 
 obs = 0
 for v in vis:
@@ -32,4 +32,6 @@ for v in vis:
         else:
             dir = (dir + 1) % 4
         vvis.add((currp, dir))
-print(obs)
+p2 = obs
+
+output(p1, p2)

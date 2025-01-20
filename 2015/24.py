@@ -3,14 +3,13 @@ inp = input_file(2015, 24).strip()
 
 parsed_input = parser(inp, ["\n"])
 
-for i in range(len(parsed_input)):
-    if qes := [prod(c) for c in itertools.combinations(parsed_input, i) if sum(c) == sum(parsed_input) // 3]:
-        break
-p1 = min(qes)
+def min_ideal(groups):
+    for i in range(len(parsed_input)):
+        if qes := [prod(c) for c in itertools.combinations(parsed_input, i) if sum(c) == sum(parsed_input) // groups]:
+            return min(qes)
+        
+p1 = min_ideal(3)
 
-for i in range(len(parsed_input)):
-    if qes := [prod(c) for c in itertools.combinations(parsed_input, i) if sum(c) == sum(parsed_input) // 4]:
-        break
-p2 = min(qes)
+p2 = min_ideal(4)
 
 output(p1, p2)

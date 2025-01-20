@@ -35,7 +35,7 @@ wires = {i[-1]: i[:-1] for i in parsed_input}
 override = sig("a")
 p1 = override
 
-wires = {i[-1]: inp[:-1] for i in parsed_input}
+wires = {i[-1]: i[:-1] for i in parsed_input}
 wires["b"] = override
 p2 = sig("a")
 

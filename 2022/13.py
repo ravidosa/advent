@@ -13,8 +13,10 @@ def cmp(l, r):
     else:
         return cmp([l] if type(l) is int else l, [r] if type(r) is int else r)
 
-print(sum(map(lambda i: (i + 1) * (cmp(parsed_input[2 * i], parsed_input[2 * i + 1]) == -1), range(len(parsed_input) // 2))))
+p1 = sum(map(lambda i: (i + 1) * (cmp(parsed_input[2 * i], parsed_input[2 * i + 1]) == -1), range(len(parsed_input) // 2)))
 
 d1 = sum(map(lambda i: cmp(i, [[2]]) == -1, parsed_input))
 d2 = sum(map(lambda i: cmp(i, [[6]]) == -1, parsed_input))    
-print((min(d1, d2) + 1) * (max(d1, d2) + 2))
+p2 = (min(d1, d2) + 1) * (max(d1, d2) + 2)
+
+output(p1, p2)

@@ -8,12 +8,16 @@ for i in parsed_input:
     sigs += [sigs[-1]]
     if i[0] == "addx":
         sigs += [sigs[-1] + i[1]]
-print(sum(map(lambda i: (i + 1) * sigs[i], range(19, 220, 40))))
+p1 = sum(map(lambda i: (i + 1) * sigs[i], range(19, 220, 40)))
 
+disp = ""
 for i in range(len(sigs)):
     if abs(sigs[i] - (i % 40)) <= 1:
-        print("##", end="")
+        disp += "##"
     else:
-        print("  ", end="")
+        disp += "  "
     if i % 40 == 39:
-        print("")
+        disp += "\n"
+p2 = disp
+
+output(p1, p2)

@@ -7,11 +7,13 @@ h, d = 0, 0
 for i in parsed_input:
     h += i[1] * (i[0] == "forward")
     d += i[1] * ((i[0] == "down") - (i[0] == "up"))
-print(h * d)
+p1 = h * d
 
 h, d, aim = 0, 0, 0
 for i in parsed_input:
     h += i[1] * (i[0] == "forward")
     d += aim * i[1] * (i[0] == "forward")
     aim += i[1] * ((i[0] == "down") - (i[0] == "up"))
-print(h * d)
+p2 = h * d
+
+output(p1, p2)

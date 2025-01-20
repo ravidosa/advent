@@ -2,6 +2,7 @@ from utils import *
 inp = input_file(2015, 19).strip().split("\n\n")
 
 parsed_input = parser(inp[0], ["\n", " => "])
+med_mol = inp[1].strip()
 
 @functools.cache
 def replace(molecule, reps):
@@ -13,7 +14,6 @@ def replace(molecule, reps):
             for ind in functools.reduce(lambda x, y: x + [y.start()], re.finditer(i[0], molecule), []):
                 mols.update(replace(molecule[:ind] + i[1] + molecule[ind + len(i[0]):], reps - 1))
         return mols
-med_mol = inp[1].strip()
 p1 = len(replace(med_mol, 1))
 
 def atomize(molecule):

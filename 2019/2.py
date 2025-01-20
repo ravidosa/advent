@@ -6,7 +6,7 @@ parsed_input = parser(inp, [","])
 program = parsed_input.copy()
 program[1], program[2] = 12, 2
 res = intcode(program)
-print(res[0])
+p1 = res[0]
 
 found = False
 for noun in range(100):
@@ -19,4 +19,6 @@ for noun in range(100):
             break
     if found:
         break
-print(100 * noun + verb)
+p2 = 100 * noun + verb
+
+output(p1, p2)

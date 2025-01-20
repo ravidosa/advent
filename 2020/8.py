@@ -14,7 +14,7 @@ while i not in run:
         i += parsed_input[i][1]
     else:
         i += 1
-print(acc)
+p1 = acc
 
 for j in range(len(parsed_input)):
     modified = [i.copy() for i in parsed_input]
@@ -35,4 +35,6 @@ for j in range(len(parsed_input)):
             break
     else:
         continue
-print(acc)
+p2 = acc
+
+output(p1, p2)

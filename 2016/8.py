@@ -19,6 +19,8 @@ for i in parsed_input:
         for r in range(H):
             new_pixels[i[1] + ((r + i[2]) % H) * 1j] = pixels.get(i[1] + r * 1j, 0)
     pixels = new_pixels
-print(sum(pixels.values()))
+p1 = sum(pixels.values())
 
-print("\n".join(map(lambda r: "".join(map(lambda c: "#" if pixels.get(c + r * 1j, 0) == 1 else " ", range(W))), range(H))))
+p2 = "\n".join(map(lambda r: "".join(map(lambda c: "#" if pixels.get(c + r * 1j, 0) == 1 else " ", range(W))), range(H)))
+
+output(p1, p2)

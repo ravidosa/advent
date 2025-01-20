@@ -18,7 +18,7 @@ def val(wir):
             wire_dict[wir] = val(wire_dict[wir][0]) ^ val(wire_dict[wir][2])
         return wire_dict[wir]
 
-print(int("".join(map(lambda i: str(val("z" + str(i).zfill(len(str(z))))), range(z)))[::-1], 2))
+p1 = int("".join(map(lambda i: str(val("z" + str(i).zfill(len(str(z))))), range(z)))[::-1], 2)
 
 swapped = set()
 for conn in connections:
@@ -37,4 +37,6 @@ for conn in connections:
             subop1, subop, subop2, subres = subconn
             if (res == subop1 or res == subop2) and subop == "OR":
                 swapped.add(res)
-print(",".join(sorted(swapped)))
+p2 = ",".join(sorted(swapped))
+
+output(p1, p2)

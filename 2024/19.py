@@ -1,8 +1,8 @@
 from utils import *
 inp = input_file(2024, 19).strip().split("\n\n")
 
-patterns = parser(inp[0], [", "])
 parsed_input = parser(inp[1], ["\n"])
+patterns = parser(inp[0], [", "])
 
 maxlen = maxval(patterns, key=len)
 @functools.cache
@@ -16,6 +16,8 @@ def ways_match(design):
     return w
 matches = [ways_match(design) for design in parsed_input]
 
-print(sum(map(lambda i: i != 0, matches)))
+p1 = sum(map(lambda i: i != 0, matches))
 
-print(sum(matches))
+p2 = sum(matches)
+
+output(p1, p2)

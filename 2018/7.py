@@ -11,13 +11,13 @@ p1 = "".join(nx.lexicographical_topological_sort(G))
 tracker = {}
 time = 0
 while tracker or G:
-    available = list(filter(lambda t: t not in tracker and G.in_degree(t) == 0, G))
+    available = [t for t in G if t not in tracker and G.in_degree(t) == 0]
     if available and len(tracker.keys()) < 5:
         task = min(available)
         tracker[task] = ord(task) - 4
     else:
         mint = min(tracker.values())
-        completed = list(filter(lambda t: tracker[t] == mint, tracker.keys()))
+        completed = [t for t in tracker.keys() if tracker[t] == mint]
         tracker = {t: tracker[t] - mint for t in filter(lambda tt: tracker[tt] > mint, tracker)}
         time += mint
         G.remove_nodes_from(completed)

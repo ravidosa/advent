@@ -12,7 +12,7 @@ for freq in freqs:
       dr, dc = en1[0] - en2[0], en1[1] - en2[1]
       nodes.add((en1[0] + dr, en1[1] + dc))
       nodes.add((en2[0] - dr, en2[1] - dc))
-print(sum(map(lambda n: int(n in grid), nodes)))
+p1 = sum(map(lambda n: int(n in grid), nodes))
 
 nodes = set()
 for freq in freqs:
@@ -22,4 +22,6 @@ for freq in freqs:
       dr, dc = en1[0] - en2[0], en1[1] - en2[1]
       steps = min(grid.cols // abs(dr), grid.rows // abs(dc))
       nodes.update(map(lambda i: (en1[0] + i * dr, en1[1] + i * dc), range(-steps, steps)))
-print(sum(map(lambda n: int(n in grid), nodes)))
+p2 = sum(map(lambda n: int(n in grid), nodes))
+
+output(p1, p2)

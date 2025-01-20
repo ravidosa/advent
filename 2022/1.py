@@ -3,6 +3,8 @@ inp = input_file(2022, 1).strip()
 
 parsed_input = parser(inp, ["\n\n", "\n"])
 
-print(max(map(sum, parsed_input)))
+p1 = max(map(sum, parsed_input))
 
-print(sum(sorted(map(sum, parsed_input))[-3:]))
+p2 = sum(sorted(map(sum, parsed_input))[-3:])
+
+output(p1, p2)

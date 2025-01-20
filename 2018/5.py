@@ -5,7 +5,7 @@ units = "|".join(map(lambda i: upper[i] + lower[i], range(26))) + "|" + "|".join
 polymer = inp
 while re.findall(units, polymer):
     polymer = re.sub(units, "", polymer)
-print(len(polymer))
+p1 = len(polymer)
 
 minl = len(inp)
 for i in range(26):
@@ -13,4 +13,6 @@ for i in range(26):
     while re.findall(units, polymer):
         polymer = re.sub(units, "", polymer)
     minl = min(minl, len(polymer))
-print(minl)
+p2 = minl
+
+output(p1, p2)

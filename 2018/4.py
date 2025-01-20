@@ -19,8 +19,10 @@ for i in parsed_input:
 
 guard = max(sleep_dict.keys(), key=lambda k: sum(sleep_dict[k]))
 minute = max(range(60), key=lambda m: sleep_dict[guard][m])
-print(guard * minute)
+p1 = guard * minute
 
 guard = max(sleep_dict.keys(), key=lambda k: max(sleep_dict[k]))
 minute = max(range(60), key=lambda m: sleep_dict[guard][m])
-print(guard * minute)
+p2 = guard * minute
+
+output(p1, p2)

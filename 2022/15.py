@@ -13,7 +13,7 @@ for i in parsed_input:
         no_beacon.remove(beacon[0])
     if sensor[1] == y:
         no_beacon.add(sensor)
-print(len(no_beacon))
+p1 = len(no_beacon)
 
 m = 4000000
 pdiag = []
@@ -29,4 +29,6 @@ for p, n in itertools.product(pdiag, ndiag):
         if all(map(lambda i: manhattan(i[0], i[1]) < manhattan(i[0], distress), parsed_input)):
             if 0 <= distress[0] <= m and 0 <= distress[1] <= m:
                 break
-print(4000000 * distress[0] + distress[1])
+p2 = 4000000 * distress[0] + distress[1]
+
+output(p1, p2)

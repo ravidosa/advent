@@ -27,7 +27,7 @@ while currp[0] != maxy - 1:
             currp = tupadd(currp, (1, -1))
     else:
         currp = tupadd(currp, (1, 0))
-print(s)
+p1 = s
 
 currp = (0, maxy)
 while grid.get_pos((0, maxy)) != "#":
@@ -48,4 +48,6 @@ while grid.get_pos((0, maxy)) != "#":
                 currp = tupadd(currp, (1, -1))
         else:
             currp = tupadd(currp, (1, 0))
-print(s)
+p2 = s
+
+output(p1, p2)

@@ -9,7 +9,7 @@ for o in order:
     ordy[o[0]] = ordy.get(o[0], []) + [o[1]]
 
 ord_reg = "|".join([("((" + "|".join(ordy[k]) + ").*" + k + ")") for k in ordy.keys()])
-print(sum(map(lambda i: (len(re.findall(ord_reg, i)) == 0) * int((ii := i.split(","))[(len(ii) - 1) // 2]), parsed_input)))
+p1 = sum(map(lambda i: (len(re.findall(ord_reg, i)) == 0) * int((ii := i.split(","))[(len(ii) - 1) // 2]), parsed_input))
 
 s = 0
 for i in parsed_input:
@@ -20,4 +20,6 @@ for i in parsed_input:
             i = i[:ind] + ff[0][-2:] + ff[0][2:-2] + ff[0][:2] + i[ind + len(ff[0]):]
             f = re.findall(ord_reg, i)
         s +=  int((ii := i.split(","))[(len(ii) - 1) // 2])
-print(s)
+p2 = s
+
+output(p1, p2)

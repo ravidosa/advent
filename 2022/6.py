@@ -1,12 +1,14 @@
 from utils import *
 inp = input_file(2022, 6).strip()
 
-i = 4
-while i < len(inp) and len(set(inp[i - 4:i])) != 4:
-    i += 1
-print(i)
+def marker_ind(length):
+    i = length
+    while i < len(inp) and len(set(inp[i - length:i])) != length:
+        i += 1
+    return i
 
-i = 14
-while i < len(inp) and len(set(inp[i - 14:i])) != 14:
-    i += 1
-print(i)
+p1 = marker_ind(4)
+
+p2 = marker_ind(14)
+
+output(p1, p2)

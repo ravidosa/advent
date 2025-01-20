@@ -1,8 +1,8 @@
 from utils import *
 inp = input_file(2024, 17).strip().split("\n\n")
 
-a, b, c = parser(inp[0], ["Register A: |Register B: |Register C: "])
 parsed_input = parser(inp[1], ["Program: |,"])
+a, b, c = parser(inp[0], ["Register A: |Register B: |Register C: "])
 
 i = 0
 ct = 0
@@ -41,7 +41,7 @@ while i < len(parsed_input) and ct < 100:
     if opcode == 7:
         c = a // (2 ** combo)
         i += 2
-print(",".join(map(str, output)))
+p1 = ",".join(map(str, output))
 
 x = z3.BitVec('x', 3 * len(parsed_input) + 1)
 s = z3.Optimize()
@@ -49,4 +49,6 @@ for i in range(len(parsed_input)):
     s.add_soft(((((x >> (3 * i)) & 7) ^ 5) ^ 6 ^ ((x >> (3 * i)) >> (((x >> (3 * i)) & 7) ^ 5))) & 7 == parsed_input[i])
 h = s.minimize(x)
 s.check()
-print(h.value())
+p2 = h.value()
+
+output(p1, p2)

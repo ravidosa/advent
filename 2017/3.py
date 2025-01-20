@@ -4,7 +4,7 @@ inp = input_file(2017, 3).strip()
 target = int(inp)
 ring = (((minsq := math.ceil(math.sqrt(target))) + (minsq % 2 == 0)) - 1) // 2
 mids = [(minsq + (minsq % 2 == 0)) ** 2 - (2 * i + 1) * ring for i in range(4)]
-print(ring + abs(min(mids, key=lambda m: abs(m - target)) - target))
+p1 = ring + abs(min(mids, key=lambda m: abs(m - target)) - target)
 
 squares = {0+0j: 1, 1+0j: 1}
 pos, dir = 1+0j, 1+0j
@@ -18,4 +18,6 @@ while squares[pos] <= target:
     i += 1
     pos += dir
     squares[pos] = sum(map(lambda d: squares.get(pos + d, 0), diag_neighbors))
-print(squares[pos])
+p2 = squares[pos]
+
+output(p1, p2)
