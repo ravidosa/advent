@@ -53,7 +53,7 @@ def mover(currp, move, boxes, double=False):
                 if len(move_boxes) > 0:
                     return nextp, update_boxes(move_boxes, move)
     return currp, boxes
-gps = lambda boxes: sum(map(lambda box: 100 * box[0] + box[1], boxes))
+gps = lambda boxes: sum(100 * box[0] + box[1] for box in boxes)
 
 grid = Grid(inp[0])
 currp = grid.find("@")[0]

@@ -5,7 +5,7 @@ parsed_input = parser(inp[0], ["\n", ": "])
 connections = parser(inp[1], ["\n", " -> | "])
 
 wire_dict = {i[0]: i[1] for i in parsed_input} | {c[-1]: c[:-1] for c in connections}
-z = sum(map(lambda c: c[-1][0] == "z", connections))
+z = sum(c[-1][0] == "z" for c in connections)
 def val(wir):
     if type(wire_dict[wir]) is int:
         return wire_dict[wir]
@@ -18,7 +18,7 @@ def val(wir):
             wire_dict[wir] = val(wire_dict[wir][0]) ^ val(wire_dict[wir][2])
         return wire_dict[wir]
 
-p1 = int("".join(map(lambda i: str(val("z" + str(i).zfill(len(str(z))))), range(z)))[::-1], 2)
+p1 = int("".join(str(val("z" + str(i).zfill(len(str(z))))) for i in range(z))[::-1], 2)
 
 swapped = set()
 for conn in connections:

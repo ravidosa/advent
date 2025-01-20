@@ -5,8 +5,8 @@ parsed_input = parser(inp, [","])
 
 mincrab, maxcrab = min(parsed_input), max(parsed_input)
 
-p1 = min(map(lambda i: sum(map(lambda p: abs(p - i), parsed_input)), range(mincrab, maxcrab + 1)))
+p1 = min(sum(abs(p - i) for p in parsed_input) for i in range(mincrab, maxcrab + 1))
 
-p2 = min(map(lambda i: sum(map(lambda p: (st := abs(p - i)) * (st + 1) // 2, parsed_input)), range(mincrab, maxcrab + 1)))
+p2 = min(sum((st := abs(p - i)) * (st + 1) // 2 for p in parsed_input) for i in range(mincrab, maxcrab + 1))
 
 output(p1, p2)

@@ -3,10 +3,10 @@ inp = input_file(2021, 3).strip()
 
 parsed_input = parser(inp, ["\n"], str)
 
-most_common = lambda bins, i: None if (bal := sum(map(lambda b: b[i] == "1", bins))) == len(bins) / 2 else ("1" if bal > len(bins) / 2 else "0")
+most_common = lambda bins, i: None if (bal := sum(b[i] == "1" for b in bins)) == len(bins) / 2 else ("1" if bal > len(bins) / 2 else "0")
 
 bits = len(parsed_input[0])
-gamma = int("".join(map(lambda i: most_common(parsed_input, i), range(bits))), 2)
+gamma = int("".join(most_common(parsed_input, i) for i in range(bits)), 2)
 epsilon = 2 ** bits - 1 - gamma
 p1 = gamma * epsilon
 

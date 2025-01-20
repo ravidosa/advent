@@ -39,10 +39,10 @@ def complexity(code, dir_robots):
                 new_press[press] *= presses[sub_route]
             temp_presses.update(new_press)
         presses = temp_presses
-    return sum(map(lambda p: len(p) * presses[p], presses)) * int(code[:-1])
+    return sum(len(p) * presses[p] for p in presses) * int(code[:-1])
 
-p1 = sum(map(lambda c: complexity(c, 2), parsed_input))
+p1 = sum(complexity(c, 2) for c in parsed_input)
 
-p2 = sum(map(lambda c: complexity(c, 25), parsed_input))
+p2 = sum(complexity(c, 25) for c in parsed_input)
 
 output(p1, p2)

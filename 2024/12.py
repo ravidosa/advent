@@ -11,8 +11,8 @@ for p in grid.cells():
         regions.append(floodfill)
         filled.update(floodfill)
 
-p1 = sum(map(lambda r: area(r) * peri(r), regions))
+p1 = sum(area(r) * peri(r) for r in regions)
 
-p2 = sum(map(lambda r: area(r) * sides(r), regions))
+p2 = sum(area(r) * sides(r) for r in regions)
 
 output(p1, p2)

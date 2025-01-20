@@ -13,8 +13,8 @@ def evally(vals, ops):
             res = int(str(res) + str(vals[ind + 1]))
     return res
 
-p1 = sum(map(lambda i: i[0] * any(map(lambda c: evally(i[1: ], c) == i[0], map(lambda j: map(lambda pos: "+" if pos == "0" else "*", format(j, "0" + str(len(i) - 2) + 'b')), range(2 ** (len(i) - 2))))), parsed_input))
+p1 = sum(i[0] * any(evally(i[1:], c) == i[0] for c in map(lambda j: map(lambda pos: "+" if pos == "0" else "*", format(j, "0" + str(len(i) - 2) + 'b')), range(2 ** (len(i) - 2)))) for i in parsed_input)
 
-p2 = sum(map(lambda i: i[0] * any(map(lambda c: evally(i[1: ], c) == i[0], map(lambda j: map(lambda pos: "+" if pos == "0" else "*" if pos == "1" else "||", dec_to_tern(j, len(i) - 2)), range(3 ** (len(i) - 2))))), parsed_input))
+p2 = sum(i[0] * any(evally(i[1: ], c) == i[0] for c in map(lambda j: map(lambda pos: "+" if pos == "0" else "*" if pos == "1" else "||", dec_to_tern(j, len(i) - 2)), range(3 ** (len(i) - 2)))) for i in parsed_input)
 
 output(p1, p2)

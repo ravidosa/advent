@@ -3,7 +3,7 @@ inp = input_file(2019, 1).strip()
 
 parsed_input = parser(inp, ["\n"])
 
-p1 = sum(map(lambda i: i // 3 - 2, parsed_input))
+p1 = sum(i // 3 - 2 for i in parsed_input)
 
 s = 0
 for i in parsed_input:

@@ -15,7 +15,7 @@ def input_file(year=datetime.datetime.now().year, day=datetime.datetime.now().da
             return open("{0}/testinput-{1}.txt".format(year, day), "r").read()
         url_html = requests.get("https://adventofcode.com/{0}/day/{1}".format(year, day), cookies={"session": SESSION}, headers={"User-Agent":"https://github.com/ravidosa/advent/blob/main/utils.py"})
         soup = bs4.BeautifulSoup(url_html.text, "lxml")
-        prev_p = next(filter(lambda t: any(map(lambda s: re.search(r"(E|e)xample", s), t.stripped_strings)), soup.findAll("p")))
+        prev_p = next(filter(lambda t: any(re.search(r"(E|e)xample", s), t.stripped_strings)) for s in soup.findAll("p"))
         if prev_p:
             test_text = prev_p.find_next_sibling().getText()
             f = open("{0}/testinput-{1}.txt".format(year, day), "w")
@@ -64,9 +64,9 @@ par_def = lambda i: int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else str(i)
 
 def parser(input, split, par=par_def, strip=True):
     if len(split) == 1:
-        return [par(inp[1].strip() if strip else inp[1]) for inp in enumerate(filter(None, re.split(split[0], input)))]
+        return [par(inp.strip() if strip else inp) for inp in re.split(split[0], input) if inp != ""]
     else:
-        return [parser(inp, split[1:], par) for inp in filter(None, re.split(split[0], input))]
+        return [parser(inp, split[1:], par) for inp in re.split(split[0], input) if inp != ""]
 
 
 
@@ -101,11 +101,11 @@ diag_neighbors = [1+0j, 1+1j, 0+1j, -1+1j, -1+0j, -1-1j, 0-1j, 1-1j]
 
 corner_tup = [[(-1, 0), (0, -1)], [(1, 0), (0, -1)], [(-1, 0), (0, 1)], [(1, 0), (0, 1)], [(-1, 0), (0, -1), (-1, -1)], [(1, 0), (0, -1), (1, -1)], [(-1, 0), (0, 1), (-1, 1)], [(1, 0), (0, 1), (1, 1)]]
 area = lambda cells: len(cells)
-peri = lambda cells: sum(map(lambda p: sum(map(lambda d: (p[0] + d[0], p[1] + d[1]) not in cells, dir_tup)), cells))
-sides = lambda cells: sum(map(lambda p: sum(map(lambda c: all(map(lambda d: (p[0] + d[0], p[1] + d[1]) not in cells, c)) if len(c) == 2 else all(map(lambda d: (p[0] + d[0], p[1] + d[1]) in cells, c[:2])) and (p[0] + c[2][0], p[1] + c[2][1]) not in cells, corner_tup)), cells))
+peri = lambda cells: sum(tupadd(p, d) not in cells for d in dir_tup for p in cells)
+sides = lambda cells: sum(all(tupadd(p, d) not in cells for d in c) if len(c) == 2 else all(tupadd(p, d) in cells for d in c[:2]) and tupadd(p, c[2]) not in cells for c in corner_tup for p in cells)
 
 def tupadd(tuple1, tuple2):
-    return tuple(map(lambda pair: pair[0] + pair[1], zip(tuple1, tuple2)))
+    return tuple(p1 + p2 for p1, p2 in zip(tuple1, tuple2))
 
 class Grid:
     def __init__(self, input, par=par_def, dirs=dir_tup):
@@ -113,7 +113,7 @@ class Grid:
         self.rows, self.cols = len(self.grid), len(self.grid[0])
         self.dirs = dirs
     def __repr__(self):
-        return "\n".join(map(lambda r: "".join(map(str, r)), self.grid))
+        return "\n".join("".join(map(str, r)) for r in self.grid)
     def __contains__(self, p):
         return 0 <= p[0] < self.rows and 0 <= p[1] < self.cols
     def find(self, loc):
@@ -197,19 +197,19 @@ def intcode(int_list, inp=None):
     i = 0
     while int_list[i] != 99:
         if int_list[i] == 1:
-            if i < len(int_list) - 3 and all(map(lambda j: int_list[i + j] < len(int_list), range(1, 4))):
+            if i < len(int_list) - 3 and all(int_list[i + j] < len(int_list) for j in range(1, 4)):
                 int_list[int_list[i + 3]] = int_list[int_list[i + 1]] + int_list[int_list[i + 2]]
                 i += 4
             else:
                 return None
         elif int_list[i] == 2:
-            if i < len(int_list) - 3 and all(map(lambda j: int_list[i + j] < len(int_list), range(1, 4))):
+            if i < len(int_list) - 3 and all(int_list[i + j] < len(int_list) for j in range(1, 4)):
                 int_list[int_list[i + 3]] = int_list[int_list[i + 1]] * int_list[int_list[i + 2]]
                 i += 4
             else:
                 return None
         elif int_list[i] == 3:
-            if i < len(int_list) - 3 and all(map(lambda j: int_list[i + j] < len(int_list), range(1, 2))):
+            if i < len(int_list) - 3 and all(int_list[i + j] < len(int_list) for j in range(1, 2)):
                 int_list[int_list[i + 3]] = int_list[int_list[i + 1]] * int_list[int_list[i + 2]]
                 i += 4
             else:
@@ -238,8 +238,8 @@ def chi_rem(a, n):
         next_n = n[0] * n[1]
         return chi_rem([next_a] + a[2:], [next_n] + n[2:])
 
-def manhattan(p1, p2):
-    return sum(map(lambda pair: abs(pair[0] - pair[1]), zip(p1, p2)))
+def manhattan(tuple1, tuple2):
+    return sum(abs(p1 - p2) for p1, p2 in zip(tuple1, tuple2))
 
 def prod(iterable):
     return functools.reduce(operator.mul, iterable)

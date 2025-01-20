@@ -3,7 +3,7 @@ inp = input_file(2022, 14).strip()
 
 parsed_input = parser(inp, ["\n", " -> ", ","], eval)
 
-maxy = max(map(lambda i: maxval(i, key=lambda j: j[1]), parsed_input)) + 2
+maxy = max(maxval(i, key=lambda j: j[1]) for i in parsed_input) + 2
 maxx = 2 * maxy + 1
 grid = Grid(("." * maxx + "\n") * maxy)
 for i in parsed_input:

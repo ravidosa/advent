@@ -18,7 +18,7 @@ while tracker or G:
     else:
         mint = min(tracker.values())
         completed = [t for t in tracker.keys() if tracker[t] == mint]
-        tracker = {t: tracker[t] - mint for t in filter(lambda tt: tracker[tt] > mint, tracker)}
+        tracker = {t: tracker[t] - mint for t in tracker if tracker[t] > mint}
         time += mint
         G.remove_nodes_from(completed)
 p2 = time

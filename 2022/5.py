@@ -16,13 +16,13 @@ for instr in parsed_input:
     bct, s1, s2 = instr
     for _ in range(bct):
         stacks[s2 - 1].insert(0, stacks[s1 - 1].pop(0))
-p1 = "".join(map(lambda s: s[0], stacks))
+p1 = "".join(s[0] for s in stacks)
 
 stacks = [stack.copy() for stack in initial_stacks]
 for instr in parsed_input:
     bct, s1, s2 = instr
     stacks[s2 - 1] = stacks[s1 - 1][:bct] + stacks[s2 - 1]
     stacks[s1 - 1] = stacks[s1 - 1][bct:]
-p2 = "".join(map(lambda s: s[0], stacks))
+p2 = "".join(s[0] for s in stacks)
 
 output(p1, p2)

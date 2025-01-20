@@ -7,7 +7,7 @@ halver = lambda s, l, u: (l if s in "FL" else u) if len(s) == 1 else halver(s[1:
 p1 = maxval(parsed_input, key=lambda s: halver(s[:-3], 0, 127) * 8 + halver(s[-3:], 0, 7))
 
 seats = set(range(1024))
-empty = seats.difference(map(lambda s: halver(s[:-3], 0, 127) * 8 + halver(s[-3:], 0, 7), parsed_input))
+empty = seats.difference(halver(s[:-3], 0, 127) * 8 + halver(s[-3:], 0, 7) for s in parsed_input)
 p2 = next(filter(lambda s: s - 1 not in empty and s + 1 not in empty, empty))
 
 output(p1, p2)

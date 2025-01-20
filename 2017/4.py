@@ -7,6 +7,6 @@ valid = lambda password: len(list(password)) == len(set(password))
 
 p1 = sum(map(valid, parsed_input))
 
-p2 = sum(map(valid, map(lambda i: map(fingerprint, i), parsed_input)))
+p2 = sum(valid([fingerprint(ii) for ii in i]) for i in parsed_input)
 
 output(p1, p2)

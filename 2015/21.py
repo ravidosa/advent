@@ -32,10 +32,10 @@ rings = parser(shop[2], ["Rings:      Cost  Damage  Armor|\n", " "])
 armors.append(["None", 0, 0, 0])
 def fight(combo):
     w, a, ring = combo
-    player_damage = weapons[w][2] + sum(map(lambda rr: rings[rr][3], ring))
-    player_armor = (0 if a == len(armors) else armors[a][3]) + sum(map(lambda rr: rings[rr][4], ring))
+    player_damage = weapons[w][2] + sum(rings[rr][3] for rr in ring)
+    player_armor = (0 if a == len(armors) else armors[a][3]) + sum(rings[rr][4] for rr in ring)
     win = math.ceil(player_hp / max(1, boss_damage - player_armor)) >= math.ceil(boss_hp / max(1, player_damage - boss_armor))
-    gold = weapons[w][1] + (0 if a == len(armors) else armors[a][1]) + sum(map(lambda rr: rings[rr][2], ring))
+    gold = weapons[w][1] + (0 if a == len(armors) else armors[a][1]) + sum(rings[rr][2] for rr in ring)
     return (win, gold)
 res = [fight(combo) for combo in itertools.product(range(len(weapons)), range(len(armors)), itertools.chain(itertools.combinations(range(len(rings)), 2), itertools.combinations(range(len(rings)), 1), itertools.combinations(range(len(rings)), 0)))]
 

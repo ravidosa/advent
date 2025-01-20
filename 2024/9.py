@@ -15,7 +15,7 @@ while dq:
         h = dq.pop()
     if h != None:
         disky.append(h)
-p1 = sum(map(lambda i: i[0] * i[1], enumerate(disky)))
+p1 = sum(pos * id for pos, id in enumerate(disky))
 
 files = {}
 frees = []
@@ -33,6 +33,6 @@ for i in range(len(files) - 1, 0, -1):
             f[0] += files[i][1]
             f[1] -= files[i][1]
             break
-p2 = sum(map(lambda f: (f * (2 * files[f][0] + files[f][1] - 1) * files[f][1]) // 2 , files))
+p2 = sum((f * (2 * files[f][0] + files[f][1] - 1) * files[f][1]) // 2 for f in files)
 
 output(p1, p2)

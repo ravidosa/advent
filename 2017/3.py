@@ -17,7 +17,7 @@ while squares[pos] <= target:
             dir *= (0+1j)
     i += 1
     pos += dir
-    squares[pos] = sum(map(lambda d: squares.get(pos + d, 0), diag_neighbors))
+    squares[pos] = sum(squares.get(pos + d, 0), diag_neighbors)
 p2 = squares[pos]
 
 output(p1, p2)

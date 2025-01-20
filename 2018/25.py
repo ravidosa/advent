@@ -8,7 +8,7 @@ for i in parsed_input:
     con = [i]
     other = []
     for chcon in const:
-        if any(map(lambda c: manhattan(i, c) <= 3, chcon)):
+        if any(manhattan(i, c) <= 3 for c in chcon):
             con += chcon
         else:
             other.append(chcon)

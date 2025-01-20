@@ -8,7 +8,7 @@ for i in parsed_input:
     sigs += [sigs[-1]]
     if i[0] == "addx":
         sigs += [sigs[-1] + i[1]]
-p1 = sum(map(lambda i: (i + 1) * sigs[i], range(19, 220, 40)))
+p1 = sum((i + 1) * sigs[i] for i in range(19, 220, 40))
 
 disp = ""
 for i in range(len(sigs)):

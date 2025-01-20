@@ -15,6 +15,6 @@ def combos(eggnog, containers, used):
 
 p1 = combos(150, tuple(parsed_input), 0)
 
-p2 =container_count[min(container_count.keys())]
+p2 = container_count[min(container_count.keys())]
 
 output(p1, p2)

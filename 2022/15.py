@@ -26,7 +26,7 @@ for i in parsed_input:
 for p, n in itertools.product(pdiag, ndiag):
     if (p - n) % 2 == 0:
         distress = ((n - p) // 2, (n + p) // 2)
-        if all(map(lambda i: manhattan(i[0], i[1]) < manhattan(i[0], distress), parsed_input)):
+        if all(manhattan(i[0], i[1]) < manhattan(i[0], distress) for i in parsed_input):
             if 0 <= distress[0] <= m and 0 <= distress[1] <= m:
                 break
 p2 = 4000000 * distress[0] + distress[1]

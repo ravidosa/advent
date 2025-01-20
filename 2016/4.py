@@ -7,7 +7,7 @@ real = lambda room: room[-2] * ("".join(sorted(lower, key=lambda l: -("".join(ro
 p1 = sum(map(real, parsed_input))
 
 for i in parsed_input:
-    if "north" in "".join(map(lambda l: lower[(lower.index(l) + i[-2]) % 26] if l != " " else l, " ".join(i[:-2]))):
+    if "north" in "".join(lower[(lower.index(l) + i[-2]) % 26] if l != " " else l for l in " ".join(i[:-2])):
         i[-2]
         break
 p2 = i[-2]

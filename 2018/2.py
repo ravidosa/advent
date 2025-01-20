@@ -3,10 +3,10 @@ inp = input_file(2018, 2).strip()
 
 parsed_input = parser(inp, ["\n"])
 
-exrep = lambda p, i: any(map(lambda g: p.count(g) == i, set(p)))
-p1 = sum(map(lambda p: exrep(p, 2), parsed_input)) * sum(map(lambda p: exrep(p, 3), parsed_input))
+exrep = lambda p, i: any(p.count(g) == i for g in set(p))
+p1 = sum(exrep(p, 2) for p in parsed_input) * sum(exrep(p, 3) for p in parsed_input)
 
-common = lambda pair: "".join(map(lambda i: pair[0][i] if pair[0][i] == pair[1][i] else "", range(len(pair[0]))))
+common = lambda pair: "".join(pair[0][i] if pair[0][i] == pair[1][i] else "" for i in range(len(pair[0])))
 p2 = max(map(common, itertools.combinations(parsed_input, 2)), key=len)
 
 output(p1, p2)

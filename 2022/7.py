@@ -22,12 +22,12 @@ def sizer(dir, path):
     if type(s := functools.reduce(operator.getitem, path, dirs)[dir]) is int:
         return s
     else:
-        sizes[dir] = (s := sum(map(lambda k: sizer(k, path + [dir]), functools.reduce(operator.getitem, path, dirs)[dir].keys())))
+        sizes[dir] = (s := sum(sizer(k, path + [dir]) for k in functools.reduce(operator.getitem, path, dirs)[dir].keys()))
         return s
 sizer("/", [])
 
-p1 = sum(filter(lambda s: s <= 100000, sizes.values()))
+p1 = sum(s for s in sizes.values() if s <= 100000)
 
-p2 = min(filter(lambda s: s >= (sizes["/"] - 40000000), sizes.values()))
+p2 = min(s for s in sizes.values() if s >= (sizes["/"] - 40000000))
 
 output(p1, p2)

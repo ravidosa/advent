@@ -13,8 +13,8 @@ def possible(game, r, g, b):
     col_dict = cols(game)
     return col_dict["r"] <= r and col_dict["g"] <= g and col_dict["b"] <= b
 
-p1 = sum(map(lambda g: g[0][0][0] * possible(g, 12, 13, 14), parsed_input))
+p1 = sum(g[0][0][0] * possible(g, 12, 13, 14) for g in parsed_input)
 
-p2 = sum(map(lambda g: prod(cols(g).values()), parsed_input))
+p2 = sum(prod(cols(g).values()) for g in parsed_input)
 
 output(p1, p2)

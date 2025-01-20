@@ -21,9 +21,9 @@ def cubes_on(fil=lambda ix, fx, iy, fy, iz, fz: True):
             if sign > 0:
                 update[(ix, fx, iy, fy, iz, fz)] += sign
             cubes.update(update)
-    return sum(map(lambda c: (c[1] - c[0] + 1) * (c[3] - c[2] + 1) * (c[5] - c[4] + 1) * cubes[c], cubes))
+    return sum((c[1] - c[0] + 1) * (c[3] - c[2] + 1) * (c[5] - c[4] + 1) * cubes[c] for c in cubes)
 
-p1 = cubes_on(lambda ix, fx, iy, fy, iz, fz: all(map(lambda i: -50 <= i <= 50, [ix, fx, iy, fy, iz, fz])))
+p1 = cubes_on(lambda ix, fx, iy, fy, iz, fz: all(-50 <= i <= 50 for i in [ix, fx, iy, fy, iz, fz]))
 
 p2 = cubes_on()
 

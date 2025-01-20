@@ -24,7 +24,7 @@ def autocomplete(chunk):
         return comp_sc
     return 0
 
-p1 = sum(map(lambda i: score(i)[0], parsed_input))
+p1 = sum(score(i)[0] for i in parsed_input)
 
 auto = sorted(filter(lambda cs: cs != 0, map(autocomplete, parsed_input)))
 p2 = auto[len(auto) // 2]

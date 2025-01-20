@@ -16,7 +16,7 @@ def ways_match(design):
     return w
 matches = [ways_match(design) for design in parsed_input]
 
-p1 = sum(map(lambda i: i != 0, matches))
+p1 = sum(i != 0 for i in matches)
 
 p2 = sum(matches)
 

@@ -19,7 +19,7 @@ def score(data):
     for _ in range(children):
         sc, data = score(data)
         scores.append(sc)
-    return sum(data[:meta]) if children == 0 else sum(map(lambda m: scores[m - 1] if 0 < m <= len(scores) else 0, data[:meta])), data[meta:]
+    return sum(data[:meta]) if children == 0 else sum(scores[m - 1] if 0 < m <= len(scores) else 0 for m in data[:meta]), data[meta:]
 p2, _ = score(parsed_input)
 
 output(p1, p2)

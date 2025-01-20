@@ -6,8 +6,8 @@ parsed_input = parser(inp, ["\n| +"])
 l1 = sorted(parsed_input[::2])
 l2 = sorted(parsed_input[1::2])
 
-p1 = sum(map(lambda a, b: abs(a - b), l1, l2))
+p1 = sum(abs(a - b) for a in l1 for b in l2)
 
-p2 = sum(map(lambda a: a * l2.count(a), l1))
+p2 = sum(a * l2.count(a) for a in l1)
 
 output(p1, p2)

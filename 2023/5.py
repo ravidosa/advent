@@ -23,12 +23,12 @@ for i in range(1, 8):
     locs.extend(mapped)
 p1 = min(locs)
 
-output(p1)
-
-locs = [(parsed_input[2 * i], parsed_input[2 * i] + parsed_input[2 * i + 1]) for i in range(len(parsed_input) // 2)]
+locs = [(parsed_input[0][0][2 * i], parsed_input[0][0][2 * i] + parsed_input[0][0][2 * i + 1]) for i in range(len(parsed_input[0][0]) // 2)]
 for i in range(1, 8):
     mapped = []
     for di, ri, rl in parsed_input[i]:
         locs, mapped = [d for li, lf in locs for d in range_divide(li, lf, ri, rl)[0]], mapped + [tupadd(d, (di - ri, di - ri)) for li, lf in locs for d in range_divide(li, lf, ri, rl)[1]]
     locs.extend(mapped)
-p1 = min(locs)
+p2 = minval(locs, key=lambda l: l[0])
+
+output(p1, p2)

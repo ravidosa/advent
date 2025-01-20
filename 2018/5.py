@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2018, 5).strip()
 
-units = "|".join(map(lambda i: upper[i] + lower[i], range(26))) + "|" + "|".join(map(lambda i: lower[i] + upper[i], range(26)))
+units = "|".join(upper[i] + lower[i] + "|" + lower[i] + upper[i] for i in range(26))
 polymer = inp
 while re.findall(units, polymer):
     polymer = re.sub(units, "", polymer)

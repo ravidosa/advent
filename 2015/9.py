@@ -9,7 +9,7 @@ for i in parsed_input:
     l1, l2, cost = i
     matrix[(l1, l2)], matrix[(l2, l1)] = cost, cost
     locations.update([l1, l2])
-dist = lambda route: sum(map(lambda i: matrix[(route[i], route[i + 1])], range(len(locations) - 1)))
+dist = lambda route: sum(matrix[(route[i], route[i + 1])] for i in range(len(locations) - 1))
 
 p1 = min(itertools.permutations(locations), key=dist)
 
