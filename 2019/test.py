@@ -1,2 +1,5 @@
-from utils import *
-print(intcode([3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0], [0,4321]))
+from intcode import *
+program = [109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99]
+intc = Computer(program)
+all(intc.run())
+print(intc.pop_out())

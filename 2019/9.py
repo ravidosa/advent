@@ -1,16 +1,16 @@
 from utils import *
 from intcode import *
-inp = input_file(2019, 5).strip()
+inp = input_file(2019, 9).strip()
 
 parsed_input = parser(inp, [","])
 
 program = parsed_input.copy()
 intc = Computer(program, [1])
 all(intc.run())
-p1 = intc.pop_out()[-1]
+p1 = intc.pop_out()[0]
 
 program = parsed_input.copy()
-intc = Computer(program, [5])
+intc = Computer(program, [2])
 all(intc.run())
 p2 = intc.pop_out()[0]
 

@@ -37,7 +37,9 @@ def input_file(year=datetime.datetime.now().year, day=datetime.datetime.now().da
 def output(*p):
     if "p1" in sys.argv or "p2" in sys.argv:
         res = requests.post("https://adventofcode.com/{0}/day/{1}/answer".format(y, d), cookies={"session": SESSION}, headers={"User-Agent":"https://github.com/ravidosa/advent/blob/main/utils.py"}, data={"level": 1 if "p1" in sys.argv else 2, "answer": p[0 if "p1" in sys.argv else 1]})
-        if "That's not the right answer; your answer is too high." in res.text:
+        if "You don't seem to be solving the right level." in res.text:
+            print("wrong day")
+        elif "That's not the right answer; your answer is too high." in res.text:
             print("too high")
         elif "That's not the right answer; your answer is too low." in res.text:
             print("too low")
@@ -77,7 +79,7 @@ def maxval(iterable, key=lambda i: i):
 def minval(iterable, key=lambda i: i):
     return key(min(iterable, key=key))
 def keyval(dic, val):
-    return dic.keys()[dic.values().index(val)]
+    return [k for k in dic if dic[k] == val]
 def argmax(iterable, key=lambda i: i):
     iterable = list(iterable)
     return max(range(len(iterable)), key=lambda ind: key(iterable[ind]))
@@ -192,57 +194,6 @@ def summer(iterable):
         return sum(map(summer, iterable))
 
 
-
-### INTCODE
-
-def intcode(int_list, inp=None):
-    inp_pos = 0
-    out = []
-    mode = lambda i, j: (int_list[i] // 10 ** (j + 1)) % 10
-    pret = lambda i, j: int_list[int_list[i + j]] if mode(i, j) == 0 else int_list[i + j]
-    valid = lambda i, pars: i < len(int_list) - pars and all(int_list[i + j] < len(int_list) if mode(i, j) == 0 else True for j in range(1, pars + 1))
-    i = 0
-    while int_list[i] != 99:
-        if int_list[i] % 100 == 1 and valid(i, 3):
-            int_list[int_list[i + 3]] = pret(i, 1) + pret(i, 2)
-            i += 4
-        elif int_list[i] % 100 == 2 and valid(i, 3):
-            int_list[int_list[i + 3]] = pret(i, 1) * pret(i, 2)
-            i += 4
-        elif int_list[i] % 100 == 3 and valid(i, 1):
-            int_list[int_list[i + 1]] = inp[inp_pos]
-            inp_pos += 1
-            i += 2
-        elif int_list[i] % 100 == 4 and valid(i, 1):
-            out.append(pret(i, 1))
-            i += 2
-        elif int_list[i] % 100 == 5 and valid(i, 2):
-            if pret(i, 1) != 0:
-                i = pret(i, 2)
-            else:
-                i += 3
-        elif int_list[i] % 100 == 6 and valid(i, 2):
-            if pret(i, 1) == 0:
-                i = pret(i, 2)
-            else:
-                i += 3
-        elif int_list[i] % 100 == 7 and valid(i, 3):
-            if pret(i, 1) < pret(i, 2):
-                int_list[int_list[i + 3]] = 1
-            else:
-                int_list[int_list[i + 3]] = 0
-            i += 4
-        elif int_list[i] % 100 == 8 and valid(i, 3):
-            if pret(i, 1) == pret(i, 2):
-                int_list[int_list[i + 3]] = 1
-            else:
-                int_list[int_list[i + 3]] = 0
-            i += 4
-        else:
-            return None, None
-        if i >= len(int_list):
-            return None, None
-    return int_list, out
 
 # MATH
 
