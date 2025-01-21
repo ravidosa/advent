@@ -196,29 +196,53 @@ def summer(iterable):
 ### INTCODE
 
 def intcode(int_list, inp=None):
+    inp_pos = 0
+    out = []
+    mode = lambda i, j: (int_list[i] // 10 ** (j + 1)) % 10
+    pret = lambda i, j: int_list[int_list[i + j]] if mode(i, j) == 0 else int_list[i + j]
+    valid = lambda i, pars: i < len(int_list) - pars and all(int_list[i + j] < len(int_list) if mode(i, j) == 0 else True for j in range(1, pars + 1))
     i = 0
     while int_list[i] != 99:
-        if int_list[i] == 1:
-            if i < len(int_list) - 3 and all(int_list[i + j] < len(int_list) for j in range(1, 4)):
-                int_list[int_list[i + 3]] = int_list[int_list[i + 1]] + int_list[int_list[i + 2]]
-                i += 4
+        if int_list[i] % 100 == 1 and valid(i, 3):
+            int_list[int_list[i + 3]] = pret(i, 1) + pret(i, 2)
+            i += 4
+        elif int_list[i] % 100 == 2 and valid(i, 3):
+            int_list[int_list[i + 3]] = pret(i, 1) * pret(i, 2)
+            i += 4
+        elif int_list[i] % 100 == 3 and valid(i, 1):
+            int_list[int_list[i + 1]] = inp[inp_pos]
+            inp_pos += 1
+            i += 2
+        elif int_list[i] % 100 == 4 and valid(i, 1):
+            out.append(pret(i, 1))
+            i += 2
+        elif int_list[i] % 100 == 5 and valid(i, 2):
+            if pret(i, 1) != 0:
+                i = pret(i, 2)
             else:
-                return None
-        elif int_list[i] == 2:
-            if i < len(int_list) - 3 and all(int_list[i + j] < len(int_list) for j in range(1, 4)):
-                int_list[int_list[i + 3]] = int_list[int_list[i + 1]] * int_list[int_list[i + 2]]
-                i += 4
+                i += 3
+        elif int_list[i] % 100 == 6 and valid(i, 2):
+            if pret(i, 1) == 0:
+                i = pret(i, 2)
             else:
-                return None
-        elif int_list[i] == 3:
-            if i < len(int_list) - 3 and all(int_list[i + j] < len(int_list) for j in range(1, 2)):
-                int_list[int_list[i + 3]] = int_list[int_list[i + 1]] * int_list[int_list[i + 2]]
-                i += 4
+                i += 3
+        elif int_list[i] % 100 == 7 and valid(i, 3):
+            if pret(i, 1) < pret(i, 2):
+                int_list[int_list[i + 3]] = 1
             else:
-                return None
+                int_list[int_list[i + 3]] = 0
+            i += 4
+        elif int_list[i] % 100 == 8 and valid(i, 3):
+            if pret(i, 1) == pret(i, 2):
+                int_list[int_list[i + 3]] = 1
+            else:
+                int_list[int_list[i + 3]] = 0
+            i += 4
+        else:
+            return None, None
         if i >= len(int_list):
-            return None
-    return int_list
+            return None, None
+    return int_list, out
 
 # MATH
 

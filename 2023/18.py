@@ -12,7 +12,7 @@ for d, l, _ in parsed_input:
     verts.append(pos)
     bord += l
 a = shoelace(verts)
-p1 = int(abs(a) + 1 - bord // 2 + bord)
+p1 = int(abs(a) + 1 + bord // 2)
 
 dir_hex = {"3": (-1, 0), "0": (0, 1), "1": (1, 0), "2": (0, -1)}
 verts = []
@@ -23,7 +23,7 @@ for _, _, h in parsed_input:
     pos = tupadd(pos, (l * mov[0], l * mov[1]))
     verts.append(pos)
     bord += l
-a = shoelace(verts)
-p2 = int(abs(a) + 1 - bord // 2 + bord)
+a = int(shoelace(verts))
+p2 = abs(a) + 1 + bord // 2
 
 output(p1, p2)
