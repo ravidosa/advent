@@ -11,9 +11,9 @@ for i in parsed_input:
     names.update([n1, n2])
 change = lambda seating: sum(matrix.get((seating[i], seating[(i + 1) % len(names)]), 0) + matrix.get((seating[(i + 1) % len(names)], seating[i]), 0) for i in range(len(seating)))
 
-p1 = max(itertools.permutations(names), key=change)
+p1 = maxval(itertools.permutations(names), key=change)
 
 names.add("me")
-p2 = max(itertools.permutations(names), key=change)
+p2 = maxval(itertools.permutations(names), key=change)
 
 output(p1, p2)

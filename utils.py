@@ -62,11 +62,11 @@ fingerprint = lambda i: "".join(sorted(str(i)))
 
 par_def = lambda i: int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else str(i)
 
-def parser(input, split, par=par_def, strip=True):
+def parser(input, split, par=par_def, strip=True, flatten=True):
     if len(split) == 1:
-        return [par(inp.strip() if strip else inp) for inp in re.split(split[0], input) if inp != ""]
+        return [par(inp.strip() if strip else inp) for inp in re.split(split[0], input) if inp != ""] if re.search(split[0], input) else par(input.strip() if strip else input) if flatten else [par(input.strip() if strip else input)]
     else:
-        return [parser(inp, split[1:], par) for inp in re.split(split[0], input) if inp != ""]
+        return [parser(inp, split[1:], par, strip=strip, flatten=flatten) for inp in re.split(split[0], input) if inp != ""] if re.search(split[0], input) else parser(input, split[1:], par, strip=strip, flatten=flatten) if flatten else [parser(input, split[1:], par, strip=strip, flatten=flatten)]
 
 
 
@@ -243,6 +243,9 @@ def chi_rem(a, n):
 def manhattan(tuple1, tuple2):
     return sum(abs(p1 - p2) for p1, p2 in zip(tuple1, tuple2))
 
+def shoelace(vertices):
+    return sum(vertices[i][0] * vertices[(i + 1) % len(vertices)][1] - vertices[(i + 1) % len(vertices)][0] * vertices[i][1] for i in range(len(vertices))) / 2
+
 def prod(iterable):
     return functools.reduce(operator.mul, iterable)
 
@@ -251,3 +254,9 @@ def bigcup(iterable):
 
 def bigcap(iterable):
     return functools.reduce(lambda a, b: a.intersection(b), iterable, set())
+
+def increasing(n):
+    return all(str(n)[i] >= str(n)[i - 1] for i in range(1, len(str(n))))
+
+def decreasing(n):
+    return all(str(n)[i] <= str(n)[i - 1] for i in range(1, len(str(n))))

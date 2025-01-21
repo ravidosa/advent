@@ -21,7 +21,7 @@ grid = Grid((" " * (maxx - minx + 1) + "\n") * (maxy - miny + 1))
 for p in newp:
     r, c = p[1] - miny, p[0] - minx
     grid.set_pos((r, c), "#")
-p1 = grid
+p1 = str(grid).replace("#", "##").replace(" ", "  ")
 
 p2 = mint
 

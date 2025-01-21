@@ -6,7 +6,7 @@ a, b, c = parser(inp[0], ["Register A: |Register B: |Register C: "])
 
 i = 0
 ct = 0
-output = []
+out = []
 while i < len(parsed_input) and ct < 100:
     ct += 1
     opcode = parsed_input[i]
@@ -33,7 +33,7 @@ while i < len(parsed_input) and ct < 100:
         b = b ^ c
         i += 2
     if opcode == 5:
-        output.append(combo % 8)
+        out.append(combo % 8)
         i += 2
     if opcode == 6:
         b = a // (2 ** combo)
@@ -41,7 +41,7 @@ while i < len(parsed_input) and ct < 100:
     if opcode == 7:
         c = a // (2 ** combo)
         i += 2
-p1 = ",".join(map(str, output))
+p1 = ",".join(map(str, out))
 
 x = z3.BitVec('x', 3 * len(parsed_input) + 1)
 opt = z3.Optimize()

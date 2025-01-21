@@ -13,7 +13,7 @@ p1 = sum((ind + 1) * hand[1] for ind, hand in enumerate(sorted(parsed_input, key
 
 strength = "J23456789TQKA"
 def val(hand):
-    typhand = hand.replace(max(set(hand), key=lambda c: hand.count(c) if c != "J" else -1), "J") if "J" in hand and hand != "JJJJJ" else hand
+    typhand = hand.replace(max(set(hand), key=lambda c: hand.count(c) if c != "J" else 0.5), "J")
     typ = sorted(collections.Counter(typhand).values())
     return types.index(typ) * 16 ** 5 + sum(16 ** (4 - i) * strength.index(hand[i]) for i in range(5))
 p2 = sum((ind + 1) * hand[1] for ind, hand in enumerate(sorted(parsed_input, key=lambda i: val(str(i[0])))))

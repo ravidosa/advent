@@ -2,7 +2,7 @@ from utils import *
 inp = input_file(2024, 5).strip().split("\n\n")
 
 parsed_input = parser(inp[1], ["\n"])
-order = parser(inp[0], ["\n", "\|"], str)
+order = parser(inp[0], ["\n", r"\|"], str)
 
 ordy = {}
 for o in order:

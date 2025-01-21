@@ -11,8 +11,8 @@ for i in parsed_input:
     locations.update([l1, l2])
 dist = lambda route: sum(matrix[(route[i], route[i + 1])] for i in range(len(locations) - 1))
 
-p1 = min(itertools.permutations(locations), key=dist)
+p1 = minval(itertools.permutations(locations), key=dist)
 
-p2 = max(itertools.permutations(locations), key=dist)
+p2 = maxval(itertools.permutations(locations), key=dist)
 
 output(p1, p2)

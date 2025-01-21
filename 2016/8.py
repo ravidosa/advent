@@ -21,6 +21,6 @@ for i in parsed_input:
     pixels = new_pixels
 p1 = sum(pixels.values())
 
-p2 = "\n".join("".join("#" if pixels.get(c + r * 1j, 0) == 1 else " " for c in range(W)) for r in range(H))
+p2 = "\n".join("".join("##" if pixels.get(c + r * 1j, 0) == 1 else "  " for c in range(W)) for r in range(H))
 
 output(p1, p2)
