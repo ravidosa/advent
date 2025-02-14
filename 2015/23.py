@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 23).strip()
 
-parsed_input = parser(inp, ["\n", ", | "])
+parsed_input = parser(inp, "`s `s|`s `i|`s `s, `i")
 
 def execute(reg):
     i = 0

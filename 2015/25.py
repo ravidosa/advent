@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 25).strip()
 
-parsed_input = parser(inp, [r"To continue, please consult the code grid in the manual\.  Enter the code at row |, column |\."])
+parsed_input = parser(inp, "To continue, please consult the code grid in the manual.  Enter the code at row `i, column `i.")
 
 r, c = parsed_input
 n = r + c - 1

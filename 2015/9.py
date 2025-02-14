@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 9).strip()
 
-parsed_input = parser(inp, ["\n", " to | = "])
+parsed_input = parser(inp, "`s to `s = `i")
 
 matrix = {}
 locations = set()

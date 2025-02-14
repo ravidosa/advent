@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 7).strip()
 
-parsed_input = parser(inp, ["\n", r" -> | "])
+parsed_input = parser(inp, "`s (`s )?(`s )?-> `s")
 
 def sig(tar):
     global wires

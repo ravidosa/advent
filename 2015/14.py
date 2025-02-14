@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 14).strip()
 
-parsed_input = parser(inp, ["\n", r" can fly | km/s for | seconds, but then must rest for | seconds\."])
+parsed_input = parser(inp, "`s can fly `i km/s for `i seconds, but then must rest for `i seconds.")
 
 dist = lambda t, speed, time, rest: t // (time + rest) * time * speed + min(t % (time + rest), time) * speed
 

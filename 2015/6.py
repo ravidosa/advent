@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 6).strip()
 
-parsed_input = parser(inp, ["\n", r"turn| through | |,"])
+parsed_input = parser(inp, "(turn )?`s `i,`i through `i,`i")
 
 lights = [[0 for _ in range(1000)] for _ in range(1000)]
 for i in parsed_input:
