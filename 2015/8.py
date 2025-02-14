@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 8).strip()
 
-parsed_input = parser(inp)
+parsed_input = parser(inp, ["\n"])
 
 p1 = sum(len(i) - len(eval(i)) for i in parsed_input)
 

@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 17).strip()
 
-parsed_input = parser(inp)
+parsed_input = parser(inp, ["\n"])
 
 container_count = {}
 def combos(eggnog, containers, used):

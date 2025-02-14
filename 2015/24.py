@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 24).strip()
 
-parsed_input = parser(inp)
+parsed_input = parser(inp, ["\n"])
 
 def min_ideal(groups):
     for i in range(len(parsed_input)):

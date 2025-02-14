@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 19).strip().split("\n\n")
 
-parsed_input = parser(inp[0], "`s => `s")
+parsed_input = parser(inp[0], ["\n", " => "])
 med_mol = inp[1].strip()
 
 @functools.cache

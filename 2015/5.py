@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 5).strip()
 
-parsed_input = parser(inp)
+parsed_input = parser(inp, ["\n"])
 
 nice = lambda inp: len(re.findall(r'[aeiou]', inp)) >= 3 and len(re.findall(r'(.)\1', inp)) >= 1 and not re.findall(r'ab|cd|pq|xy', inp)
 p1 = sum(map(nice, parsed_input))

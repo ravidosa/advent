@@ -64,18 +64,13 @@ fingerprint = lambda i: "".join(sorted(str(i)))
 
 par_def = lambda i: int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else str(i)
 
-def parser(input, format=None, strip=True, par=par_def):
-    if format:
-        format = re.sub("`i", "INTEGER", format)
-        format = re.sub("`s", "STRING", format)
-        format = re.sub("`li", "LIST_INTEGER", format)
-        format = format.replace("(", "(?:").replace("INTEGER", "((?:\+|-)?[0-9]+)").replace("STRING", "(\w+)").replace("LIST_INTEGER", "(?:\+|-)?[0-9]+(?: |,|-(?:\+|-)?[0-9]+)*").replace(".", "\\.")
-    if strip:
-        input = input.strip()
-    if "\n" in input:
-        return [tuple([par(iii) for iii in re.split(" |,|-", ii)] if re.fullmatch("(?:\+|-)?[0-9]+(?: |,|-(?:\+|-)?[0-9]+)+", ii) else par(ii) for ii in re.fullmatch(format, i).groups() if ii) if format else par(i) for i in input.split("\n")]
+def parser(input, split, par=par_def, strip=True, flatten=True):
+    if len(split) == 1:
+        return [par(inp.strip() if strip else inp) for inp in re.split(split[0], input) if inp != ""] if re.search(split[0], input) else par(input.strip() if strip else input) if flatten else [par(input.strip() if strip else input)]
     else:
-        return tuple([par(iii) for iii in re.split(" |,|-", ii)] if re.fullmatch("(?:\+|-)?[0-9]+(?: |,|-(?:\+|-)?[0-9]+)+", ii) else par(ii) for ii in re.fullmatch(format, input).groups() if ii) if format else input
+        return [parser(inp, split[1:], par, strip=strip, flatten=flatten) for inp in re.split(split[0], input) if inp != ""] if re.search(split[0], input) else parser(input, split[1:], par, strip=strip, flatten=flatten) if flatten else [parser(input, split[1:], par, strip=strip, flatten=flatten)]
+
+
 
 # MAX/MIN
 
