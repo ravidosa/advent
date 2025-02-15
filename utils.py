@@ -62,15 +62,32 @@ alph = lower + upper
 
 fingerprint = lambda i: "".join(sorted(str(i)))
 
-par_def = lambda i: int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else str(i)
+def par_def(i, fmt):
+    if fmt == "i":
+        return int(i)
+    if fmt == "s":
+        return i
+    if fmt == "e":
+        return int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else i
+    if fmt.startswith("li"):
+        return [int(ii) for ii in re.split(fmt[2:], i) if ii != ""]
+    if fmt.startswith("ls"):
+        return [ii for ii in re.split(fmt[2:], i) if ii != ""]
+    if fmt.startswith("le"):
+        return [int(ii) if re.fullmatch(r"(\+|-)?[0-9]+", ii) else ii for ii in re.split(fmt[2:], i) if ii != ""]
 
-def parser(input, split, par=par_def, strip=True, flatten=True):
-    if len(split) == 1:
-        return [par(inp.strip() if strip else inp) for inp in re.split(split[0], input) if inp != ""] if re.search(split[0], input) else par(input.strip() if strip else input) if flatten else [par(input.strip() if strip else input)]
+def parser(input, format=None, split=True):
+    if format:
+        splits = "|".join(sorted(filter(lambda i: i != "", re.split("{{(?:i|s|e|li[^}]*|ls[^}]*|le[^}]*)}}", format)), key=len, reverse=True)).replace(".", r"\.").replace("+", r"\+").replace("*", r"\*").replace("?", r"\?").replace("^", r"\^").replace("$", r"\$").replace("(", r"\(").replace("{", r"\{").replace("[", r"\[").replace(")", r"\)").replace("}", r"\}").replace("]", r"\]")
+        captures = re.findall("{{(i|s|e|li[^}]*|ls[^}]*|le[^}]*)}}", format)
+        if splits != "":
+            splits = re.compile(splits)
+        if split:
+            return [[par_def(ii, captures[min(ind, len(captures) - 1)]) for ind, ii in enumerate(filter(lambda i: i != "", re.split(splits, i)) if splits != "" else [i])] for i in input.split("\n")]
+        else:
+            return [par_def(ii, captures[min(ind, len(captures) - 1)]) for ind, ii in enumerate(filter(lambda i: i != "", re.split(splits, input)) if splits != "" else [input])]
     else:
-        return [parser(inp, split[1:], par, strip=strip, flatten=flatten) for inp in re.split(split[0], input) if inp != ""] if re.search(split[0], input) else parser(input, split[1:], par, strip=strip, flatten=flatten) if flatten else [parser(input, split[1:], par, strip=strip, flatten=flatten)]
-
-
+        return [par_def(i, "e") for i in input.split("\n")] if split else input
 
 # MAX/MIN
 

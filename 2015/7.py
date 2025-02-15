@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2015, 7).strip()
 
-parsed_input = parser(inp, ["\n", r" -> | "])
+parsed_input = parser(inp, "{{le }} -> {{s}}")
 
 def sig(tar):
     global wires
@@ -31,11 +31,11 @@ def sig(tar):
         wires[tar] = sig(ass[0])
     return wires[tar]
 
-wires = {i[-1]: i[:-1] for i in parsed_input}
+wires = {i[1]: i[0] for i in parsed_input}
 override = sig("a")
 p1 = override
 
-wires = {i[-1]: i[:-1] for i in parsed_input}
+wires = {i[1]: i[0] for i in parsed_input}
 wires["b"] = override
 p2 = sig("a")
 
