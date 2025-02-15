@@ -1,19 +1,20 @@
 from utils import *
 inp = input_file(2016, 10).strip()
 
-parsed_input = parser(inp, ["\n", r" goes to | gives low to | and high to | "])
+parsed_input = parser(inp, "{{le goes to | gives low to | and high to | }}")
 
 bots = {}
 outputs = {}
 gives = {}
 giving = []
 for i in parsed_input:
-    if i[0] == "value":
-        bots[i[3]] = bots.get(i[3], []) + [i[1]]
-        if len(bots[i[3]]) == 2:
-            giving.append(i[3])
+    com = i[0]
+    if com[0] == "value":
+        bots[com[3]] = bots.get(com[3], []) + [com[1]]
+        if len(bots[com[3]]) == 2:
+            giving.append(com[3])
     else:
-        gives[i[1]] = (i[2:4], i[4:6])
+        gives[com[1]] = (com[2:4], com[4:6])
 cmp_17_61 = None
 while len(giving) > 0:
     bot = giving.pop(0)

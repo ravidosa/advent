@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2016, 2).strip()
 
-parsed_input = parser(inp, ["\n", ""])
+parsed_input = parser(inp)
 
 def press(keypad):
     pos = 0+0j

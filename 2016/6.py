@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2016, 6).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 char_freq = [{} for _ in range(len(parsed_input[0]))]
 for i in parsed_input:

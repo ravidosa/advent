@@ -1,11 +1,11 @@
 from utils import *
 inp = input_file(2015, 6).strip()
 
-parsed_input = parser(inp, "turn {{s}} {{i}},{{i}} through {{i}},{{i}}")
+parsed_input = parser(inp, "{{le,|turn | through | }}")
 
 lights = [[0 for _ in range(1000)] for _ in range(1000)]
 for i in parsed_input:
-    instr, ix, iy, fx, fy = i
+    instr, ix, iy, fx, fy = i[0]
     for x in range(ix, fx + 1):
         for y in range(iy, fy + 1):
             if instr == "on":
@@ -18,7 +18,7 @@ p1 = summer(lights)
 
 lights = [[0 for _ in range(1000)] for _ in range(1000)]
 for i in parsed_input:
-    instr, ix, iy, fx, fy = i
+    instr, ix, iy, fx, fy = i[0]
     for x in range(ix, fx + 1):
         for y in range(iy, fy + 1):
             if instr == "on":

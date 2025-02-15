@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2016, 3).strip()
 
-parsed_input = parser(inp, ["\n", " "])
+parsed_input = parser(inp, "{{i}} {{i}} {{i}}")
 
 possible = lambda tri: tri[0] + tri[1] > tri[2] and tri[0] + tri[2] > tri[1] and tri[1] + tri[2] > tri[0]
 p1 = sum(map(possible, parsed_input))
