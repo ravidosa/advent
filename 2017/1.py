@@ -1,10 +1,12 @@
 from utils import *
 inp = input_file(2017, 1).strip()
 
-parsed_input = parser(inp, [""])
+parsed_input = parser(inp, "{{li|}}", split=False)
 
-p1 = sum(parsed_input[i] * (parsed_input[i] == parsed_input[(i + 1) % len(parsed_input)]) for i in range(len(parsed_input)))
+captcha = parsed_input[0]
 
-p2 = sum(parsed_input[i] * (parsed_input[i] == parsed_input[(i + len(parsed_input) // 2) % len(parsed_input)]) for i in range(len(parsed_input)))
+p1 = sum(captcha[i] * (captcha[i] == captcha[(i + 1) % len(captcha)]) for i in range(len(captcha)))
+
+p2 = sum(captcha[i] * (captcha[i] == captcha[(i + len(captcha) // 2) % len(captcha)]) for i in range(len(captcha)))
 
 output(p1, p2)

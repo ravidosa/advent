@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2017, 5).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 instr = parsed_input.copy()
 pos, steps = 0, 0
