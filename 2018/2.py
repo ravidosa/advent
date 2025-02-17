@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2018, 2).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 exrep = lambda p, i: any(p.count(g) == i for g in set(p))
 p1 = sum(exrep(p, 2) for p in parsed_input) * sum(exrep(p, 3) for p in parsed_input)

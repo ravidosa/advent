@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2018, 25).strip()
 
-parsed_input = parser(inp, ["\n", ","])
+parsed_input = parser(inp, "{{i}},{{i}},{{i}},{{i}}")
 
 const = []
 for i in parsed_input:

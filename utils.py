@@ -64,17 +64,18 @@ fingerprint = lambda i: "".join(sorted(str(i)))
 
 def par_def(i, fmt):
     if fmt == "i":
-        return int(i)
+        return int(i.strip())
     if fmt == "s":
         return i
     if fmt == "e":
-        return int(i) if re.fullmatch(r"(\+|-)?[0-9]+", i) else i
+        return int(i.strip()) if re.fullmatch(r"(\+|-)?[0-9]+", i.strip()) else i
     if fmt.startswith("li"):
-        return [int(ii) for ii in re.split(fmt[2:], i) if ii != ""]
+        return [int(ii.strip()) for ii in re.split(fmt[2:], i) if ii != ""]
     if fmt.startswith("ls"):
         return [ii for ii in re.split(fmt[2:], i) if ii != ""]
     if fmt.startswith("le"):
-        return [int(ii) if re.fullmatch(r"(\+|-)?[0-9]+", ii) else ii for ii in re.split(fmt[2:], i) if ii != ""]
+        print(re.split(fmt[2:], i))
+        return [int(ii.strip()) if re.fullmatch(r"(\+|-)?[0-9]+", ii.strip()) else ii for ii in re.split(fmt[2:], i) if ii != ""]
 
 def parser(input, format=None, split=True):
     if format:
@@ -127,7 +128,7 @@ def tupadd(tuple1, tuple2):
     return tuple(p1 + p2 for p1, p2 in zip(tuple1, tuple2))
 
 class Grid:
-    def __init__(self, input, par=par_def, dirs=dir_tup, wrap=False):
+    def __init__(self, input, par=lambda i: par_def(i, "e"), dirs=dir_tup, wrap=False):
         self.grid = [[par(i) for i in inp] for inp in input.split("\n")]
         self.rows, self.cols = len(self.grid), len(self.grid[0])
         self.dirs = dirs

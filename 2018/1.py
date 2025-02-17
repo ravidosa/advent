@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2018, 1).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 p1 = sum(parsed_input)
 

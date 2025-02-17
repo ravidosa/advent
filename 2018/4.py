@@ -1,21 +1,24 @@
 from utils import *
 inp = "\n".join(sorted(input_file(2018, 4).split("\n"))[1:])
 
-parsed_input = parser(inp, [r"\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}\] Guard #", r"\n|\[[0-9]{4}-[0-9]{2}-[0-9]{2} 00:| begins shift", r"\]"])
+parsed_input = parser(inp, "[{{i}}-{{i}}-{{i}} {{i}}:{{i}}] {{e}}")
 
 sleep_dict = {}
 for i in parsed_input:
-    if i[0] not in sleep_dict:
-        sleep_dict[i[0]] = [0] * 60
-    sleep = False
-    inst = 1
-    minute = 0
-    while minute < 60:
-        if inst < len(i) and minute == i[inst][0]:
-            sleep = i[inst][1] == "falls asleep"
-            inst += 1
-        sleep_dict[i[0]][minute] += sleep
-        minute += 1
+    if "Guard" in i:
+        id = int(i[6][1:])
+        if id not in sleep_dict:
+            sleep_dict[id] = [0] * 60
+        curr_guard = id
+        sleep = False
+        minute = 0
+    else:
+        while minute < 60:
+            if minute == i[4]:
+                sleep = i[-1] == "asleep"
+                break
+            sleep_dict[curr_guard][minute] += sleep
+            minute += 1
 
 guard = max(sleep_dict.keys(), key=lambda k: sum(sleep_dict[k]))
 minute = max(range(60), key=lambda m: sleep_dict[guard][m])

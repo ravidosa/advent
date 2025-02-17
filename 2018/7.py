@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2018, 7).strip()
 
-parsed_input = parser(inp, ["\n", "Step | must be finished before step | can begin."])
+parsed_input = parser(inp, "Step {{s}} must be finished before step {{s}} can begin.")
 
 G = nx.DiGraph()
 G.add_edges_from(parsed_input)

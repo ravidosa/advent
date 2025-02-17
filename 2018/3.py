@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2018, 3).strip()
 
-parsed_input = parser(inp, ["\n", "#| @ |,|: |x"])
+parsed_input = parser(inp, "#{{i}} @ {{i}},{{i}}: {{i}}x{{i}}")
 
 fabric_dict = {}
 for i in parsed_input:
