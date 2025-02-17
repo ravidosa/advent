@@ -1,8 +1,8 @@
 from utils import *
 inp = input_file(2024, 19).strip().split("\n\n")
 
-parsed_input = parser(inp[1], ["\n"])
-patterns = parser(inp[0], [", "])
+parsed_input = parser(inp[1])
+patterns = parser(inp[0], "{{ls, }}")
 
 maxlen = maxval(patterns, key=len)
 @functools.cache

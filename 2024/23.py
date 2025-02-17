@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2024, 23).strip()
 
-parsed_input = parser(inp, ["\n", "-"])
+parsed_input = parser(inp, "{{s}}-{{s}}")
 
 G = nx.Graph()
 G.add_edges_from(parsed_input)

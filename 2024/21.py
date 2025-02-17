@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2024, 21).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 numeric = {"7": (0,0), "8": (1,0), "9": (2,0), "4": (0,1), "5": (1,1), "6": (2,1), "1": (0,2), "2": (1,2), "3": (2,2), "0": (1,3), "A": (2,3)}
 directional = {"^": (1,0), "<": (0,1), "v": (1,1), ">": (2,1), "A": (2,0)}

@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2024, 15).strip().split("\n\n")
 
-parsed_input = "".join(parser(inp[1], "\n"))
+parsed_input = "".join(inp[1].split("\n"))
 
 def find_boxes(currp, move, double=False):
     global boxes

@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2023, 18).strip()
 
-parsed_input = parser(inp, ["\n", r" |\(|\)"])
+parsed_input = parser(inp, "{{s}} {{i}} (#{{s}})")
 
 verts = []
 bord = 0
@@ -19,7 +19,7 @@ verts = []
 bord = 0
 pos = (0, 0)
 for _, _, h in parsed_input:
-    mov, l = dir_hex[h[-1]], int(h[1:-1], 16)
+    mov, l = dir_hex[h[-1]], int(h[:-1], 16)
     pos = tupadd(pos, (l * mov[0], l * mov[1]))
     verts.append(pos)
     bord += l

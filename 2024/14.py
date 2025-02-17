@@ -1,13 +1,13 @@
 from utils import *
 inp = input_file(2024, 14).strip()
 
-parsed_input = parser(inp, ["\n", " ", "p=|v=|,"])
+parsed_input = parser(inp, "p={{i}},{{i}} v={{i}},{{i}}")
 
 W, H = 101, 103
 def safety(t):
     quads = [0, 0, 0, 0]
     for i in parsed_input:
-        p, v = i
+        p, v = i[:2], i[2:]
         pxf, pyf = (p[0] + v[0] * t) % W, (p[1] + v[1] * t) % H
         if pxf != W // 2 and pyf != H // 2:
             quads[2 * (pxf > W // 2) + (pyf > H // 2)] += 1

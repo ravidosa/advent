@@ -1,7 +1,7 @@
 from utils import *
-inp = input_file(2023, 13).strip()
+inp = input_file(2023, 13).strip().replace(".", "0").replace("#", "1")
 
-parsed_input = parser(inp.replace(".", "0").replace("#", "1"), ["\n\n"], Grid)
+parsed_input = [Grid(i) for i in inp.split("\n\n")]
 
 def row_refl(grid, err):
     for r in range(1, grid.rows):

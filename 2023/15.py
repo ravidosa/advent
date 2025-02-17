@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2023, 15).strip()
 
-parsed_input = parser(inp, [","])
+parsed_input = parser(inp, "{{ls,}}")
 
 hash = lambda string, curr=0: curr if len(string) == 0 else hash(string[1:], 17 * (curr + ord(string[0])) % 256)
 

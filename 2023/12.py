@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2023, 12).strip()
 
-parsed_input = parser(inp, ["\n", " ", ","])
+parsed_input = parser(inp, "{{s}} {{li,}}")
 
 @functools.cache
 def possible(string, run, groups):

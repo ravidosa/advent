@@ -1,10 +1,10 @@
 from utils import *
-inp = input_file(2020, 6).strip()
+inp = input_file(2020, 6).strip().replace("\n", " ").replace("  ", "\n")
 
-parsed_input = parser(inp, ["\n\n"], lambda i: (i.replace("\n", ""), i.count("\n") + 1))
+parsed_input = parser(inp, "{{ls }}")
 
-p1 = sum(len(set(ans)) for ans, _ in parsed_input)
+p1 = sum(len(set("".join(i))) for i in parsed_input)
 
-p2 = sum(len(list(g)) == per for ans, per in parsed_input for _, g in itertools.groupby(sorted(ans)))
+p2 = sum(len(list(g)) == len(i) for i in parsed_input for _, g in itertools.groupby(sorted("".join(i))))
 
 output(p1, p2)

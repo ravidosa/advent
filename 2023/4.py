@@ -1,9 +1,9 @@
 from utils import *
 inp = input_file(2023, 4).strip()
 
-parsed_input = parser(inp, ["\n", r"Card [0-9]*: | \| ", " "])
+parsed_input = parser(inp, "Card {{i}}: {{li }} \| {{li }}")
 
-matching = lambda card: len(set(card[0]).intersection(card[1]))
+matching = lambda card: len(set(card[1]).intersection(card[2]))
 
 p1 = sum(2 ** matching(c) // 2 for c in parsed_input)
 

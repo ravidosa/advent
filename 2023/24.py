@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2023, 24).strip()
 
-parsed_input = parser(inp, ["\n", " @ |, "])
+parsed_input = parser(inp, "{{i}}, {{i}}, {{i}} @ {{i}}, {{i}}, {{i}}")
 
 def intersect2d(h1, h2):
     px1, py1, _, vx1, vy1, _ = h1

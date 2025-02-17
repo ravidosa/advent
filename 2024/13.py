@@ -1,7 +1,7 @@
 from utils import *
-inp = input_file(2024, 13).strip()
+inp = input_file(2024, 13).strip().replace("\n", " ").replace("  ", "\n")
 
-parsed_input = parser(inp, ["\n\n", "\n", "Button A: X|Button B: X|, Y=?|Prize: X="])
+parsed_input = parser(inp, "Button A: X+{{i}}, Y+{{i}} Button B: X+{{i}}, Y+{{i}} Prize: X={{i}}, Y={{i}}")
 
 def press(a, b, p):
     ax, ay = a
@@ -13,8 +13,8 @@ def press(a, b, p):
         b_press = (py * ax - ay * px) / det
         return int(a_press * 3 + b_press) * (a_press.is_integer() and b_press.is_integer())
 
-p1 = sum(press(a, b, p) for a, b, p in parsed_input)
+p1 = sum(press(i[:2], i[2:4], i[4:]) for i in parsed_input)
 
-p2 = sum(press(a, b, [p[0] + 10000000000000, p[1] + 10000000000000]) for a, b, p in parsed_input)
+p2 = sum(press(i[:2], i[2:4], [i[4] + 10000000000000, i[5] + 10000000000000]) for i in parsed_input)
 
 output(p1, p2)

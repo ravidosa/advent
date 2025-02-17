@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2024, 25).strip()
 
-parsed_input = parser(inp, ["\n\n", "\n"])
+parsed_input = [parser(i) for i in inp.split("\n\n")]
 
 w, h = len(parsed_input[0][0]), len(parsed_input[0]) - 2
 locks, keys = [], []

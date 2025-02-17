@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2024, 11).strip()
 
-parsed_input = parser(inp, [" "])
+parsed_input = parser(inp, "{{li }}")
 
 stone_ct = {i: parsed_input.count(i) for i in parsed_input}
 stone = lambda i: [1] if i == 0 else divmod(i, 10 ** (dig // 2)) if ((dig := math.floor(math.log10(i)) + 1) % 2 == 0) else [2024 * i]

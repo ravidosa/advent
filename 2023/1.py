@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2023, 1).strip()
 
-parsed_input = parser(inp, ["\n"], str)
+parsed_input = parser(inp, "{{s}}")
 
 def calibration(i):
     d1, d2 = None, None

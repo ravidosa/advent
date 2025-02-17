@@ -1,8 +1,8 @@
 from utils import *
 inp = input_file(2024, 17).strip().split("\n\n")
 
-parsed_input = parser(inp[1], ["Program: |,"])
-a, b, c = parser(inp[0], ["Register A: |Register B: |Register C: "])
+parsed_input = parser(inp[1], "Program: {{li,}}")
+a, b, c = parser(inp[0].replace("\n", " "), "Register A: {{i}} Register B: {{i}} Register C: {{i}}")
 
 i = 0
 ct = 0

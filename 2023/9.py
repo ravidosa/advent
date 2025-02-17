@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2023, 9).strip()
 
-parsed_input = parser(inp, ["\n", " "])
+parsed_input = parser(inp, "{{li }}")
 
 def extrap(seq):
     ex = seq[-1]

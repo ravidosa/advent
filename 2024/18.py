@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2024, 18).strip()
 
-parsed_input = parser(inp, ["\n", ","])
+parsed_input = parser(inp, "{{i}},{{i}}")
 
 grid = Grid((("." * 71 + "\n") * 71).strip())
 for byte in parsed_input[:1024]:

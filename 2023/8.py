@@ -1,9 +1,9 @@
 from utils import *
 inp = input_file(2023, 8).strip().split("\n\n")
 
-parsed_input = parser(inp[1], ["\n", r" = \(|\)", ", "])
+parsed_input = parser(inp[1], "{{s}} = ({{s}}, {{s}})")
 
-path = {n: lr for n, lr in parsed_input}
+path = {i[0]: i[1:] for i in parsed_input}
 
 steps = 0
 currn = "AAA"

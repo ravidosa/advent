@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2024, 22).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 def next_secret(secret):
     secret = (secret ^ (secret * 64)) % 16777216

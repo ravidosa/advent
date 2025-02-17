@@ -1,8 +1,8 @@
 from utils import *
 inp = input_file(2024, 24).strip().split("\n\n")
 
-parsed_input = parser(inp[0], ["\n", ": "])
-connections = parser(inp[1], ["\n", " -> | "])
+parsed_input = parser(inp[0], "{{s}}: {{i}}")
+connections = parser(inp[1], "{{s}} {{s}} {{s}} -> {{s}}")
 
 wire_dict = {i[0]: i[1] for i in parsed_input} | {c[-1]: c[:-1] for c in connections}
 z = sum(c[-1][0] == "z" for c in connections)
