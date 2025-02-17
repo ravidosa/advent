@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2021, 1).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 p1 = sum(parsed_input[i - 1] < parsed_input[i] for i in range(1, len(parsed_input)))
 

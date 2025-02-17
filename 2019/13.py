@@ -2,7 +2,7 @@ from utils import *
 from intcode import *
 inp = input_file(2019, 13).strip()
 
-parsed_input = parser(inp, [","])
+parsed_input = parser(inp, "{{li,}}")
 
 tiles = {}
 program = parsed_input.copy()

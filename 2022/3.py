@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2022, 3).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 p1 = sum(alph.index(ii) + 1 for i in parsed_input for ii in set(i[:len(i) // 2]).intersection(set(i[len(i) // 2:])))
 

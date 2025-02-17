@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2020, 8).strip()
 
-parsed_input = parser(inp, ["\n", " "])
+parsed_input = parser(inp, "{{s}} {{i}}")
 
 acc, i = 0, 0
 run = set()

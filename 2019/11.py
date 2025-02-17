@@ -2,7 +2,7 @@ from utils import *
 from intcode import *
 inp = input_file(2019, 11).strip()
 
-parsed_input = parser(inp, [","])
+parsed_input = parser(inp, "{{li,}}")
 
 paint = {}
 pos, dir = 0+0j, 0+1j

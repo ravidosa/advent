@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2020, 9).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 i = 25
 while parsed_input[i] in list(map(sum, itertools.combinations(parsed_input[i - 25: i], 2))):

@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2022, 10).strip()
 
-parsed_input = parser(inp, ["\n", " "])
+parsed_input = parser(inp, "{{le }}")
 
 sigs = [1]
 for i in parsed_input:

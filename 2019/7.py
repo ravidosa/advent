@@ -2,7 +2,7 @@ from utils import *
 from intcode import *
 inp = input_file(2019, 7).strip()
 
-parsed_input = parser(inp, [","])
+parsed_input = parser(inp, "{{li,}}")
 
 max_out = -math.inf
 for phase in itertools.permutations(range(5)):

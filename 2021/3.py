@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2021, 3).strip()
 
-parsed_input = parser(inp, ["\n"], str)
+parsed_input = parser(inp, "{{s}}")
 
 most_common = lambda bins, i: None if (bal := sum(b[i] == "1" for b in bins)) == len(bins) / 2 else ("1" if bal > len(bins) / 2 else "0")
 

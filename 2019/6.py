@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2019, 6).strip()
 
-parsed_input = parser(inp, ["\n", r"\)"], str)
+parsed_input = parser(inp, "{{s}}){{s}}")
 
 dir_orbit = {}
 for i in parsed_input:

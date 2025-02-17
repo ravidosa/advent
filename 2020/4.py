@@ -1,9 +1,10 @@
 from utils import *
-inp = input_file(2020, 4).strip()
+inp = input_file(2020, 4).strip().replace("\n", " ").replace("  ", "\n")
 
-parsed_input = parser(inp, ["\n\n", " |\n", ":"], str)
+parsed_input = parser(inp, "{{nls |:}}")
 
 passports = [{f[0]: f[1] for f in i} for i in parsed_input]
+
 valid = lambda p: len(p.keys()) == 8 or (len(p.keys()) == 7 and "cid" not in p.keys())
 p1 = sum(map(valid, passports))
 

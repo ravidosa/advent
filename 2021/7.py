@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2021, 7).strip()
 
-parsed_input = parser(inp, [","])
+parsed_input = parser(inp, "{{li,}}")
 
 mincrab, maxcrab = min(parsed_input), max(parsed_input)
 

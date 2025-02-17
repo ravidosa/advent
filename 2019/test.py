@@ -1,5 +1,0 @@
-from intcode import *
-program = [109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99]
-intc = Computer(program)
-all(intc.run())
-print(intc.pop_out())

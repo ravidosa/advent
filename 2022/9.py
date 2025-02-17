@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2022, 9).strip()
 
-parsed_input = parser(inp, ["\n", " "])
+parsed_input = parser(inp, "{{s}} {{i}}")
 def tail_pos(length):
     rope = [0+0j] * length
     vis = set()

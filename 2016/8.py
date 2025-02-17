@@ -8,17 +8,16 @@ W, H = 50, 6
 pixels = {}
 for i in parsed_input:
     new_pixels = pixels.copy()
-    com = i[0]
-    if com[0] == "rect":
-        for c in range(com[1]):
-            for r in range(com[2]):
+    if i[0] == "rect":
+        for c in range(i[1]):
+            for r in range(i[2]):
                 new_pixels[c + r * 1j] = 1
-    elif com[0] == "row":
+    elif i[0] == "row":
         for c in range(W):
-            new_pixels[((c + com[2]) % W) + com[1] * 1j] = pixels.get(c + com[1] * 1j, 0)
-    elif com[0] == "column":
+            new_pixels[((c + i[2]) % W) + i[1] * 1j] = pixels.get(c + i[1] * 1j, 0)
+    elif i[0] == "column":
         for r in range(H):
-            new_pixels[com[1] + ((r + com[2]) % H) * 1j] = pixels.get(com[1] + r * 1j, 0)
+            new_pixels[i[1] + ((r + i[2]) % H) * 1j] = pixels.get(i[1] + r * 1j, 0)
     pixels = new_pixels
 p1 = sum(pixels.values())
 

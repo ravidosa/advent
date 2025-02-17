@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2018, 9).strip()
 
-parsed_input = parser(inp, "{{i}} players; last marble is worth {{i}} points", split=False)
+parsed_input = parser(inp, "{{i}} players; last marble is worth {{i}} points")
 
 players, marbles = parsed_input
 

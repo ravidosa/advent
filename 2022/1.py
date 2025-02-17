@@ -1,7 +1,7 @@
 from utils import *
-inp = input_file(2022, 1).strip()
+inp = input_file(2022, 1).strip().replace("\n", " ").replace("  ", "\n")
 
-parsed_input = parser(inp, ["\n\n", "\n"], flatten=False)
+parsed_input = parser(inp, "{{li }}")
 
 p1 = max(map(sum, parsed_input))
 

@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2020, 2).strip()
 
-parsed_input = parser(inp, ["\n", "-| |: "])
+parsed_input = parser(inp, "{{i}}-{{i}} {{s}}: {{s}}")
 
 valid = lambda i: i[0] <= i[3].count(i[2]) <= i[1]
 p1 = sum(map(valid, parsed_input))

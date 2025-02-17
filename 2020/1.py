@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2020, 1).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 for pair in itertools.combinations(parsed_input, 2):
     if sum(pair) == 2020:

@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2022, 2).strip()
 
-parsed_input = parser(inp, ["\n", " "])
+parsed_input = parser(inp, "{{s}} {{s}}")
 
 score = lambda s1, s2: 3 * ((ord(s2) - ord(s1) - 1) % 3)
 shape_score = lambda s: ord(s) - 87

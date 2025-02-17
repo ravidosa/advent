@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2021, 5).strip()
 
-parsed_input = parser(inp, ["\n", " -> |,"])
+parsed_input = parser(inp, "{{i}},{{i}} -> {{i}},{{i}}")
 
 grid = {}
 for i in parsed_input:

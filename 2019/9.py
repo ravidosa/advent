@@ -2,7 +2,7 @@ from utils import *
 from intcode import *
 inp = input_file(2019, 9).strip()
 
-parsed_input = parser(inp, [","])
+parsed_input = parser(inp, "{{li,}}")
 
 program = parsed_input.copy()
 intc = Computer(program, [1])

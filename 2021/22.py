@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2021, 22).strip()
 
-parsed_input = parser(inp, ["\n", r" x=|,y=|,z=|\.\."])
+parsed_input = parser(inp, "{{s}} x={{i}}..{{i}},y={{i}}..{{i}},z={{i}}..{{i}}")
 
 def cubes_on(fil=lambda ix, fx, iy, fy, iz, fz: True):
     cubes = collections.Counter()

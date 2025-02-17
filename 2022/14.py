@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2022, 14).strip()
 
-parsed_input = parser(inp, ["\n", " -> ", ","], eval)
+parsed_input = parser(inp, "{{nli -> |,}}")
 
 maxy = max(maxval(i, key=lambda j: j[1]) for i in parsed_input) + 2
 maxx = 2 * maxy + 1

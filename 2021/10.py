@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2021, 10).strip()
 
-parsed_input = parser(inp, ["\n"])
+parsed_input = parser(inp)
 
 def score(chunk):
     stack = []

@@ -1,10 +1,10 @@
 from utils import *
 inp = input_file(2016, 1).strip()
 
-parsed_input = parser(inp, "{{ls, }}", split=False)
+parsed_input = parser(inp, "{{ls, }}")
 
 pos, dir = 0+0j, 0+1j
-for i in parsed_input[0]:
+for i in parsed_input:
     dir *= (0+1j if i[0] == "L" else 0-1j)
     pos += int(i[1:]) * dir
 p1 = abs(int(pos.real)) + abs(int(pos.imag))
@@ -12,7 +12,7 @@ p1 = abs(int(pos.real)) + abs(int(pos.imag))
 vis = set()
 pos, dir = 0+0j, 0+1j
 vis.add(pos)
-for i in parsed_input[0]:
+for i in parsed_input:
     dir *= (0+1j if i[0] == "L" else 0-1j)
     rep = False
     for i in range(int(i[1:])):

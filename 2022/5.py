@@ -1,8 +1,8 @@
 from utils import *
 inp = input_file(2022, 5).split("\n\n")
 
-parsed_input = parser(inp[1], ["\n", "move | from | to "])
-initial = parser(inp[0], ["\n"], str, strip=False)
+parsed_input = parser(inp[1], "move {{i}} from {{i}} to {{i}}")
+initial = inp[0].splitlines()
 
 stack_count = len(initial[-1].split())
 initial_stacks = [[] for _ in range(stack_count)]
