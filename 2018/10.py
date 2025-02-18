@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2018, 10).strip()
 
-parsed_input = parser(inp, "position=<{{i}}, {{i}}> velocity=<{{i}}, {{i}}>")
+parsed_input = parser(inp, "position=<{{i}},{{i}}> velocity=<{{i}},{{i}}>")
 
 def bounding(pos):
     minx = minval(pos, key=lambda i: i[0])

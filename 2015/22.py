@@ -1,9 +1,9 @@
 from utils import *
 inp = input_file(2015, 22).strip()
 
-parsed_input = parser(inp, "{{s}}: {{i}}")
+parsed_input = parser(inp, "{{ls }}: {{i}}")
 
-boss_hp, boss_damage = parsed_input[0][1], parsed_input[1][1]
+boss_hp, boss_damage = parsed_input[0][-1], parsed_input[1][-1]
 
 minsp = math.inf
 def round(turn, player_hp, boss_hp, mana, s_turn, p_turn, r_turn, spent, hard=False):

@@ -10,8 +10,7 @@ p1 = corr_check.count("1") * corr_check.count("2")
 image = ["2"] * w * h
 for l in layers:
     image = [l[i] if image[i] == "2" else image[i] for i in range(w * h)]
-print(image)
 image = "".join(image).replace("0", " ").replace("1", "#")
-p2 = "\n".join(image[i:i + w] for i in range(0, w * h, w))
+p2 = "\n".join(image[i:i + w] for i in range(0, w * h, w)).replace(" ", "  ").replace("#", "##")
 
 output(p1, p2)

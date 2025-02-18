@@ -64,20 +64,20 @@ fingerprint = lambda i: "".join(sorted(str(i)))
 
 def par_nest(i, ty, spl):
     if len(spl) == 1:
-        return [int(ii) if ty == "nli" else ii if ty == "nls" else (int(ii.strip()) if re.fullmatch(r"(\+|-)?[0-9]+", ii.strip()) else ii) for ii in re.split(spl[0], i)]
+        return [int(ii) if ty == "nli" else (int(ii.strip()) if re.fullmatch(r"(\+|-)?[0-9]+" if ty == "nle" else ii, ii.strip()) else ii) for ii in re.split(spl[0], i)]
     else:
         return [par_nest(ii, ty, spl[1:]) for ii in re.split(spl[0], i)]
     
 def par_def(i, fmt):
     if fmt == "i":
         return int(i.strip())
-    if fmt == "s":
+    if fmt == "s" or fmt == "p":
         return i
     if fmt == "e":
         return int(i.strip()) if re.fullmatch(r"(?:\+|-)?[0-9]+", i.strip()) else i
     if fmt.startswith("li"):
         return [int(ii.strip()) for ii in re.split(fmt[2:], i) if ii != ""]
-    if fmt.startswith("ls"):
+    if fmt.startswith("ls") or fmt.startswith("lp"):
         return [ii for ii in re.split(fmt[2:], i) if ii != ""]
     if fmt.startswith("le"):
         return [int(ii.strip()) if re.fullmatch(r"(?:\+|-)?[0-9]+", ii.strip()) else ii for ii in re.split(fmt[2:], i) if ii != ""]
@@ -85,39 +85,46 @@ def par_def(i, fmt):
         return par_nest(i, fmt[:3], fmt[3:].split("|"))
 
 def fmt_regex(fmt):
-    if fmt == "{{i}}":
-        return r"((?:\+|-)?[0-9]+)"
-    if fmt == "{{s}}" or fmt == "{{e}}":
-        return r"(\w+)"
-    if fmt.startswith("{{li"):
-        return r"((?:\+|-)?[0-9]+(?:(?:" + fmt[4:-2] + r")(?:\+|-)?[0-9]+)*)"
-    if fmt.startswith("{{ls") or fmt.startswith("{{le"):
-        return r"(\w+(?:(?:" + fmt[4:-2] + r")\w+)*)"
-    if fmt.startswith("{{nli"):
-        return r"((?:\+|-)?[0-9]+(?:(?:" + fmt[5:-2] + r")(?:\+|-)?[0-9]+)*)"
-    if fmt.startswith("{{nls") or fmt.startswith("{{nle"):
-        return r"(\w+(?:(?:" + fmt[5:-2] + r")\w+)*)"
+    if fmt == "i":
+        return r"(\s*(?:\+|-)?[0-9]+\s*)"
+    if fmt == "s" or fmt == "e":
+        return r"(\S+)"
+    if fmt == "p":
+        return r"(.+)"
+    if fmt.startswith("li"):
+        return r"((?:(?:" + fmt[2:] + r")*\s*(?:\+|-)?[0-9]+\s*)*)(?:" + fmt[2:] + r")*"
+    if fmt.startswith("ls") or fmt.startswith("le"):
+        return r"((?:(?:" + fmt[2:] + r")*\S+)*)(?:" + fmt[2:] + r")*"
+    if fmt.startswith("lp"):
+        return r"((?:(?:" + fmt[2:] + r")*.+)*)(?:" + fmt[2:] + r")*"
+    if fmt.startswith("nli"):
+        return r"((?:(?:" + fmt[3:] + r")*\s*(?:\+|-)?[0-9]+\s*)*)(?:" + fmt[3:] + r")*"
+    if fmt.startswith("nls") or fmt.startswith("nle"):
+        return r"((?:(?:" + fmt[3:] + r")*\S+)*)(?:" + fmt[3:] + r")*"
+    if fmt.startswith("nlp"):
+        return r"((?:(?:" + fmt[3:] + r")*.+)*)(?:" + fmt[3:] + r")*"
 
 def parser(input, format=None, split=None, strip=False):
     split = "\n" in input if split == None else split
     if format:
         cleaned = format
-        for special in []:
-            cleaned = re.sub(r'((\' + special + r')(?![^(]*\)))', r'\' + special, cleaned)
-        splits = "|".join(sorted(filter(lambda i: i != "", re.split("{{(?:i|s|e|li[^}]*|ls[^}]*|le[^}]*|nli[^}]*|nls[^}]*|nle[^}]*)}}", format)), key=len, reverse=True)).replace(".", r"\.").replace("+", r"\+").replace("*", r"\*").replace("?", r"\?").replace("^", r"\^").replace("$", r"\$").replace("(", r"\(").replace("{", r"\{").replace("[", r"\[").replace(")", r"\)").replace("}", r"\}").replace("]", r"\]")
-        formats = re.findall("{{(i|s|e|li[^}]*|ls[^}]*|le[^}]*|nli[^}]*|nls[^}]*|nle[^}]*)}}", format)
-        if splits != "":
-            splits = re.compile(splits)
+        for special in ".+*?^$([])":
+            cleaned = re.sub("\\" + special + "(?![^{]*\})", "\\\\" + special, cleaned)
+        cleaned = re.sub("(?<![{])({)(?![{])", "\\{", cleaned)
+        cleaned = re.sub("(?<![}])(})(?![}])", "\\}", cleaned)
+        formats = re.findall("{{(i|s|e|p|li[^}]*|ls[^}]*|le[^}]*|lp[^}]*|nli[^}]*|nls[^}]*|nle[^}]*|nlp[^}]*)}}", format)
+        for fmt in formats:
+            cleaned = cleaned.replace("{{" + fmt + "}}", fmt_regex(fmt))
         if split:
             if len(formats) == 1:
-                return [par_def(list(filter(lambda i: i != "", re.split(splits, i)))[0], formats[0]) if splits != "" else par_def(i, formats[0]) for i in input.split("\n")]
+                return [par_def(re.fullmatch(cleaned, i).groups()[0], formats[0]) for i in input.split("\n")]
             else:
-                return [[par_def(ii, formats[min(ind, len(formats) - 1)]) for ind, ii in enumerate(filter(lambda i: i != "", re.split(splits, i)) if splits != "" else [i])] for i in input.split("\n")]
+                return [[par_def(ii, formats[min(ind, len(formats) - 1)]) for ind, ii in enumerate(re.fullmatch(cleaned, i).groups())] for i in input.split("\n")]
         else:
             if len(formats) == 1:
-                return par_def(list(filter(lambda i: i != "", re.split(splits, input)))[0], formats[0]) if splits != "" else par_def(input, formats[0])
+                return par_def(re.fullmatch(cleaned, input).groups()[0], formats[0])
             else:
-                return [par_def(ii, formats[min(ind, len(formats) - 1)]) for ind, ii in enumerate(filter(lambda i: i != "", re.split(splits, input)) if splits != "" else [input])]
+                return [par_def(ii, formats[min(ind, len(formats) - 1)]) for ind, ii in enumerate(re.fullmatch(cleaned, input).groups())]
     else:
         return [par_def(i, "e") for i in input.split("\n")] if split else input
 

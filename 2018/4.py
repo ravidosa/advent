@@ -1,12 +1,12 @@
 from utils import *
 inp = "\n".join(sorted(input_file(2018, 4).split("\n"))[1:])
 
-parsed_input = parser(inp, "[{{i}}-{{i}}-{{i}} {{i}}:{{i}}] {{e}}")
+parsed_input = parser(inp, "[{{i}}-{{i}}-{{i}} {{i}}:{{i}}] {{le }}")
 
 sleep_dict = {}
 for i in parsed_input:
-    if "Guard" in i:
-        id = int(i[6][1:])
+    if "Guard" in i[-1]:
+        id = int(i[-1][1][1:])
         if id not in sleep_dict:
             sleep_dict[id] = [0] * 60
         curr_guard = id
@@ -15,7 +15,7 @@ for i in parsed_input:
     else:
         while minute < 60:
             if minute == i[4]:
-                sleep = i[-1] == "asleep"
+                sleep = i[-1][-1] == "asleep"
                 break
             sleep_dict[curr_guard][minute] += sleep
             minute += 1

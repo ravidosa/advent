@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2017, 8).strip()
 
-parsed_input = parser(inp, "{{s}} {{s}} {{i}} if {{s}} {{s}} {{s}}")
+parsed_input = parser(inp, "{{s}} {{s}} {{i}} if {{s}} {{e}} {{i}}")
 
 regm = []
 reg = {}

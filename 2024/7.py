@@ -1,7 +1,7 @@
 from utils import *
 inp = input_file(2024, 7).strip()
 
-parsed_input = parser(inp, "{{i}}:{{li }}")
+parsed_input = parser(inp, "{{i}}: {{li }}")
 def evally(vals, ops):
     res = vals[0]
     for ind, op in enumerate(ops):

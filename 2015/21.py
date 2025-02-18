@@ -1,9 +1,9 @@
 from utils import *
 inp = input_file(2015, 21).strip()
 
-parsed_input = parser(inp, "{{s}}: {{i}}")
+parsed_input = parser(inp, "{{ls }}: {{i}}")
 
-boss_hp, boss_damage, boss_armor = parsed_input[0][1], parsed_input[1][1], parsed_input[2][1]
+boss_hp, boss_damage, boss_armor = parsed_input[0][-1], parsed_input[1][-1], parsed_input[2][-1]
 player_hp = 100
 shop = """Weapons:    Cost  Damage  Armor
 Dagger        8     4       0
@@ -26,12 +26,9 @@ Damage +3   100     3       0
 Defense +1   20     0       1
 Defense +2   40     0       2
 Defense +3   80     0       3""".split("\n\n")
-weapons = parser(shop[0], "{{le\s}}")
-weapons = [w[0] for w in weapons[1:]]
-armors = parser(shop[1], "{{le\s}}")
-armors = [a[0] for a in armors[1:]]
-rings = parser(shop[2], "{{le\s}}")
-rings = [r[0] for r in rings[1:]]
+weapons = parser(shop[0], "{{le\s|:}}")[1:]
+armors = parser(shop[1], "{{le\s|:}}")[1:]
+rings = parser(shop[2], "{{le\s|:}}")[1:]
 armors.append(["None", 0, 0, 0])
 
 def fight(combo):
