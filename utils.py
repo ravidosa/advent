@@ -165,6 +165,8 @@ sides = lambda cells: sum(all(tupadd(p, d) not in cells for d in c) if len(c) ==
 def tupadd(tuple1, tuple2):
     return tuple(p1 + p2 for p1, p2 in zip(tuple1, tuple2))
 
+transpose = lambda matrix : [list(row) for row in zip(*matrix)]
+
 class Grid:
     def __init__(self, input, par=lambda i: par_def(i, "e"), dirs=dir_tup, wrap=False):
         self.grid = [[par(i) for i in inp] for inp in input.split("\n")]
