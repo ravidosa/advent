@@ -1,4 +1,4 @@
-import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, os, pathlib, bs4, datetime
+import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, os, pathlib, bs4, datetime, copy
 from env import SESSION
 
 p1, p2 = None, None
@@ -293,3 +293,13 @@ def increasing(n):
 
 def decreasing(n):
     return all(str(n)[i] <= str(n)[i - 1] for i in range(1, len(str(n))))
+
+
+# TEXT
+
+def make_rectangular(string):
+    maxlen = max(len(line) for line in string.splitlines())
+    return "\n".join(line.ljust(maxlen) for line in string.splitlines())
+
+def transpose(string):
+    return "\n".join(''.join(chars) for chars in zip(*string.splitlines()))
