@@ -303,3 +303,8 @@ def make_rectangular(string):
 
 def transpose(string):
     return "\n".join(''.join(chars) for chars in zip(*string.splitlines()))
+
+# LISTS
+
+def copy(lst):
+    return [copy(item) if isinstance(item, list) else item for item in lst]
