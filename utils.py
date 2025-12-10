@@ -1,4 +1,4 @@
-import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, os, pathlib, bs4, datetime, copy
+import re, operator, functools, itertools, collections, math, cmath, z3, networkx as nx, heapq as hq, requests, sys, os, pathlib, bs4, datetime, copy, shapely
 from env import SESSION
 
 p1, p2 = None, None
