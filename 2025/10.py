@@ -1,12 +1,12 @@
 from utils import *
 inp = input_file(2025, 10).strip()
 
-parsed_input = parser(inp, "[{{s}}] {{le }}")
-parsed_input = [[i[0], [parser(p[1:-1], "{{li,}}") for p in i[1][:-1]], parser(i[1][-1][1:-1], "{{li,}}")] for i in parsed_input]
+inp_ = parser(inp, "{{le }}")
+parsed_input = [[parser(ii[1:-1], "{{le,}}") for ii in i] for i in inp_]
 
 tot = 0
 for i in parsed_input:
-    button, press, jolt = i
+    button, press, jolt = i[0][0], i[1:-1], i[-1]
     x = [z3.Int('x%s' % i) for i in range(len(press))]
     opt = z3.Optimize()
     opt.minimize(sum(x))
@@ -20,7 +20,7 @@ p1 = tot
 
 tot = 0
 for i in parsed_input:
-    button, press, jolt = i
+    button, press, jolt = i[0][0], i[1:-1], i[-1]
     x = [z3.Int('x%s' % i) for i in range(len(press))]
     opt = z3.Optimize()
     opt.minimize(sum(x))
